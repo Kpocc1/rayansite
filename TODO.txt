@@ -1,0 +1,17 @@
+1) Дополнения - дополнения - шаблоны - 28 элементов на страницу
+
+2) 
+https://rayanhalal.ru/nam-vazhno-vashe-mnenie/ -> https://rayanhalal.ru/feedback/
+
+3) таблоица shop_sms_code (сделал)
+
+4) Пройтись по всем $this->customer->isLogged()
+
+5) Главная Магазины Настройки -> Включить SEO URL -> Нет
+
+6) в env поправить production
+
+7) Сервер - Переменные - sql_mode -  удалить ONLY_FULL_GROUP_BY
+
+
+обнуление корзины и данных заказа после офомрдения
