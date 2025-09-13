@@ -133,6 +133,9 @@ const CheckoutForm = ({ customer, data }) => {
       form.setFieldsValue({ address_1: address, shipping_total: costAddress });
     }
   }, [form, address, costAddress]);
+console.log(shippingMethods?.data)
+  // Проверка доступности доставки
+  const deliveryEnabled = shippingMethods?.data?.delivery_enabled !== undefined ? shippingMethods.data.delivery_enabled : true;
 
   return (
     <Form
@@ -140,16 +143,17 @@ const CheckoutForm = ({ customer, data }) => {
       name="checkout-form"
       onFinish={onFinish}
       layout="vertical"
-      // onValuesChange={handleValuesChange}
-      // autoComplete="off"
-      // labelCol={{ span: 4 }}
-      // wrapperCol={{ span: 8 }}
-      // style={{ maxWidth: 600 }}
     >
       <div className={`white ${isMobile ? "p-20" : "p-30"}`}>
         <Typography.Title level={4} style={{ marginTop: 0 }}>
           Способ доставки
         </Typography.Title>
+
+        {!deliveryEnabled && currentShippingMethod !== "pickup.pickup" && (
+          <div style={{ marginBottom: 16 }}>
+            <Tag color="red">Курьерская доставка временно недоступна. Пожалуйста, выберите самовывоз.</Tag>
+          </div>
+        )}
 
         <Form.Item
           name="shipping_method"
@@ -283,8 +287,8 @@ const CheckoutForm = ({ customer, data }) => {
         shouldUpdate={(prev, current) => prev.shipping_method !== current.shipping_method}
       >
         {({ getFieldValue }) => (
-          getFieldValue("shipping_method") === SHIPPINGS[0].code && (
-            <CheckoutFormIntervals shippingMethods={shippingMethods} />
+          getFieldValue("shipping_method") === SHIPPINGS[0].code && deliveryEnabled && (
+            <CheckoutFormIntervals shippingMethods={shippingMethods} deliveryEnabled={deliveryEnabled} />
           )
         )}
       </Form.Item>
@@ -336,6 +340,7 @@ const CheckoutForm = ({ customer, data }) => {
             htmlType="submit"
             block
             loading={loading}
+            disabled={!deliveryEnabled && currentShippingMethod !== "pickup.pickup"}
             // disabled={isDisabledSubmit}
           >
             Оформить заказ
