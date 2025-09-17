@@ -276,3 +276,8 @@ input[type="number"]{
   border: 1px solid #b8b8b8;
   border-radius: 5px;
 }
+@media (max-width: 425px) {
+  .ant-dropdown-menu-submenu-popup {
+    left: 50% !important; 
+  }
+}
