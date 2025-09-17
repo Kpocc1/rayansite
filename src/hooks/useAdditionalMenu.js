@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 const useAdditionalMenu = () => {
 	const [additionalMenu, setAdditionalMenu] = useState([]);
 	const { data } = useSelector(state => state.layout.mainInfo);
-
 	useEffect(() => {
 		if (data.top_menu) {
 			setAdditionalMenu([
@@ -20,6 +19,7 @@ const useAdditionalMenu = () => {
 							key: `/page/${data.top_menu.certificate.id}`,
 						},
 						{ label: 'Новости', key: '/news' },
+						{ label: 'Партнерам', key: `/page/${data.top_menu.partner.id}` },
 					],
 				},
 				{ label: 'Доставка', key: `/page/${data.top_menu.delivery.id}` },
