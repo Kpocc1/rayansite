@@ -6,7 +6,7 @@ import { loadingStatus } from 'helpers/fetcher';
 
 const CheckoutFormIntervals = ({ shippingMethods }) => {
 	const { isMobile } = useBreakpoint();
-
+	const isNalchik = shippingMethods.data?.store_id === 0;
 	return (
 		<div className='white p-20'>
 			<Typography.Title level={4} style={{ marginTop: 0 }}>
@@ -15,7 +15,11 @@ const CheckoutFormIntervals = ({ shippingMethods }) => {
 			{shippingMethods.status === loadingStatus.SUCCEEDED ? (
 				<Tabs
 					defaultActiveKey='1'
-					items={intervalItems(shippingMethods.data.intervals, isMobile)}
+					items={intervalItems(
+						shippingMethods.data.intervals,
+						isMobile,
+						isNalchik
+					)}
 					// onChange={console.log}
 				/>
 			) : (
@@ -25,7 +29,7 @@ const CheckoutFormIntervals = ({ shippingMethods }) => {
 	);
 };
 
-const intervalItems = (intervals, isMobile) => {
+const intervalItems = (intervals, isMobile, isNalchik) => {
 	const now = new Date();
 	const todayStr =
 		now.getDate().toString().padStart(2, '0') +
@@ -34,7 +38,7 @@ const intervalItems = (intervals, isMobile) => {
 		'.' +
 		now.getFullYear();
 	const currentMinutes = now.getHours() * 60 + now.getMinutes();
-	const isBefore19 = currentMinutes < 19 * 60; 
+	const isBefore19 = currentMinutes < 17 * 60;
 	return intervals.dates.map((d, index) => {
 		const [date, title] = d;
 		const label = title || formatDate(date, 'dddd');
@@ -71,7 +75,7 @@ const intervalItems = (intervals, isMobile) => {
 									);
 								const disabled =
 									shouldBeDisabled &&
-									!(isToday && isLastInterval && isBefore19);
+									!(isNalchik && isToday && isLastInterval && isBefore19);
 
 								return (
 									<Radio.Button
