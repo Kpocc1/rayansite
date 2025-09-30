@@ -255,6 +255,35 @@ const CheckoutForm = ({ customer, data }) => {
 						</Radio.Button>
 					</Radio.Group>
 				</Form.Item>
+
+				{/* Новый блок с адресом самовывоза */}
+				{currentShippingMethod === SHIPPINGS[1].code && pickupEnabled && (
+					<div style={{ marginBottom: 16 }}>
+						{shippingMethods.data?.store_id === 0 ? (
+							<>
+								<Typography.Text strong>
+									Адрес: г. Нальчик, ул. Кирова, 294
+								</Typography.Text>
+								<br />
+								<Typography.Text type='secondary'>
+									Режим работы: 8:00 - 20:00, воскресенье 8:00 - 19:00. В
+									пятницу перерыв 12:00-14:00, без выходных
+								</Typography.Text>
+							</>
+						) : (
+							<>
+								<Typography.Text strong>
+									Адрес: г. Москва, Ленинский пр-т, 68/10
+								</Typography.Text>
+								<br />
+								<Typography.Text type='secondary'>
+									Режим работы: 10:00 - 21:00, без выходных
+								</Typography.Text>
+							</>
+						)}
+					</div>
+				)}
+
 				<Divider />
 
 				<Typography.Title level={4}>Ваши данные</Typography.Title>
