@@ -152,13 +152,13 @@ const Cart = () => {
           />
         </Col>
         <Col xs={24} xl={11}>
-          {customer.token ? (
+          {/* {customer.token ? ( */}
             <CheckoutForm customer={customer} data={data} />
-          ) : (
-            <div className="p-30 white">
-              <SignIn />
-            </div>
-          )}
+          {/*  ) : (
+           <div className="p-30 white">
+               <SignIn />
+             </div>
+           )} */}
         </Col>
       </Row>
     </div>
