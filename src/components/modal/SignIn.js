@@ -13,6 +13,7 @@ const SignIn = () => {
 	const [status, setStatus] = useState({ type: '', text: '' });
 	const [telephone, setTelephone] = useState('');
 	const [code, setCode] = useState();
+	const [method, setMethod] = useState('sms'); // ✅ НОВОЕ: выбор метода отправки
 
 	const { setCustomer, customer } = useCustomer();
 
@@ -22,8 +23,13 @@ const SignIn = () => {
 	};
 
 	const handleSubmitTelephone = async () => {
-		setStatus({ type: 'info', text: 'На Ваш номер придет смс с кодом' });
-		const res = await postAuthCodeSend(telephone);
+		// ✅ НОВОЕ: разные сообщения в зависимости от метода
+		const statusText =
+			method === 'whatsapp'
+				? 'Код будет отправлен в WhatsApp'
+				: 'На Ваш номер придет смс с кодом';
+		setStatus({ type: 'info', text: statusText });
+		const res = await postAuthCodeSend(telephone, method); // ✅ Передаем method
 		setCode(res);
 		setStatus();
 	};
@@ -53,13 +59,14 @@ const SignIn = () => {
 	};
 
 	return (
-		<div style={{ height: 455 }}>
+		<div style={{ height: 'auto' }}>
 			{code ? (
 				<CodeForm
 					handleCode={handleCode}
 					handleClearCode={handleClearCode}
 					code={code}
 					status={status}
+					method={method}
 				/>
 			) : (
 				<TelephoneForm
@@ -67,13 +74,15 @@ const SignIn = () => {
 					handleTelephone={handleTelephone}
 					telephone={telephone}
 					status={status}
+					method={method}
+					setMethod={setMethod}
 				/>
 			)}
 		</div>
 	);
 };
 
-const CodeForm = ({ handleCode, handleClearCode, code, status }) => {
+const CodeForm = ({ handleCode, handleClearCode, code, status, method }) => {
 	function fmtMSS(s) {
 		return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s;
 	}
@@ -109,16 +118,21 @@ const CodeForm = ({ handleCode, handleClearCode, code, status }) => {
 
 	return (
 		<Form name='signin-code' layout='vertical'>
-			<Typography.Title level={5} className='text-gray mt-10'>
-				Мы отправили код на номер
+			<Typography.Title
+				level={5}
+				className='text-gray'
+				style={{ marginTop: 0, marginBottom: 12 }}
+			>
+				Мы отправили код{method === 'whatsapp' ? ' в WhatsApp' : ' по SMS'} на
+				номер
 				<br />
 				{code.telephone}
 			</Typography.Title>
-			<Divider />
 			<Form.Item
 				name='code'
-				label='Код из смс'
+				label={method === 'whatsapp' ? 'Код из WhatsApp' : 'Код из смс'}
 				rules={[{ required: true, message: 'Введите код' }]}
+				style={{ marginBottom: 16 }}
 			>
 				{/* <Input.OTP
           autoFocus
@@ -155,21 +169,30 @@ const TelephoneForm = ({
 	handleTelephone,
 	telephone,
 	status,
+	method,
+	setMethod,
 }) => (
 	<Form
 		name='signin-telephone'
 		layout='vertical'
 		onFinish={handleSubmitTelephone}
 	>
-		<Typography.Title level={2}>
+		<Typography.Title level={2} style={{ marginBottom: 8 }}>
 			Войти или зарегистрироваться
-			<Typography.Title level={5} className='text-gray mt-10'>
+			<Typography.Title
+				level={5}
+				className='text-gray'
+				style={{ marginTop: 8, marginBottom: 0 }}
+			>
 				Чтобы сохранять корзину, историю покупок, добавлять в избранное,
 				участвовать в акциях и программах
 			</Typography.Title>
 		</Typography.Title>
-		<Divider />
-		<Form.Item name='telephone' label='Ваш телефон'>
+		<Form.Item
+			name='telephone'
+			label='Ваш телефон'
+			style={{ marginBottom: 16 }}
+		>
 			<InputMask
 				mask='+7 (999) 999-99-99'
 				onChange={handleTelephone}
@@ -178,7 +201,30 @@ const TelephoneForm = ({
 				<Input />
 			</InputMask>
 		</Form.Item>
-		<Form.Item>
+
+		{/* ✅ НОВОЕ: Выбор метода отправки кода */}
+		<Form.Item label='Как отправить код?' style={{ marginBottom: 16 }}>
+			<Button.Group style={{ width: '100%' }}>
+				<Button
+					type={method === 'sms' ? 'primary' : 'default'}
+					onClick={() => setMethod('sms')}
+					disabled={!!status?.type}
+					style={{ width: '50%' }}
+				>
+					📱 SMS
+				</Button>
+				<Button
+					type={method === 'whatsapp' ? 'primary' : 'default'}
+					onClick={() => setMethod('whatsapp')}
+					disabled={!!status?.type}
+					style={{ width: '50%' }}
+				>
+					💬 WhatsApp
+				</Button>
+			</Button.Group>
+		</Form.Item>
+
+		<Form.Item style={{ marginBottom: 12 }}>
 			<Button
 				type='primary'
 				htmlType='submit'
@@ -190,7 +236,9 @@ const TelephoneForm = ({
 				Получить код
 			</Button>
 		</Form.Item>
-		<p>Продолжая Вы соглашаетесь с политикой конфиденциальности</p>
+		<p style={{ marginBottom: 8, marginTop: 0 }}>
+			Продолжая Вы соглашаетесь с политикой конфиденциальности
+		</p>
 		{status?.type && <Alert message={status.text} type={status.type} banner />}
 	</Form>
 );

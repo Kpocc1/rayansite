@@ -3,9 +3,10 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import fetcher, { loadingStatus } from 'helpers/fetcher';
 import { customer, raw } from 'constants/endpoints';
 
-const postAuthCodeSend = async telephone => {
+const postAuthCodeSend = async (telephone, method = 'sms') => {
 	const formData = new FormData();
 	formData.append('telephone', telephone);
+	formData.append('method', method); // ✅ НОВОЕ: передаем метод отправки
 	const response = await fetcher(
 		'/index.php?route=account/signin/auth-code-send',
 		{
