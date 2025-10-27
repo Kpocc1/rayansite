@@ -1,35 +1,26 @@
-const geoObjectDisplayName = (geoObject) => {
-  const addr = geoObject.properties.get("metaDataProperty.GeocoderMetaData.Address");
-  const locality = addr.Components.find((c) => c.kind === 'locality');
-  const street = addr.Components.find((c) => c.kind === 'street');
-  const house = addr.Components.find((c) => c.kind === 'house');
-  if (!street) return;
-  return `${locality.name}, ${street.name}${house ? `, ${house.name}` : ""}`;
+/**
+ * Форматирование адреса из геообъекта
+ * Возвращает человекочитаемый адрес
+ */
+const geoObjectDisplayName = geoObject => {
+	const addr = geoObject.properties.get(
+		'metaDataProperty.GeocoderMetaData.Address'
+	);
+	const locality = addr.Components.find(c => c.kind === 'locality');
+	const street = addr.Components.find(c => c.kind === 'street');
+	const house = addr.Components.find(c => c.kind === 'house');
+
+	// Гибкий формат: показываем что есть, без строгих требований
+	if (locality && street && house) {
+		return `${locality.name}, ${street.name}, ${house.name}`;
+	} else if (locality && street) {
+		return `${locality.name}, ${street.name}`;
+	} else if (locality) {
+		return locality.name;
+	}
+
+	// Фоллбэк на полное имя объекта
+	return geoObject.properties.get('name') || geoObject.properties.get('text');
 };
 
-const suggestViewProvider = (ymaps) => ({
-  suggest: function (request, options) {
-    delete options["provider"];
-    return ymaps.suggest(request, options).then((items) => {
-      const arrayResult = [];
-      const arrayPromises = [];
-      items.forEach((item) => {
-        arrayPromises.push(
-          ymaps.geocode(item.value).then((res) => {
-            const geoObject = res.geoObjects.get(0);
-            const displayName = geoObjectDisplayName(geoObject);
-            if (displayName) {
-              arrayResult.push({ displayName, value: displayName });
-            }            
-          })
-        );
-      });
-
-      return Promise.all(arrayPromises).then(function () {
-        return ymaps.vow.resolve(arrayResult);
-      });
-    });
-  },
-});
-
-export { suggestViewProvider, geoObjectDisplayName };
+export { geoObjectDisplayName };
