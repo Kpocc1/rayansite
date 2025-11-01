@@ -1,5 +1,6 @@
 #!/bin/bash
 # Улучшенный деплой фронтенда сайта rayanhalal.ru с проверками
+# Сохраняет папку files при обновлении
 # Использование: ./deploy-site-frontend-SAFE.sh
 
 set -e  # Остановка при ошибке
@@ -138,17 +139,28 @@ ssh $SERVER << 'ENDSSH'
     # Создать директорию если не существует
     mkdir -p "$FRONTEND_DIR"
     
-    # ✅ КРИТИЧНО: Удалить старые файлы (включая возможный вложенный build/)
-    echo "Очистка старых файлов..."
-    rm -rf "$FRONTEND_DIR"/*
+    # ✅ СОХРАНЯЕМ ПАПКУ FILES: Удалить старые файлы, но сохранить папку files
+    echo "Очистка старых файлов (сохраняем папку files)..."
     
-    # Проверка, что папка пустая
-    if [ "$(ls -A $FRONTEND_DIR 2>/dev/null)" ]; then
-        echo "⚠️  ВНИМАНИЕ: Папка не пустая после очистки!"
-        ls -la "$FRONTEND_DIR"
-    else
-        echo "✅ Папка очищена"
+    # Создать временную папку для сохранения files
+    if [ -d "$FRONTEND_DIR/files" ]; then
+        echo "Сохраняю папку files..."
+        cp -r "$FRONTEND_DIR/files" /tmp/files_backup
     fi
+    
+    # Удалить все файлы кроме files
+    find "$FRONTEND_DIR" -maxdepth 1 -type f -delete
+    find "$FRONTEND_DIR" -maxdepth 1 -type d ! -name "files" ! -path "$FRONTEND_DIR" -exec rm -rf {} +
+    
+    # Восстановить папку files
+    if [ -d "/tmp/files_backup" ]; then
+        echo "Восстанавливаю папку files..."
+        mv /tmp/files_backup "$FRONTEND_DIR/files"
+    fi
+    
+    # Проверка содержимого после очистки
+    echo "Содержимое после очистки:"
+    ls -la "$FRONTEND_DIR"
     
     # Распаковать новый билд
     echo "Распаковка нового билда..."
@@ -204,6 +216,14 @@ ssh $SERVER << 'ENDSSH'
         echo "✅ Папка static найдена"
     else
         echo "❌ Папка static НЕ НАЙДЕНА!"
+    fi
+    
+    if [ -d "/var/www/www-root/data/www/rayanhalal.ru/frontend/build/files" ]; then
+        echo "✅ Папка files сохранена"
+        echo "   Размер папки files:"
+        du -sh /var/www/www-root/data/www/rayanhalal.ru/frontend/build/files
+    else
+        echo "⚠️  Папка files не найдена (возможно, её не было)"
     fi
 ENDSSH
 

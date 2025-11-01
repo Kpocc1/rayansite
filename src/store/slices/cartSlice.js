@@ -4,70 +4,70 @@ import fetcher, { loadingStatus } from 'helpers/fetcher';
 import { cart, checkout } from 'constants/endpoints';
 
 const addToCart = async (product_id, quantity = 1) => {
-	const formData = new FormData();
+  const formData = new FormData();
 	formData.append('product_id', product_id);
 	formData.append('quantity', quantity);
-	const response = await fetcher(cart.ADD, {
+  const response = await fetcher(cart.ADD, {
 		method: 'POST',
-		body: formData,
-	});
-	return response.json();
+    body: formData,
+  });
+  return response.json();
 };
 
 const batchAddToCart = async products => {
-	const response = await fetcher(cart.BATCH_ADD, {
+  const response = await fetcher(cart.BATCH_ADD, {
 		method: 'POST',
-		body: JSON.stringify({ products }),
-	});
-	return response.json();
+    body: JSON.stringify({ products }),
+  });
+  return response.json();
 };
 
 const reduceFromCart = async (product_id, quantity = 1) => {
-	const formData = new FormData();
+  const formData = new FormData();
 	formData.append('product_id', product_id);
 	formData.append('quantity', quantity);
-	const response = await fetcher(cart.REDUCE, {
+  const response = await fetcher(cart.REDUCE, {
 		method: 'POST',
-		body: formData,
-	});
-	return response.json();
+    body: formData,
+  });
+  return response.json();
 };
 
 const removeFromCart = async key => {
-	const formData = new FormData();
+  const formData = new FormData();
 	formData.append('key', key);
-	const response = await fetcher(cart.REMOVE, {
+  const response = await fetcher(cart.REMOVE, {
 		method: 'POST',
-		body: formData,
-	});
-	return response.json();
+    body: formData,
+  });
+  return response.json();
 };
 
 const checkoutSave = async data => {
-	const formData = new FormData();
+  const formData = new FormData();
 	Object.keys(data).forEach(k => formData.append(k, data[k]));
-	const response = await fetcher(checkout.SAVE, {
+  const response = await fetcher(checkout.SAVE, {
 		method: 'POST',
-		body: formData,
-	});
-	return response.json();
+    body: formData,
+  });
+  return response.json();
 };
 
 const checkoutPayment = async action => {
-	const response = await fetcher(action);
-	return response.json();
+  const response = await fetcher(action);
+  return response.json();
 };
 
 const fetchCartProducts = createAsyncThunk('cart.PRODUCTS', async () => {
-	const response = await fetcher(cart.CART);
-	return response.json();
+  const response = await fetcher(cart.CART);
+  return response.json();
 });
 
 const fetchShippingMethods = createAsyncThunk(
 	'cart.SHIPPING_METHODS',
 	async () => {
 		const response = await fetcher('/index.php?route=checkout/shipping_method');
-		return response.json();
+  return response.json();
 	}
 );
 
@@ -75,7 +75,7 @@ const fetchPaymentMethods = createAsyncThunk(
 	'cart.PAYMENT_METHOD',
 	async () => {
 		const response = await fetcher('/index.php?route=checkout/payment_method');
-		return response.json();
+  return response.json();
 	}
 );
 
@@ -87,13 +87,13 @@ const fetchSuccessPage = createAsyncThunk(
 				orderId ? `&order_id=${orderId}` : ''
 			}`
 		);
-		return response.json();
+  return response.json();
 	}
 );
 
 const calcBasedOnYaTaxi = async (storeCoords, coords, cb) => {
 	try {
-		const formData = new FormData();
+  const formData = new FormData();
 		// ВАЖНО: Яндекс.Такси ожидает формат "долгота,широта" (lon,lat), а не (lat,lon)!
 		// storeCoords приходит как [lat, lon], нужно поменять местами
 		const storeLonLat = [storeCoords[1], storeCoords[0]].join(',');
@@ -114,7 +114,7 @@ const calcBasedOnYaTaxi = async (storeCoords, coords, cb) => {
 			'/index.php?route=checkout/checkout/yandex_taxi',
 			{
 				method: 'POST',
-				body: formData,
+    body: formData,
 			}
 		);
 
@@ -152,7 +152,7 @@ const calcBasedOnYaTaxi = async (storeCoords, coords, cb) => {
 		if (parsedRes && parsedRes.options && parsedRes.options[0]) {
 			const taxiPrice = parsedRes.options[0].price;
 			console.log('💰 Стоимость доставки по Яндекс.Такси:', taxiPrice);
-			cb(taxiPrice);
+  cb(taxiPrice);
 		} else {
 			console.error('❌ Неверный формат ответа от Яндекс.Такси');
 			cb(0);
@@ -164,54 +164,54 @@ const calcBasedOnYaTaxi = async (storeCoords, coords, cb) => {
 };
 
 const initialState = {
-	cartProducts: {
-		data: {},
-		status: loadingStatus.IDLE,
-	},
-	shippingMethods: {
-		data: {},
-		status: loadingStatus.IDLE,
-	},
-	paymentMethods: {
-		data: {},
-		status: loadingStatus.IDLE,
-	},
-	successPage: {
-		data: {},
-		status: loadingStatus.IDLE,
-	},
+  cartProducts: {
+    data: {},
+    status: loadingStatus.IDLE,
+  },
+  shippingMethods: {
+    data: {},
+    status: loadingStatus.IDLE,
+  },
+  paymentMethods: {
+    data: {},
+    status: loadingStatus.IDLE,
+  },
+  successPage: {
+    data: {},
+    status: loadingStatus.IDLE,
+  },
 };
 
 const cartSlice = createSlice({
 	name: 'cart',
-	initialState,
-	reducers: {},
-	extraReducers(builder) {
-		builder
-			.addCase(fetchCartProducts.pending, (state, action) => {
-				state.cartProducts.status = loadingStatus.LOADING;
-			})
-			.addCase(fetchCartProducts.fulfilled, (state, action) => {
-				state.cartProducts.status = loadingStatus.SUCCEEDED;
-				state.cartProducts.data = action.payload;
-			})
-			.addCase(fetchShippingMethods.pending, (state, action) => {
-				state.shippingMethods.status = loadingStatus.LOADING;
-			})
-			.addCase(fetchShippingMethods.fulfilled, (state, action) => {
-				state.shippingMethods.status = loadingStatus.SUCCEEDED;
-				state.shippingMethods.data = action.payload;
-			})
-			.addCase(fetchPaymentMethods.pending, (state, action) => {
-				state.paymentMethods.status = loadingStatus.LOADING;
-			})
-			.addCase(fetchPaymentMethods.fulfilled, (state, action) => {
-				state.paymentMethods.status = loadingStatus.SUCCEEDED;
-				state.paymentMethods.data = action.payload;
-			})
-			.addCase(fetchSuccessPage.fulfilled, (state, action) => {
-				state.successPage.status = loadingStatus.SUCCEEDED;
-				state.successPage.data = action.payload;
+  initialState,
+  reducers: {},
+  extraReducers(builder) {
+    builder
+      .addCase(fetchCartProducts.pending, (state, action) => {
+        state.cartProducts.status = loadingStatus.LOADING;
+      })
+      .addCase(fetchCartProducts.fulfilled, (state, action) => {
+        state.cartProducts.status = loadingStatus.SUCCEEDED;
+        state.cartProducts.data = action.payload;
+      })
+      .addCase(fetchShippingMethods.pending, (state, action) => {
+        state.shippingMethods.status = loadingStatus.LOADING;
+      })
+      .addCase(fetchShippingMethods.fulfilled, (state, action) => {
+        state.shippingMethods.status = loadingStatus.SUCCEEDED;
+        state.shippingMethods.data = action.payload;
+      })
+      .addCase(fetchPaymentMethods.pending, (state, action) => {
+        state.paymentMethods.status = loadingStatus.LOADING;
+      })
+      .addCase(fetchPaymentMethods.fulfilled, (state, action) => {
+        state.paymentMethods.status = loadingStatus.SUCCEEDED;
+        state.paymentMethods.data = action.payload;
+      })
+      .addCase(fetchSuccessPage.fulfilled, (state, action) => {
+        state.successPage.status = loadingStatus.SUCCEEDED;
+        state.successPage.data = action.payload;
 			});
 	},
 });
@@ -220,15 +220,15 @@ export default cartSlice.reducer;
 
 // export const { postAdded, postUpdated, reactionAdded } = playerSlice.actions;
 export {
-	reduceFromCart,
-	addToCart,
-	removeFromCart,
-	batchAddToCart,
-	checkoutSave,
-	checkoutPayment,
-	calcBasedOnYaTaxi,
-	fetchCartProducts,
-	fetchShippingMethods,
-	fetchPaymentMethods,
-	fetchSuccessPage,
+  reduceFromCart,
+  addToCart,
+  removeFromCart,
+  batchAddToCart,
+  checkoutSave,
+  checkoutPayment,
+  calcBasedOnYaTaxi,
+  fetchCartProducts,
+  fetchShippingMethods,
+  fetchPaymentMethods,
+  fetchSuccessPage,
 };
