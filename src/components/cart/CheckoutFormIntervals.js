@@ -4,13 +4,13 @@ import useBreakpoint from 'hooks/useBreakpoint';
 import { formatDate } from 'helpers/formatter';
 import { loadingStatus } from 'helpers/fetcher';
 
-const CheckoutFormIntervals = ({ shippingMethods }) => {
+const CheckoutFormIntervals = ({ shippingMethods, isPickup }) => {
 	const { isMobile } = useBreakpoint();
 	const isNalchik = shippingMethods.data?.store_id === 0;
 	return (
 		<div className='white p-20'>
 			<Typography.Title level={4} style={{ marginTop: 0 }}>
-				Дата и интервал доставки
+				{isPickup ? 'Дата и время самовывоза' : 'Дата и интервал доставки'}
 			</Typography.Title>
 			{shippingMethods.status === loadingStatus.SUCCEEDED ? (
 				<Tabs
@@ -18,7 +18,8 @@ const CheckoutFormIntervals = ({ shippingMethods }) => {
 					items={intervalItems(
 						shippingMethods.data.intervals,
 						isMobile,
-						isNalchik
+						isNalchik,
+						isPickup
 					)}
 					// onChange={console.log}
 				/>
@@ -29,7 +30,7 @@ const CheckoutFormIntervals = ({ shippingMethods }) => {
 	);
 };
 
-const intervalItems = (intervals, isMobile, isNalchik) => {
+const intervalItems = (intervals, isMobile, isNalchik, isPickup) => {
 	const now = new Date();
 	const todayStr =
 		now.getDate().toString().padStart(2, '0') +
@@ -61,7 +62,7 @@ const intervalItems = (intervals, isMobile, isNalchik) => {
 				>
 					{intervals.disables_day_of_week.includes(
 						formatDate(date).isoWeekday()
-					) ? (
+					) && !isPickup ? (
 						<Alert message='Доставка недоступна' type='error' showIcon />
 					) : (
 						<Radio.Group buttonStyle='solid' size='large'>
@@ -73,14 +74,45 @@ const intervalItems = (intervals, isMobile, isNalchik) => {
 									intervals.disables_datetime.includes(
 										`${date.split('.').reverse().join('-')} ${t[0]}`
 									);
+								
+								// Дополнительная проверка для самовывоза с учетом режима работы
+								let pickupDisabled = false;
+								if (isPickup) {
+									const dayOfWeek = formatDate(date).isoWeekday(); // 1=пн, 7=вс
+									const [startTime] = t[0].split(' - ');
+									const [startHours] = startTime.split(':').map(Number);
+									
+									if (isNalchik) {
+										// Нальчик: 8:00 - 20:00 БЕЗ ВЫХОДНЫХ, пятница перерыв 12:00-14:00
+										if (dayOfWeek === 5) { // пятница - перерыв 12:00-14:00
+											pickupDisabled = startHours < 8 || startHours >= 20 || (startHours >= 12 && startHours < 14);
+										} else {
+											// Воскресенье работает как обычно для САМОВЫВОЗА
+											pickupDisabled = startHours < 8 || startHours >= 20;
+										}
+									} else {
+										// Москва: 10:00-21:00, интервал доступен если начинается до 21:00
+										pickupDisabled = startHours < 10 || startHours >= 21;
+									}
+								}
+								
 								const disabled =
-									shouldBeDisabled &&
-									!(isNalchik && isToday && isLastInterval && isBefore19);
+									(shouldBeDisabled &&
+									!(isNalchik && isToday && isLastInterval && isBefore19)) ||
+									pickupDisabled;
+
+								// Для Москвы при самовывозе: последний интервал 20:00-21:00 вместо 20:00-22:00
+								let displayInterval = t[0];
+								let valueInterval = t[0];
+								if (isPickup && !isNalchik && t[0] === '20:00 - 22:00') {
+									displayInterval = '20:00 - 21:00';
+									valueInterval = '20:00 - 21:00';
+								}
 
 								return (
 									<Radio.Button
 										key={`${date}-${t[0]}`}
-										value={`${date} в ${t[0]}`}
+										value={`${date} в ${valueInterval}`}
 										disabled={disabled}
 										style={
 											isMobile
@@ -93,10 +125,39 @@ const intervalItems = (intervals, isMobile, isNalchik) => {
 												: {}
 										}
 									>
-										{t[0]}
+										{displayInterval}
 									</Radio.Button>
 								);
 							})}
+							
+							{/* Дополнительные интервалы для Нальчика при самовывозе */}
+							{isPickup && isNalchik && (() => {
+								const dayOfWeek = formatDate(date).isoWeekday(); // 1=пн, 7=вс
+								const isSunday = dayOfWeek === 7;
+								
+								// Обычные дни: 18:00 - 20:00, Воскресенье: 18:00 - 19:00
+								const extraInterval = isSunday ? '18:00 - 19:00' : '18:00 - 20:00';
+								
+								return (
+									<Radio.Button
+										key={`${date}-extra`}
+										value={`${date} в ${extraInterval}`}
+										disabled={false}
+										style={
+											isMobile
+												? {
+														borderRadius: 0,
+														width: '50%',
+														textAlign: 'center',
+														marginBottom: 5,
+												  }
+												: {}
+										}
+									>
+										{extraInterval}
+									</Radio.Button>
+								);
+							})()}
 						</Radio.Group>
 					)}
 				</Form.Item>

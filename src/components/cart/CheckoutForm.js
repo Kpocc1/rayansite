@@ -396,15 +396,19 @@ const CheckoutForm = ({ customer, data }) => {
 					prev.shipping_method !== current.shipping_method
 				}
 			>
-				{({ getFieldValue }) =>
-					getFieldValue('shipping_method') === SHIPPINGS[0].code &&
-					deliveryEnabled && (
+				{({ getFieldValue }) => {
+					const shippingMethod = getFieldValue('shipping_method');
+					const isDelivery = shippingMethod === SHIPPINGS[0].code;
+					const isPickup = shippingMethod === SHIPPINGS[1].code;
+					
+					return (isDelivery && deliveryEnabled) || (isPickup && pickupEnabled) ? (
 						<CheckoutFormIntervals
 							shippingMethods={shippingMethods}
 							deliveryEnabled={deliveryEnabled}
+							isPickup={isPickup}
 						/>
-					)
-				}
+					) : null;
+				}}
 			</Form.Item>
 			<Divider style={{ marginTop: 0 }} />
 
