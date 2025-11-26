@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Input, AutoComplete, Flex } from "antd";
+import { Input, AutoComplete, Flex, Button } from "antd";
 
 import { fetchSearch } from "store/slices/productSlice";
 import useSmartNavigate from "hooks/useSmartNavigate";
@@ -45,12 +45,36 @@ const SearchWithSuggest = ({ listHeight = 700, isDesktop = true, onClose = () =>
       listHeight={listHeight}
     >
       {isDesktop ? (
-        <Input.Search
-          size="large"
-          placeholder="поиск по товарам"
-          onSearch={handleGoSearchPage}
-          enterButton
-        />
+        <Flex gap={0} style={{ width: "100%", alignItems: "center" }}>
+          <Input
+            size="large"
+            placeholder="поиск по товарам"
+            prefix={
+              <img
+                src={`${process.env.PUBLIC_URL}/icons/icon-search.svg`}
+                alt=""
+                style={{ width: 24, height: 24 }}
+              />
+            }
+            className="search-input"
+            onPressEnter={(e) => {
+              e.stopPropagation();
+              handleGoSearchPage(e.target.value);
+            }}
+            ref={inputRef}
+          />
+          <Button
+            type="primary"
+            className="search-button"
+            onClick={() => {
+              if (inputRef.current) {
+                handleGoSearchPage(inputRef.current.input.value);
+              }
+            }}
+          >
+            Найти
+          </Button>
+        </Flex>
       ) : (
         <Input
           size="large"

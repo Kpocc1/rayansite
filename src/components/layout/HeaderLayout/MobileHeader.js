@@ -36,9 +36,6 @@ const MobileHeader = ({
           <a onClick={customer.token ? hrefNavigate("/account") : handleSigninModalOpen}>
             <UserOutlined style={{ fontSize: 18 }} /><br />{customer.token ? "Кабинет" : "Войти"}
           </a>
-          <a href={`tel: ${data.telephone}`}>
-            <PhoneOutlined style={{ fontSize: 18 }} /><br />Поддержка
-          </a>
           <a href="/catalog" onClick={hrefNavigate("/catalog")}>
             <AppstoreOutlined style={{ fontSize: 18 }} /><br />Каталог
           </a>
