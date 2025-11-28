@@ -61,6 +61,441 @@ input[type='number'] {
 	margin-block-end: 0;
 	background-color: var(--rn-white-color);
 }
+/* Секция каталога */
+.catalog-section {
+	margin-bottom: 100px !important;
+}
+.catalog-section-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 48px;
+}
+.catalog-title {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 48px;
+	font-weight: 500; /* Medium */
+	line-height: 1.2;
+	color: #1c1c1c; /* AA - черный цвет */
+	margin: 0;
+	text-transform: uppercase;
+}
+.catalog-link-all {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	gap: 6px;
+}
+.catalog-link-text {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400; /* Regular */
+	line-height: 1.5;
+	color: var(--rn-gray-color); /* Dark gray */
+}
+.catalog-link-icon {
+	width: 20px;
+	height: 20px;
+}
+/* Карточки товара в каталоге - отступы 24px со всех сторон, 4 колонки */
+.catalog-products-list .ant-row {
+	margin-left: -12px !important;
+	margin-right: -12px !important;
+	margin-top: -12px !important;
+}
+.catalog-products-list .ant-col {
+	padding: 12px !important; /* 24px / 2 = 12px для gutter */
+	margin-bottom: 0 !important;
+}
+.catalog-products-list .ant-list-item {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+.catalog-products-list .ant-list-item .ant-card {
+	margin: 0;
+	height: 100%;
+}
+/* Стили карточки каталога */
+.catalog-card {
+	height: 247px !important;
+	border-radius: 20px;
+	overflow: hidden;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	cursor: pointer;
+	position: relative;
+}
+.catalog-card .ant-card-body {
+	height: 100%;
+	padding: 0 !important;
+	position: relative;
+}
+.catalog-card:hover,
+.catalog-card:focus {
+	transform: scale(1.02);
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+.catalog-card-image {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	object-position: center;
+	display: block;
+}
+.catalog-card-title {
+	position: absolute;
+	bottom: 24px;
+	left: 24px;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 24px;
+	font-weight: 600; /* Demibold */
+	line-height: 1.2;
+	color: #1c1c1c; /* AA - черный цвет */
+	margin: 0;
+}
+/* Секция популярных товаров */
+.popular-products-section {
+	margin-top: 100px !important;
+}
+/* Секция скидок */
+.discounts-section {
+	margin-top: 100px !important;
+}
+/* Секция "О компании" */
+.about-section {
+	margin-top: 100px !important;
+}
+.about-content {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 0;
+	border-radius: 20px;
+	overflow: hidden;
+	align-items: stretch;
+}
+.about-text {
+	display: flex;
+	flex-direction: column;
+	background: var(--rn-lightgray-color);
+	padding: 48px 75px 48px 48px;
+}
+.about-title {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 48px;
+	font-weight: 500; /* Medium */
+	line-height: 1.2;
+	color: #1c1c1c; /* AA - черный цвет */
+	margin: 0 0 32px 0;
+	text-transform: uppercase;
+}
+.about-title-brand {
+	color: var(--rn-blue-color);
+}
+.about-main-text {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 18px;
+	font-weight: 400; /* Regular - Body1_18px */
+	line-height: 1.5;
+	color: #1c1c1c;
+	margin: 0 0 24px 0;
+}
+.about-main-text p {
+	margin: 0 0 16px 0;
+}
+.about-main-text p:last-child {
+	margin-bottom: 0;
+}
+.about-brand-text {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 18px;
+	font-weight: 600; /* Demibold - H5_18px */
+	line-height: 1.5;
+	color: #1c1c1c;
+	margin: 0;
+}
+.about-image {
+	display: flex;
+	align-items: stretch;
+	overflow: hidden;
+}
+.about-image-img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+/* Секция "Доверьтесь качеству" */
+.quality-section {
+	margin-top: 100px !important;
+}
+.quality-title {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 48px;
+	font-weight: 500; /* Medium */
+	line-height: 1.2;
+	color: #1c1c1c; /* AA - черный цвет */
+	margin: 0 0 48px 0;
+	text-transform: uppercase;
+}
+/* Блоки качества */
+.quality-cards {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(2, auto);
+	gap: 24px;
+	margin-bottom: 48px;
+}
+.quality-card {
+	padding: 24px;
+	border-radius: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+	text-align: left;
+}
+.quality-card-gray {
+	background: var(--rn-lightgray-color);
+}
+.quality-card-blue {
+	grid-row: 1 / 3;
+	grid-column: 3;
+}
+.quality-card-icon {
+	width: 44px;
+	height: 44px;
+	margin-bottom: 24px;
+	object-fit: contain;
+}
+.quality-card-text {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 24px;
+	font-weight: 600; /* Demibold */
+	line-height: 1.2;
+	color: var(--rn-blue-color);
+	margin: 0;
+}
+.quality-card-text-white {
+	color: #fff;
+}
+.popular-products-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 48px;
+}
+.popular-products-list {
+	margin-bottom: 0;
+}
+/* Карточка популярного товара */
+.popular-product-card {
+	padding: 10px 20px 16px;
+	background: #fff;
+	border-radius: 20px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	position: relative;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+.popular-product-image-wrapper {
+	position: relative;
+	margin-bottom: 24px;
+}
+.popular-product-image {
+	width: 100%;
+	height: auto;
+	display: block;
+	border-radius: 4px;
+}
+.popular-product-favorite {
+	position: absolute;
+	top: 16px;
+	right: 16px;
+	width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #f7f7f9;
+	border: none;
+	border-radius: 50%;
+	cursor: pointer;
+	padding: 0;
+	transition: background 0.3s ease;
+}
+.popular-product-favorite:hover {
+	background: #e8e8ea;
+}
+.popular-product-favorite-icon {
+	width: 16px;
+	height: 16px;
+}
+.popular-product-rating {
+	position: absolute;
+	bottom: 8px;
+	left: 8px;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	background: #f7f7f9;
+	padding: 4px 8px;
+	border-radius: 24px;
+}
+.popular-product-rating-icon {
+	width: 16px;
+	height: 15px;
+}
+.popular-product-rating-value {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 600; /* Demibold - H5_16px */
+	line-height: 1.5;
+	color: #1c1c1c;
+	display: flex;
+	align-items: center;
+}
+.popular-product-title {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 18px;
+	font-weight: 400; /* Regular */
+	line-height: 1.5;
+	color: #1c1c1c;
+	margin: 0 0 24px 0;
+	min-height: 54px; /* 18px * 1.5 * 2 строки */
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+.popular-product-price-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 24px;
+}
+.popular-product-price {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 24px;
+	font-weight: 600; /* Demibold */
+	line-height: 1.2;
+	color: #1c1c1c;
+}
+.popular-product-weight {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400; /* Regular */
+	line-height: 1.5;
+	color: #898989;
+}
+.popular-product-button {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	padding: 12px 0;
+	background: var(--rn-blue-color);
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	margin-bottom: 16px;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 600; /* Demibold - H5_16px */
+	line-height: 1.5;
+	color: #fff;
+	transition: background 0.3s ease;
+	flex-shrink: 0;
+}
+.popular-product-button:hover {
+	background: #0669b8;
+}
+.popular-product-button-icon {
+	width: 24px;
+	height: 24px;
+}
+.popular-product-stock {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400; /* Regular - Body2_16px */
+	line-height: 1.5;
+	color: var(--rn-blue-color);
+	text-align: center;
+	flex-shrink: 0;
+}
+/* Бейдж скидки */
+.discount-badge {
+	position: absolute;
+	top: 8px;
+	left: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(196, 0, 4, 0.1); /* #C40004 с 10% прозрачностью */
+	padding: 4px 8px;
+	border-radius: 24px;
+}
+.discount-badge-text {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 600; /* Demibold - H5_16px */
+	line-height: 1.5;
+	color: #c40004;
+	display: flex;
+	align-items: center;
+}
+/* Цены со скидкой */
+.discount-product-price-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin-bottom: 24px;
+}
+.discount-price-wrapper {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+.discount-product-price {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 24px;
+	font-weight: 600; /* Demibold - h4_24px */
+	line-height: 1.2;
+	color: #c40004;
+	margin-right: 8px;
+}
+.discount-product-price-old {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400; /* Regular */
+	line-height: 1.5;
+	color: #898989;
+	text-decoration: line-through;
+}
+.popular-products-title {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 48px;
+	font-weight: 500; /* Medium */
+	line-height: 1.2;
+	color: #1c1c1c; /* AA - черный цвет */
+	margin: 0;
+	text-transform: uppercase;
+}
+.popular-products-link {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400; /* Regular */
+	line-height: 1.5;
+	color: var(--rn-gray-color);
+	text-decoration: none;
+}
+.popular-products-link:hover {
+	color: var(--rn-primary-color);
+}
 .rn-layout {
 	min-height: 100vh;
 	background-color: var(--rn-white-color);
@@ -350,6 +785,29 @@ input[type='number'] {
 .city-dropdown-menu .ant-dropdown-menu-item-selected:hover {
 	background-color: var(--rn-darkblue-color);
 }
+/* Применяем размытие для dropdown города (как и для каталога) */
+.city-dropdown-overlay ~ .ant-dropdown-mask,
+.city-dropdown-overlay .ant-dropdown-mask,
+body:has(.city-dropdown-overlay) .ant-dropdown-mask {
+	backdrop-filter: blur(3px) !important;
+	-webkit-backdrop-filter: blur(3px) !important;
+	background: rgba(0, 0, 0, 0.3) !important;
+	pointer-events: auto !important;
+}
+/* Применяем размытие через псевдоэлемент body для города */
+body:has(.city-dropdown-overlay)::before {
+	content: '';
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	backdrop-filter: blur(3px);
+	-webkit-backdrop-filter: blur(3px);
+	background: rgba(0, 0, 0, 0.3);
+	z-index: 1040;
+	pointer-events: auto;
+}
 .rn-header {
 	line-height: 22px !important;
 	margin-top: 24px;
@@ -481,7 +939,11 @@ input[type='number'] {
 	border: none;
 	margin-right: 20px;
 	position: relative;
-	z-index: 1051 !important; /* Выше размытого фона - кнопка не размывается */
+}
+/* Кнопка каталог не размывается, когда открыт dropdown каталога */
+.catalog-button-open {
+	z-index: 1051 !important;
+	position: relative;
 }
 .catalog-button:hover {
 	background-color: var(--rn-blue-color);
@@ -602,10 +1064,9 @@ body:has(.ant-dropdown-open:not([style*='display: none']))::before {
 	z-index: 1040;
 	pointer-events: auto; /* Размытые элементы неактивны - клики блокируются */
 }
-/* Исключаем кнопку каталог из размытия */
+/* Кнопка каталог - обычный z-index, чтобы размывалась вместе с остальным контентом */
 .catalog-button {
 	position: relative;
-	z-index: 1051 !important; /* Выше размытого фона */
 }
 /* Убираем размытие когда меню закрыто */
 body:not(:has(.ant-dropdown-open))::before,
@@ -793,7 +1254,23 @@ body:not(:has([class*='ant-dropdown-open']))::before {
 	box-shadow: none !important;
 }
 .rm-main {
-	padding-top: 20px;
+	padding-top: 0;
+}
+/* Hero баннер */
+.hero-banner-wrapper {
+	margin-top: 64px;
+	margin-bottom: 64px;
+}
+.hero-banner-wrapper .ant-carousel {
+	width: 100%;
+}
+.hero-banner-wrapper .ant-carousel .slick-slide {
+	width: 100%;
+}
+.hero-banner-wrapper .ant-carousel img {
+	width: 100%;
+	height: auto;
+	display: block;
 }
 .rn-footer {
 	margin-top: 60px;

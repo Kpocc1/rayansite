@@ -132,10 +132,12 @@ const HeaderLayout = () => {
 				<div className='region'>
 					<Flex vertical={false} justify='flex-start' align='center'>
 						<Dropdown
+							trigger={['click']}
 							menu={{
 								items: data.cities_list,
 								onClick: handleCityClick,
 							}}
+							overlayClassName='city-dropdown-overlay'
 							dropdownRender={menu => (
 								<div className='city-dropdown-menu'>{menu}</div>
 							)}
@@ -359,7 +361,9 @@ const HeaderLayout = () => {
 					>
 						<Button
 							type='primary'
-							className='catalog-button'
+							className={`catalog-button ${
+								catalogMenuOpen ? 'catalog-button-open' : ''
+							}`}
 							onClick={() => setCatalogMenuOpen(!catalogMenuOpen)}
 						>
 							<img

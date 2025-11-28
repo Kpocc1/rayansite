@@ -8,7 +8,7 @@ const FooterLayout = () => {
 
   return (
     <div className="rn-footer region">
-      {isDesktop ? (
+      {/* {isDesktop ? (
         <List
           grid={{ gutter: 16, column: 5 }}
           className="advantages-list"
@@ -50,7 +50,7 @@ const FooterLayout = () => {
             </List.Item>
           )}
         />
-      ) : ""}
+      ) : ""} */}
       <Divider />
       <div className="mt-30">
         ©{new Date().getFullYear()} Мясной дом "Райян"

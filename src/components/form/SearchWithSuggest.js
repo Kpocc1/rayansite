@@ -47,8 +47,8 @@ const SearchWithSuggest = ({ listHeight = 700, isDesktop = true, onClose = () =>
       {isDesktop ? (
         <Flex gap={0} style={{ width: "100%", alignItems: "center" }}>
           <Input
-            size="large"
-            placeholder="поиск по товарам"
+          size="large"
+          placeholder="поиск по товарам"
             prefix={
               <img
                 src={`${process.env.PUBLIC_URL}/icons/icon-search.svg`}

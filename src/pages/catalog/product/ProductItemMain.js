@@ -21,6 +21,10 @@ const ProductItemMain = ({ product_id, data }) => {
     dispatch(setDeliveryModalIsOpen(true));
   };
 
+  if (!data || !data.heading_title) {
+    return null;
+  }
+
   return (
     <>
       <HeadingTitle
@@ -51,7 +55,7 @@ const ProductItemMain = ({ product_id, data }) => {
               }
               style={{ marginTop: 0, marginBottom: 15 }}
             />
-            {data.weight.indexOf("кг") && (
+            {data.weight && data.weight.indexOf("кг") && (
               <>
                 {data.price_kg && (
                   <div>
@@ -77,7 +81,7 @@ const ProductItemMain = ({ product_id, data }) => {
           </Flex>
         </Col>
         <Col md={22} lg={22} xl={10}>
-          {data.weight.indexOf("кг") && (
+          {data.weight && data.weight.indexOf("кг") && (
             <Alert
               message={<><SlidersOutlined style={{ fontSize: 18, marginRight: 5 }} /> Это весовой товар</>}
               description="Цена указана за максимальный вес фасовки"

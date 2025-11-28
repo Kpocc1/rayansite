@@ -1,5 +1,13 @@
 
 const getStock = (item) => {
+  if (!item || !item.weight) {
+    return {
+      quantity: 0,
+      stock: 0,
+      label: "нет в наличии",
+    };
+  }
+
   const PRE_ORDER_STATES = {
     0: "pre-order",
     999: "always-yes",

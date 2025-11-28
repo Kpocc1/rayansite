@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Card, List, Skeleton, Typography } from "antd";
+import { Card, List, Skeleton, Typography, Flex } from "antd";
 
 import Breadcrumb from "components/Breadcrumb";
 import { fetchCategory } from "store/slices/productSlice";
@@ -80,24 +80,39 @@ const Catalog = ({ breadcrumb, grid }) => {
   }, [dispatch, url]);
 
   return (
-    <div className="region">
+    <div className="region catalog-section">
       {breadcrumb ? breadcrumb : <Breadcrumb />}
-      <Typography.Title level={3}>Каталог</Typography.Title>
+      <div className="catalog-section-header">
+        <h2 className="catalog-title">КАТАЛОГ</h2>
+        <a href="/catalog" onClick={(e) => { e.preventDefault(); navigate('/catalog'); }} className="catalog-link-all">
+          <span className="catalog-link-text">Перейти в каталог</span>
+          <img
+            src={`${process.env.PUBLIC_URL}/icons/icon-arrow-right-gray.svg`}
+            alt=""
+            className="catalog-link-icon"
+          />
+        </a>
+      </div>
 
       <List
         grid={grid || PRODUCTS_GRID}
+        className="catalog-products-list"
         // dataSource={data.categories || Array(5 * 3).fill({})}
         dataSource={dataCategories}
         renderItem={(item) => (
           <Skeleton active avatar loading={status !== loadingStatus.SUCCEEDED}>
             <List.Item>
-              <Card onClick={() => navigate(`/catalog/${item.path}`)}>
+              <Card 
+                onClick={() => navigate(`/catalog/${item.path}`)}
+                className="catalog-card"
+                bodyStyle={{ padding: 0, height: '100%', position: 'relative' }}
+              >
                 <img
                   src={getImage(item.image)}
                   alt=""
-                  className="img-responsive"
+                  className="catalog-card-image"
                 />
-                <strong>{item.name}</strong>
+                <div className="catalog-card-title">{item.name}</div>
               </Card>
             </List.Item>
           </Skeleton>
