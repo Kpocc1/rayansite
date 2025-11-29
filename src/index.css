@@ -165,6 +165,7 @@ input[type='number'] {
 /* Секция "О компании" */
 .about-section {
 	margin-top: 100px !important;
+	margin-bottom: 60px !important;
 }
 .about-content {
 	display: grid;
@@ -228,6 +229,7 @@ input[type='number'] {
 /* Секция "Доверьтесь качеству" */
 .quality-section {
 	margin-top: 100px !important;
+	margin-bottom: 100px !important;
 }
 .quality-title {
 	font-family: 'TT Firs Neue', sans-serif;
@@ -254,6 +256,12 @@ input[type='number'] {
 	align-items: flex-start;
 	justify-content: flex-start;
 	text-align: left;
+	transition: transform 0.3s ease;
+	cursor: pointer;
+}
+.quality-card:hover,
+.quality-card:focus {
+	transform: scale(1.02);
 }
 .quality-card-gray {
 	background: var(--rn-lightgray-color);
@@ -298,6 +306,13 @@ input[type='number'] {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	cursor: pointer;
+}
+.popular-product-card:hover,
+.popular-product-card:focus {
+	transform: scale(1.02);
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 .popular-product-image-wrapper {
 	position: relative;
@@ -836,11 +851,17 @@ body:has(.city-dropdown-overlay)::before {
 	gap: 8px;
 	text-decoration: none;
 	cursor: pointer;
-	transition: opacity 0.2s;
+	transition: opacity 0.2s, color 0.2s;
 	white-space: nowrap;
 }
 .rn-header-bottom-nav-item:hover {
 	opacity: 0.7;
+}
+.rn-header-bottom-nav-item.active,
+.rn-header-bottom-nav-item.active:hover,
+.rn-header-bottom-nav-item.active:focus {
+	color: var(--rn-blue-color);
+	opacity: 1;
 }
 .rn-header-bottom-nav-item.promotion {
 	color: var(--rn-red-color);
@@ -854,15 +875,28 @@ body:has(.city-dropdown-overlay)::before {
 .header-bottom-icon {
 	width: 20px;
 	height: 20px;
+	transition: filter 0.2s;
+}
+.rn-header-bottom-nav-item.active .header-bottom-icon,
+.rn-header-bottom-nav-item.active:hover .header-bottom-icon,
+.rn-header-bottom-nav-item.active:focus .header-bottom-icon {
+	filter: brightness(0) saturate(100%) invert(27%) sepia(98%) saturate(2833%)
+		hue-rotate(196deg) brightness(99%) contrast(101%);
 }
 .rn-header-bottom-nav-text {
 	font-family: 'TT Firs Neue', sans-serif;
 	font-size: 16px;
 	font-weight: 600; /* DemiBold */
 	line-height: 16px;
+	transition: color 0.2s;
 }
 .rn-header-bottom-nav-item.promotion .rn-header-bottom-nav-text {
 	color: var(--rn-red-color);
+}
+.rn-header-bottom-nav-item.active .rn-header-bottom-nav-text,
+.rn-header-bottom-nav-item.active:hover .rn-header-bottom-nav-text,
+.rn-header-bottom-nav-item.active:focus .rn-header-bottom-nav-text {
+	color: var(--rn-blue-color);
 }
 .rn-header-bottom-divider {
 	width: 1px;
@@ -1273,8 +1307,166 @@ body:not(:has([class*='ant-dropdown-open']))::before {
 	display: block;
 }
 .rn-footer {
-	margin-top: 60px;
-	margin-bottom: 30px;
+	padding: 48px 0;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	color: #fff;
+	width: 100vw;
+	position: relative;
+	left: 50%;
+	right: 50%;
+	margin-left: -50vw;
+	margin-right: -50vw;
+}
+.footer-content {
+	max-width: 1600px;
+	margin: 0 auto;
+	padding: 0 25px;
+}
+.footer-main {
+	display: flex;
+	gap: 190px;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+.footer-column {
+	display: flex;
+	flex-direction: column;
+}
+.footer-column-left {
+	flex-shrink: 0;
+}
+.footer-columns-right {
+	display: flex;
+	flex: 1;
+	justify-content: space-between;
+	gap: 0;
+}
+.footer-logo {
+	width: 89px;
+	height: auto;
+	margin-bottom: 48px;
+}
+.footer-subtitle {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #fff;
+	margin: 0 0 16px 0;
+}
+.footer-phone {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 24px;
+	font-weight: 600;
+	line-height: 1.2;
+	color: #fff;
+	text-decoration: none;
+	margin-bottom: 40px;
+	display: block;
+}
+.footer-phone:hover {
+	opacity: 0.8;
+}
+.footer-label {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #fff;
+	margin: 0 0 16px 0;
+}
+.footer-email {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 24px;
+	font-weight: 600;
+	line-height: 1.2;
+	color: #fff;
+	text-decoration: none;
+	margin-top: 0;
+	display: block;
+}
+.footer-email:hover {
+	opacity: 0.8;
+}
+.footer-links {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.footer-links li {
+	margin-bottom: 24px;
+}
+.footer-links li:last-child {
+	margin-bottom: 0;
+}
+.footer-links a {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #fff;
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+.footer-links a:hover {
+	opacity: 0.8;
+}
+.footer-link-bold {
+	font-weight: 600 !important;
+}
+.footer-link-icon {
+	width: 20px;
+	height: 20px;
+	flex-shrink: 0;
+}
+.footer-bottom {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 48px;
+	flex-wrap: wrap;
+}
+.footer-social {
+	display: flex;
+	gap: 24px;
+}
+@media (max-width: 768px) {
+	.footer-bottom {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.footer-social {
+		margin-bottom: 16px;
+	}
+}
+.footer-social-link {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	transition: opacity 0.3s ease;
+}
+.footer-social-link:hover {
+	opacity: 0.8;
+}
+.footer-social-link img {
+	width: 48px;
+	height: 48px;
+}
+.footer-payments {
+	display: flex;
+	gap: 16px;
+	align-items: center;
+}
+.footer-payment-icon {
+	height: 48px;
+	width: auto;
 }
 .rn-map {
 	width: 100%;
@@ -1417,6 +1609,382 @@ body:not(:has([class*='ant-dropdown-open']))::before {
 }
 .text-center {
 	text-align: center;
+}
+/* Секция контактов */
+.contact-section {
+	padding-top: 64px;
+}
+.contact-breadcrumb {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 24px;
+}
+.breadcrumb-link {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 14px;
+	font-weight: 400; /* Regular - caption_14px */
+	line-height: 1.5;
+	color: var(--rn-gray-color);
+	text-decoration: none;
+	transition: color 0.2s;
+}
+.breadcrumb-link:hover {
+	color: var(--rn-blue-color);
+}
+.breadcrumb-separator {
+	width: 4px;
+	height: 4px;
+	border-radius: 50%;
+	background-color: var(--rn-gray-color);
+}
+.breadcrumb-separator-active {
+	background-color: var(--rn-blue-color);
+}
+.breadcrumb-current {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 14px;
+	font-weight: 400; /* Regular - caption_14px */
+	line-height: 1.5;
+	color: var(--rn-blue-color);
+}
+.contact-title {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 48px;
+	font-weight: 500; /* Medium */
+	line-height: 1.2;
+	color: #1c1c1c; /* AA - черный цвет */
+	margin: 0 0 48px 0;
+	text-transform: uppercase;
+}
+.contact-form-wrapper {
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	border-radius: 20px;
+	padding: 24px;
+	margin-bottom: 48px;
+}
+.contact-form {
+	background: #fff;
+	width: 494px;
+	border-radius: 20px;
+	padding: 24px;
+}
+.contact-form-title {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 24px;
+	font-weight: 600; /* Demibold - h4_24px */
+	line-height: 1.2;
+	color: var(--rn-red-color);
+	margin: 0 0 20px 0;
+}
+.contact-form-field {
+	margin-bottom: 12px;
+	position: relative;
+}
+.contact-form-field:last-of-type {
+	margin-bottom: 20px;
+}
+.contact-form-field-textarea {
+	margin-bottom: 20px;
+}
+.contact-form-label {
+	position: absolute;
+	left: 20px;
+	top: 50%;
+	transform: translateY(-50%);
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400; /* Regular - Body2_16px */
+	line-height: 1.5;
+	color: var(--rn-gray-color);
+	pointer-events: none;
+	transition: all 0.3s ease;
+	background-color: transparent;
+	z-index: 1;
+	max-width: calc(100% - 40px);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.contact-form-field-textarea .contact-form-label {
+	top: 16px;
+	transform: translateY(0);
+}
+.contact-form-label-active {
+	top: 8px;
+	left: 20px;
+	font-size: 12px;
+	font-weight: 400; /* Regular */
+	color: var(--rn-gray-color);
+	background-color: transparent;
+	padding: 0;
+	transform: translateY(0);
+}
+.contact-form-field-textarea .contact-form-label-active {
+	top: 8px;
+	left: 20px;
+}
+.contact-form-input {
+	width: 100%;
+	height: 54px;
+	border-radius: 8px;
+	background-color: var(--rn-lightgray-color);
+	border: none;
+	padding: 20px 20px 8px 20px;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400; /* Regular - Body2_16px */
+	line-height: 1.5;
+	color: #1c1c1c;
+	box-sizing: border-box;
+}
+.contact-form-input::placeholder {
+	color: transparent;
+}
+.contact-form-input:focus {
+	outline: none;
+	background-color: #e8e8ea;
+}
+.contact-form-input:focus + .contact-form-label {
+	top: 8px;
+	left: 20px;
+	font-size: 12px;
+	font-weight: 400; /* Regular */
+	color: var(--rn-gray-color);
+	background-color: transparent;
+	padding: 0;
+	transform: translateY(0);
+}
+.contact-form-textarea {
+	width: 100%;
+	height: 138px;
+	border-radius: 8px;
+	background-color: var(--rn-lightgray-color);
+	border: none;
+	padding: 20px 20px 32px 20px;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400; /* Regular - Body2_16px */
+	line-height: 1.5;
+	color: #1c1c1c;
+	resize: none;
+	box-sizing: border-box;
+}
+.contact-form-textarea::placeholder {
+	color: transparent;
+}
+.contact-form-textarea:focus {
+	outline: none;
+	background-color: #e8e8ea;
+}
+.contact-form-textarea:focus + .contact-form-label {
+	top: 8px;
+	left: 20px;
+	font-size: 12px;
+	font-weight: 400; /* Regular */
+	color: var(--rn-gray-color);
+	background-color: transparent;
+	padding: 0;
+	transform: translateY(0);
+}
+.contact-form-counter {
+	position: absolute;
+	bottom: 8px;
+	right: 20px;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 12px;
+	font-weight: 400;
+	color: var(--rn-gray-color);
+	pointer-events: none;
+	z-index: 1;
+}
+.contact-form-button {
+	width: 100%;
+	padding: 16px 0;
+	background: var(--rn-blue-color);
+	border: none;
+	border-radius: 8px;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 600; /* Demibold - H5_16px */
+	line-height: 1.5;
+	color: #fff;
+	cursor: pointer;
+	transition: background 0.3s ease;
+	margin-bottom: 12px;
+	text-align: center;
+}
+.contact-form-button:hover {
+	background: #0669b8;
+}
+.contact-form-button:focus {
+	outline: none;
+	background: #0669b8;
+}
+.contact-form-disclaimer {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.5;
+	margin: 0;
+	text-align: left;
+}
+.contact-form-disclaimer-text {
+	color: #1c1c1c; /* Черный */
+}
+.contact-form-disclaimer-link {
+	color: var(--rn-gray-color); /* Dark gray */
+	text-decoration: none;
+	transition: color 0.2s;
+}
+.contact-form-disclaimer-link:hover {
+	color: var(--rn-blue-color);
+}
+/* Контактная информация */
+.contact-info-section {
+	margin-bottom: 48px;
+}
+.contact-info-grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 24px;
+}
+.contact-info-item {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	min-width: 200px;
+}
+.contact-info-title {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 18px;
+	font-weight: 600; /* Demibold - H5_18px */
+	line-height: 1.5;
+	margin: 0 0 20px 0;
+}
+.contact-info-title-blue {
+	color: var(--rn-blue-color);
+}
+.contact-info-title-red {
+	color: var(--rn-red-color);
+}
+.contact-info-list {
+	list-style: none;
+	padding: 0;
+	margin: 0 0 20px 0;
+}
+.contact-info-list li {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 18px;
+	font-weight: 400; /* Regular - body1_18px */
+	line-height: 1.5;
+	color: #1c1c1c;
+	margin-bottom: 16px;
+}
+.contact-info-list li:last-child {
+	margin-bottom: 0;
+}
+.contact-info-phone {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 18px;
+	font-weight: 400; /* Regular - body1_18px */
+	line-height: 1.5;
+	color: #1c1c1c;
+	text-decoration: none;
+	display: block;
+	transition: color 0.2s;
+}
+.contact-info-phone:hover {
+	color: var(--rn-blue-color);
+}
+.contact-info-email {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 18px;
+	font-weight: 400; /* Regular - body1_18px */
+	line-height: 1.5;
+	color: #1c1c1c;
+	text-decoration: none;
+	display: block;
+	transition: color 0.2s;
+}
+.contact-info-email:hover {
+	color: var(--rn-blue-color);
+}
+.contact-info-address {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 18px;
+	font-weight: 400; /* Regular - body1_18px */
+	line-height: 1.5;
+	color: #1c1c1c;
+}
+.contact-info-break {
+	color: var(--rn-gray-color) !important; /* Dark gray */
+}
+.contact-info-map-link {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 18px;
+	font-weight: 400; /* Regular - body1_18px */
+	line-height: 1.5;
+	color: var(--rn-blue-color);
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	transition: opacity 0.2s;
+}
+.contact-info-map-link:hover {
+	opacity: 0.7;
+}
+.contact-info-map-icon {
+	width: 20px;
+	height: 20px;
+}
+/* Реквизиты компании */
+.company-details-section {
+	margin-bottom: 60px;
+}
+.company-details-title {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 36px;
+	font-weight: 500; /* Medium - h3_36px */
+	line-height: 1.2;
+	color: #1c1c1c;
+	margin: 0 0 24px 0;
+}
+.company-details-divider {
+	width: 100%;
+	height: 1px;
+	background-color: #1c1c1c;
+	margin-bottom: 24px;
+}
+.company-details-grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 24px;
+}
+.company-details-item {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	min-width: 250px;
+}
+.company-details-label {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 18px;
+	font-weight: 600; /* Demibold - H5_18px */
+	line-height: 1.5;
+	color: #1c1c1c;
+	margin: 0 0 12px 0;
+}
+.company-details-value {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 18px;
+	font-weight: 400; /* Regular - body1_18px */
+	line-height: 1.5;
+	color: var(--rn-gray-color);
+	margin: 0;
 }
 .text-right {
 	text-align: right;

@@ -505,7 +505,11 @@ const HeaderLayout = () => {
 						</a>
 						<a
 							href={`/page/${data.top_menu.about.id}`}
-							className='rn-header-bottom-nav-item'
+							className={`rn-header-bottom-nav-item ${
+								location.pathname === `/page/${data.top_menu.about.id}`
+									? 'active'
+									: ''
+							}`}
 							onClick={e => {
 								e.preventDefault();
 								navigate(`/page/${data.top_menu.about.id}`);
@@ -520,7 +524,11 @@ const HeaderLayout = () => {
 						</a>
 						<a
 							href={`/page/${data.top_menu.delivery.id}`}
-							className='rn-header-bottom-nav-item'
+							className={`rn-header-bottom-nav-item ${
+								location.pathname === `/page/${data.top_menu.delivery.id}`
+									? 'active'
+									: ''
+							}`}
 							onClick={e => {
 								e.preventDefault();
 								navigate(`/page/${data.top_menu.delivery.id}`);
@@ -537,7 +545,9 @@ const HeaderLayout = () => {
 						</a>
 						<a
 							href='/contact'
-							className='rn-header-bottom-nav-item'
+							className={`rn-header-bottom-nav-item ${
+								location.pathname === '/contact' ? 'active' : ''
+							}`}
 							onClick={e => {
 								e.preventDefault();
 								navigate('/contact');

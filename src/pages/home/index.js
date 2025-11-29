@@ -13,27 +13,27 @@ import { getImage } from 'helpers';
 // import { PRODUCTS_GRID } from "constants/breakpoints";
 
 const Home = () => {
-	const dispatch = useDispatch();
-	// const bottomModules = useSelector((state) => state.module.bottomModules);
+  const dispatch = useDispatch();
+  // const bottomModules = useSelector((state) => state.module.bottomModules);
 	const topModules = useSelector(state => state.module.topModules);
-	const { navigate } = useSmartNavigate();
+  const { navigate } = useSmartNavigate();
 
 	const slideshow = topModules.data.modules?.find(d => d.code === 'slideshow');
-	// const featured = bottomModules.data.modules?.find((d) => d.code === "featured");
+  // const featured = bottomModules.data.modules?.find((d) => d.code === "featured");
 
-	useEffect(() => {
-		dispatch(fetchTopModules());
-		// dispatch(fetchBottomModules());
-	}, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchTopModules());
+    // dispatch(fetchBottomModules());
+  }, [dispatch]);
 
-	return (
-		<>
+  return (
+    <>
 			<div className='region hero-banner-wrapper'>
 				<div className='text-center'>
-					{loadingStatus.SUCCEEDED === topModules.status ? (
-						<Carousel autoplay>
-							{slideshow.banners.map((b, index) => (
-								<div key={index} onClick={() => navigate(b.link)}>
+          {loadingStatus.SUCCEEDED === topModules.status ? (
+            <Carousel autoplay>
+              {slideshow.banners.map((b, index) => (
+                <div key={index} onClick={() => navigate(b.link)}>
 									<img
 										src={b.image}
 										alt={b.title}
@@ -44,16 +44,16 @@ const Home = () => {
 											display: 'block',
 										}}
 									/>
-								</div>
-							))}
-						</Carousel>
-					) : (
-						<Skeleton.Image active style={{ width: 859, height: 360 }} />
-					)}
-				</div>
-			</div>
+                </div>
+              ))}
+            </Carousel>
+          ) : (
+            <Skeleton.Image active style={{ width: 859, height: 360 }} />
+          )}
+        </div>
+      </div>
 
-			{/* <HeadingTitle title={featured?.heading_title} />
+      {/* <HeadingTitle title={featured?.heading_title} />
       <List
         grid={PRODUCTS_GRID}
         className="rn-product-grid"
@@ -433,10 +433,10 @@ const Home = () => {
 							className='about-image-img'
 						/>
 					</div>
-				</div>
-			</div>
-		</>
-	);
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default Home;
