@@ -8,7 +8,7 @@ import { loadingStatus } from 'helpers/fetcher';
 import useSmartNavigate from 'hooks/useSmartNavigate';
 
 const PageContact = () => {
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
 	const { data, status } = useSelector(state => state.page.page);
 	const { '*': path } = useParams();
 	const { navigate } = useSmartNavigate();
@@ -23,9 +23,9 @@ const PageContact = () => {
 		comment: false,
 	});
 
-	useEffect(() => {
+  useEffect(() => {
 		dispatch(fetchPage({ id: null, route: 'information/contact' }));
-	}, [dispatch, path]);
+  }, [dispatch, path]);
 
 	const handleInputChange = e => {
 		const { name, value } = e.target;
@@ -55,7 +55,7 @@ const PageContact = () => {
 		console.log('Form submitted:', formData);
 	};
 
-	return (
+  return (
 		<div className='region contact-section'>
 			{/* Breadcrumb */}
 			<div className='contact-breadcrumb'>
@@ -403,9 +403,9 @@ const PageContact = () => {
 						</h4>
 					</div>
 				</div>
-			</div>
-		</div>
-	);
+      </div>
+    </div>
+  );
 };
 
 export default PageContact;

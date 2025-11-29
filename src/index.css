@@ -240,6 +240,231 @@ input[type='number'] {
 	margin: 0 0 48px 0;
 	text-transform: uppercase;
 }
+/* Список новостей */
+.news-section {
+	padding-top: 64px;
+	margin-top: 0;
+	margin-bottom: 60px;
+}
+/* Отступ сверху только для хлебных крошек в новостях */
+.news-section .contact-breadcrumb {
+	margin-top: 64px;
+}
+.news-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 48px;
+}
+.news-title {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 48px;
+	font-weight: 500; /* Medium */
+	line-height: 1.2;
+	color: #1c1c1c; /* AA - черный цвет */
+	margin: 0;
+	text-transform: uppercase;
+}
+.news-sort-wrapper {
+	position: relative;
+}
+.news-sort-button {
+	width: 233px;
+	height: 56px;
+	background-color: var(--rn-lightgray-color);
+	border: none;
+	border-radius: 8px;
+	padding: 17px 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	cursor: pointer;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400; /* Regular - Body2_16px */
+	line-height: 1.5;
+	color: #1c1c1c;
+	transition: background-color 0.2s;
+}
+.news-sort-button:hover {
+	background-color: #e8e8ea;
+}
+.news-sort-button span {
+	flex: 1;
+	text-align: left;
+}
+.news-sort-icon {
+	width: 24px;
+	height: 24px;
+	margin-left: 10px;
+	transition: transform 0.2s;
+	flex-shrink: 0;
+}
+.news-sort-icon-open {
+	transform: rotate(180deg);
+}
+.news-sort-dropdown {
+	position: absolute;
+	top: calc(100% + 8px);
+	right: 0;
+	width: 233px;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+	overflow: hidden;
+	z-index: 1000;
+}
+.news-sort-option {
+	width: 100%;
+	padding: 12px 20px;
+	border: none;
+	background: transparent;
+	text-align: left;
+	cursor: pointer;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400; /* Regular - Body2_16px */
+	line-height: 1.5;
+	color: #1c1c1c;
+	transition: background-color 0.2s;
+}
+.news-sort-option:hover {
+	background-color: var(--rn-lightgray-color);
+}
+.news-sort-option-active {
+	color: var(--rn-blue-color);
+	font-weight: 600; /* Demibold */
+}
+.news-grid {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 24px;
+}
+.news-card {
+	background: #fff;
+	border-radius: 20px;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	cursor: pointer;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.news-card:hover,
+.news-card:focus {
+	transform: scale(1.02);
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+.news-card-image-wrapper {
+	width: 100%;
+	overflow: hidden;
+}
+.news-card-image {
+	width: 100%;
+	height: 250px;
+	object-fit: cover;
+	display: block;
+}
+.news-card-image-placeholder {
+	width: 100%;
+	height: 250px;
+	background-color: var(--rn-lightgray-color);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #898989;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 14px;
+}
+.news-card-body {
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+.news-card-title {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 18px;
+	font-weight: 600; /* Demibold - H5_18px */
+	line-height: 1.5;
+	color: #1c1c1c;
+	margin: 0 0 12px 0;
+}
+.news-card-excerpt {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400; /* Regular - Body2_16px */
+	line-height: 1.5;
+	color: #1c1c1c;
+	margin: 0 0 16px 0;
+	display: -webkit-box;
+	-webkit-line-clamp: 4;
+	line-clamp: 4;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+.news-card-meta {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	margin-top: auto;
+}
+.news-card-meta-item {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	color: var(--rn-blue-color);
+}
+.news-card-meta-icon {
+	width: 16px;
+	height: 16px;
+}
+.news-load-more {
+	margin: 32px auto 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 18px;
+	font-weight: 600; /* Demibold - H5_18px */
+	line-height: 1.5;
+	color: var(--rn-gray-color); /* Dark gray */
+}
+.news-load-more-icon {
+	width: 20px;
+	height: 20px;
+}
+/* Копия блока качества под новостями */
+.news-quality-section {
+	margin-top: 60px !important;
+	margin-bottom: 100px;
+}
+.news-quality-section .quality-title {
+	margin-top: 60px;
+}
+@media (max-width: 1200px) {
+	.news-grid {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
+@media (max-width: 992px) {
+	.news-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+@media (max-width: 576px) {
+	.news-grid {
+		grid-template-columns: 1fr;
+	}
+}
 /* Блоки качества */
 .quality-cards {
 	display: grid;
