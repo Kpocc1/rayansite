@@ -1,120 +1,133 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Flex, Divider, Col, Alert } from "antd";
-import { StarFilled, TruckOutlined, ShopOutlined, SlidersOutlined } from "@ant-design/icons";
 
-import { setDeliveryModalIsOpen } from "store/slices/layoutSlice";
-import WishlistButton from "components/cart/WishlistButton";
-import CartQtyButtonGroup from "components/cart/CartQtyButtonGroup";
-import HeadingTitle from "components/HeadingTitle";
-import useBreakpoint from "hooks/useBreakpoint";
+import { addToCart, fetchCartProducts } from "store/slices/cartSlice";
+import { setSigninModalIsOpen } from "store/slices/layoutSlice";
 import useCustomer from "hooks/useCustomer";
 import { formatCurrency, formatWeightWithUnit } from "helpers/formatter";
+import { getStock } from "helpers/product";
 
 const ProductItemMain = ({ product_id, data }) => {
   const dispatch = useDispatch();
   const { customer } = useCustomer();
-  const { breakpoint } = useBreakpoint();
-
-  const handleDeliveryModalOpen = (e) => {
-    e.preventDefault();
-    dispatch(setDeliveryModalIsOpen(true));
-  };
+  const stock = getStock(data);
 
   if (!data || !data.heading_title) {
     return null;
   }
 
-  return (
-    <>
-      <HeadingTitle
-        title={`${data.heading_title}, ${formatWeightWithUnit(data.weight)}`}
-        style={{ marginTop: 0 }}
-      />
-      <div className="mb-10">Артикул: {data.model}</div>
-      <Flex align="center">
-        <strong>{data.reviews}</strong>
-        <div className="ml-30">
-          <StarFilled style={{ fontSize: 17, color: "#fadb14" }} />{" "}
-          {data.rating}
-        </div>
-      </Flex>
-      <Divider />
+  let stockText;
+  if (stock.quantity === 0 || stock.stock === 0) {
+    stockText = "нет в наличии";
+  } else if (stock.quantity === 999 || stock.stock === 999) {
+    stockText = "В наличии много";
+  } else {
+    stockText = `В наличии ${stock.quantity} шт.`;
+  }
 
-      <Flex vertical={!["xxl", "xl"].includes(breakpoint)} justify="space-between">
-        <Col md={24} lg={24} xl={12}>
-          <div className="lightgray p-20">
-            <HeadingTitle
-              title={
-                <>
-                  <span>{formatCurrency(data.price)}</span>
-                  <small className="text-gray">
-                    {" "} / {formatWeightWithUnit(data.weight)}
-                  </small>
-                </>
-              }
-              style={{ marginTop: 0, marginBottom: 15 }}
+  // Форматируем отзывы - если уже есть слово "отзывов", не добавляем его снова
+  const reviewsText = data.reviews 
+    ? (data.reviews.includes("отзывов") ? data.reviews : `${data.reviews} отзывов`)
+    : "12 отзывов";
+
+  return (
+    <div className="product-details-card">
+      <div className="product-details">
+        {/* Рейтинг, отзывы, артикул и избранное */}
+        <div className="product-header-row" style={{ marginBottom: "24px", display: "flex", alignItems: "center", flexWrap: "wrap", gap: "16px" }}>
+          <div className="popular-product-rating" style={{ position: "static", marginRight: "8px" }}>
+            <img
+              src={`${process.env.PUBLIC_URL}/icons/icon-star.svg`}
+              alt="Рейтинг"
+              className="popular-product-rating-icon"
             />
-            {data.weight && data.weight.indexOf("кг") && (
-              <>
-                {data.price_kg && (
-                  <div>
-                    <span style={{ marginRight: 8 }}>Цена за кг:</span>
-                    <strong>{formatCurrency(data.price_kg)}</strong>
-                  </div>
-                )}
-                <div>
-                  <span style={{ marginRight: 12 }}>Макс. вес:</span>
-                  <strong>{formatWeightWithUnit(data.weight)}</strong>
-                </div>
-              </>
+            <span className="popular-product-rating-value">{data.rating || "4,6"}</span>
+          </div>
+          <span className="product-reviews" style={{ marginRight: "16px" }}>{reviewsText}</span>
+          <div className="product-article" style={{ marginRight: "auto" }}>
+            <span className="product-article-label">Артикул:</span> <span className="product-article-value">{data.model || "A-133"}</span>
+          </div>
+          <button
+            className="product-favorite-button"
+            onClick={(e) => {
+              e.preventDefault();
+              // TODO: Добавить логику добавления в избранное
+            }}
+          >
+            <img
+              src={`${process.env.PUBLIC_URL}/icons/icon-heart.svg`}
+              alt="Избранное"
+              className="product-favorite-icon"
+            />
+          </button>
+        </div>
+
+      {/* Название товара */}
+      <h1 className="product-title">
+        {data.heading_title}, {formatWeightWithUnit(data.weight)}
+      </h1>
+
+      {/* Метки доставки */}
+      <div className="product-delivery-tags">
+        {data.weight && data.weight.includes("кг") && (
+          <span className="product-delivery-tag">Весовой товар</span>
+        )}
+        <span className="product-delivery-tag">Курьер: {formatCurrency(200)}</span>
+        <span className="product-delivery-tag">Самовывоз: {formatCurrency(0)}</span>
+      </div>
+
+      {/* Цена */}
+      <div className="product-price-section">
+        <div className="product-price-row">
+          <div className="product-price-main">
+            <span className="product-price-value">{formatCurrency(data.price)}</span>
+            <span className="product-price-separator"> / </span>
+            <span className="product-price-weight">{formatWeightWithUnit(data.weight)}</span>
+          </div>
+          <div className="product-price-details">
+            {data.price_kg && (
+              <div className="product-price-kg">
+                <span className="product-price-label">Цена за кг:</span> <span className="product-price-value-small">{formatCurrency(data.price_kg)}</span>
+              </div>
+            )}
+            {data.weight && (
+              <div className="product-max-weight">
+                <span className="product-price-label">Макс. вес:</span> <span className="product-price-value-small">{formatWeightWithUnit(data.weight)}</span>
+              </div>
             )}
           </div>
-          <Flex className="mt-30">
-            <CartQtyButtonGroup item={data} size="large" block />
-            <WishlistButton
-              product_id={product_id}
-              active={data.in_wishlist}
-              size={28}
-              wrapStyle={{ margin: "6px 0 0 20px" }}
-            />
-          </Flex>
-        </Col>
-        <Col md={22} lg={22} xl={10}>
-          {data.weight && data.weight.indexOf("кг") && (
-            <Alert
-              message={<><SlidersOutlined style={{ fontSize: 18, marginRight: 5 }} /> Это весовой товар</>}
-              description="Цена указана за максимальный вес фасовки"
-              type="success"
-              style={{ padding: "8px 15px", margin: "10px 0" }}
-            />
-          )}
+        </div>
+      </div>
 
-          <Alert
-            message={<><TruckOutlined style={{ fontSize: 18, marginRight: 5 }} /> Курьерская доставка</>}
-            description={
-              <>
-                {+customer.store_id === 0 ? (
-                  `${formatCurrency(200)} по городу`
-                ) : (
-                  <a href="#" onClick={handleDeliveryModalOpen}>
-                    ввести адрес
-                  </a>
-                )}
-              </>
+      {/* Кнопка корзины и наличие */}
+      <div className="product-cart-row" style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "16px" }}>
+        <button
+          className="popular-product-button"
+          onClick={async (e) => {
+            e.preventDefault();
+            if (!customer.token) {
+              dispatch(setSigninModalIsOpen(true));
+              return;
             }
-            type="info"
-            style={{ padding: "8px 15px", margin: "10px 0" }}
-            />
-          <Alert
-            message={<><ShopOutlined style={{ fontSize: 18, marginRight: 5 }} /> Самовывоз</>}
-            description="бесплатно"
-            type="info"
-            style={{ padding: "8px 15px", margin: "10px 0" }}
-            />
-        </Col>
-      </Flex>
-    </>
+            await addToCart(product_id, data.minimum || 1);
+            dispatch(fetchCartProducts());
+          }}
+          disabled={stock.quantity === 0 && stock.stock === 0}
+          style={{ marginBottom: 0, flex: 1 }}
+        >
+          <img
+            src={`${process.env.PUBLIC_URL}/icons/icon-shopping-cart.svg`}
+            alt=""
+            className="popular-product-button-icon"
+          />
+          <span>В корзину</span>
+        </button>
+        <div className={`product-stock ${stock.quantity === 0 || stock.stock === 0 ? 'product-stock-unavailable' : ''}`} style={{ marginTop: 0, whiteSpace: "nowrap" }}>
+          {stockText}
+        </div>
+      </div>
+      </div>
+    </div>
   );
 };
 

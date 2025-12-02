@@ -81,15 +81,6 @@ const CartQtyButtonGroup = ({
           </Button>
         )}
       </Space.Compact>
-      <div style={{ margin: "5px 0 0", textAlign: "right" }}>
-        <Tag
-          style={{ margin: 0 }}
-          bordered={false}
-          color={stock.quantity > 0 ? "green" : "error"}
-        >
-          {stock.label}
-        </Tag>
-      </div>
     </div>
   );
 };

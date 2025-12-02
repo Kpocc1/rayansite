@@ -286,28 +286,16 @@ const HeaderLayout = () => {
 																setSelectedCategory(category);
 															}
 														}}
+														onMouseLeave={() => {
+															// Можно оставить пустым или добавить задержку перед скрытием
+														}}
 														onClick={() => {
-															if (hasChildren) {
-																// Если есть подкатегории, проверяем, не выбрана ли уже эта категория
-																if (
-																	selectedCategory?.category_id ===
-																		categoryId ||
-																	selectedCategory?.key === categoryId
-																) {
-																	// Если уже выбрана, сбрасываем выбор
-																	setSelectedCategory(null);
-																} else {
-																	// Если не выбрана, выбираем категорию
-																	setSelectedCategory(category);
-																}
-															} else {
-																// Если нет подкатегорий, переходим на страницу
-																if (category.path || category.slug) {
-																	navigate(
-																		`/catalog/${category.path || category.slug}`
-																	);
-																	setCatalogMenuOpen(false);
-																}
+															// При клике на категорию всегда переходим на страницу категории
+															if (category.path || category.slug) {
+																navigate(
+																	`/catalog/${category.path || category.slug}`
+																);
+																setCatalogMenuOpen(false);
 															}
 														}}
 													>

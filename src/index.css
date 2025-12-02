@@ -521,6 +521,9 @@ input[type='number'] {
 .popular-products-list {
 	margin-bottom: 0;
 }
+.popular-products-list .ant-col {
+	margin-bottom: 24px;
+}
 /* Карточка популярного товара */
 .popular-product-card {
 	padding: 10px 20px 16px;
@@ -542,12 +545,16 @@ input[type='number'] {
 .popular-product-image-wrapper {
 	position: relative;
 	margin-bottom: 24px;
+	height: 280px;
+	overflow: hidden;
+	border-radius: 20px;
 }
 .popular-product-image {
 	width: 100%;
-	height: auto;
+	height: 100%;
 	display: block;
-	border-radius: 4px;
+	border-radius: 20px;
+	object-fit: cover;
 }
 .popular-product-favorite {
 	position: absolute;
@@ -665,6 +672,10 @@ input[type='number'] {
 	color: var(--rn-blue-color);
 	text-align: center;
 	flex-shrink: 0;
+	margin-top: 16px;
+}
+.popular-product-stock-unavailable {
+	color: var(--rn-gray-color); /* Dark grey */
 }
 /* Бейдж скидки */
 .discount-badge {
@@ -1861,10 +1872,10 @@ body:not(:has([class*='ant-dropdown-open']))::before {
 	width: 4px;
 	height: 4px;
 	border-radius: 50%;
-	background-color: var(--rn-gray-color);
+	background-color: var(--rn-gray-color); /* Dark grey */
 }
 .breadcrumb-separator-active {
-	background-color: var(--rn-blue-color);
+	background-color: var(--rn-blue-color); /* Blue */
 }
 .breadcrumb-current {
 	font-family: 'TT Firs Neue', sans-serif;
@@ -2230,8 +2241,704 @@ body:not(:has([class*='ant-dropdown-open']))::before {
 	border: 1px solid #b8b8b8;
 	border-radius: 5px;
 }
+/* Секция детальной страницы новости */
+.news-detail-section {
+	margin-top: 64px;
+}
+/* Обертка для breadcrumb, даты, заголовка и текста - контейнер 860px */
+.news-detail-wrapper {
+	max-width: 860px;
+	margin: 0 auto;
+}
+.news-detail-meta {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 8px;
+	margin-bottom: 48px;
+}
+.news-detail-date {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 18px;
+	font-weight: 400; /* Regular */
+	line-height: 1.5;
+	color: var(--rn-gray-color); /* Dark grey */
+	margin: 0;
+}
+.news-detail-views {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+.news-detail-views-icon {
+	width: 20px;
+	height: 20px;
+	margin-right: 8px;
+}
+.news-detail-views-text {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 14px;
+	font-weight: 400; /* Regular - caption_14px */
+	line-height: 1.5;
+	color: var(--rn-blue-color);
+}
+.news-detail-title {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 48px;
+	font-weight: 500; /* Medium - h2_48px */
+	line-height: 1.2;
+	color: #1c1c1c; /* AA */
+	margin: 0;
+	text-transform: uppercase;
+}
+/* Контейнер для контента статьи */
+.news-detail-content {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 18px;
+	font-weight: 400; /* Regular - body1_18px */
+	line-height: 1.5;
+	color: #1c1c1c;
+}
+/* Текст в контейнере 860px */
+.news-detail-content p,
+.news-detail-content div:not(:has(img)),
+.news-detail-content span,
+.news-detail-content h1,
+.news-detail-content h2,
+.news-detail-content h3,
+.news-detail-content h4,
+.news-detail-content h5,
+.news-detail-content h6,
+.news-detail-content ul,
+.news-detail-content ol,
+.news-detail-content li {
+	max-width: 860px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.news-detail-content p {
+	margin-top: 0;
+	margin-bottom: 24px;
+}
+.news-detail-content p:last-child {
+	margin-bottom: 0;
+}
+/* Изображения на всю ширину основного контейнера (.region) - 1520px */
+.news-detail-content img {
+	display: block;
+	margin: 24px 0;
+	width: 1520px !important;
+	max-width: 1520px;
+	margin-left: -330px;
+	margin-right: -330px;
+	background-color: #d9d9d9;
+	aspect-ratio: 1520 / 684;
+	height: auto;
+	object-fit: contain;
+	border-radius: 20px;
+	box-sizing: border-box;
+}
+@media screen and (max-width: 1600px) {
+	.news-detail-content img {
+		width: calc(100vw - 80px);
+		max-width: calc(100vw - 80px);
+		margin-left: calc((860px - (100vw - 80px)) / 2);
+		margin-right: calc((860px - (100vw - 80px)) / 2);
+	}
+}
+@media screen and (max-width: 960px) {
+	.news-detail-content img {
+		width: calc(100vw - 50px);
+		max-width: calc(100vw - 50px);
+		margin-left: calc((860px - (100vw - 50px)) / 2);
+		margin-right: calc((860px - (100vw - 50px)) / 2);
+	}
+}
+@media screen and (max-width: 767px) {
+	.news-detail-content img {
+		width: calc(100vw - 30px);
+		max-width: calc(100vw - 30px);
+		margin-left: calc((860px - (100vw - 30px)) / 2);
+		margin-right: calc((860px - (100vw - 30px)) / 2);
+	}
+}
+/* Заглушка для изображений при ошибке загрузки */
+.news-detail-content img[src=''],
+.news-detail-content img:not([src]) {
+	background-color: #d9d9d9;
+	min-height: 200px;
+	border-radius: 20px;
+}
+/* Если изображение внутри параграфа, вытаскиваем его наружу */
+.news-detail-content p:has(img),
+.news-detail-content div:has(img) {
+	max-width: 100%;
+	margin-left: 0;
+	margin-right: 0;
+	padding: 0;
+}
+.news-detail-error {
+	max-width: 860px;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: #fff3cd;
+	border: 1px solid #ffc107;
+	border-radius: 8px;
+	color: #856404;
+}
+@media (max-width: 768px) {
+	.news-detail-date {
+		font-size: 36px;
+	}
+	.news-detail-title {
+		font-size: 32px;
+	}
+	.news-detail-meta {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}
+/* Стили для страницы категории */
+.category-section {
+	margin-top: 64px;
+}
+.category-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 24px;
+	flex-wrap: wrap;
+	gap: 16px;
+}
+.category-title {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 48px;
+	font-weight: 500; /* Medium */
+	line-height: 1.2;
+	color: #1c1c1c; /* AA - черный цвет */
+	margin: 0;
+	text-transform: uppercase;
+}
+.category-filters {
+	display: flex;
+	gap: 12px;
+	margin-bottom: 24px;
+	flex-wrap: wrap;
+}
+.category-filter-button {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400; /* Regular */
+	line-height: 1.5;
+	padding: 12px 24px;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+	background-color: #fff;
+	color: #1c1c1c;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+.category-filter-button:hover {
+	border-color: var(--rn-blue-color);
+	color: var(--rn-blue-color);
+}
+.category-filter-button.active {
+	background-color: var(--rn-blue-color);
+	border-color: var(--rn-blue-color);
+	color: #fff;
+}
+.category-sort-wrapper {
+	position: relative;
+}
+.category-sort-wrapper {
+	position: relative;
+}
+.category-sort-button {
+	width: 233px;
+	height: 56px;
+	background-color: var(--rn-lightgray-color);
+	border: none;
+	border-radius: 8px;
+	padding: 17px 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	cursor: pointer;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400; /* Regular - Body2_16px */
+	line-height: 1.5;
+	color: #1c1c1c;
+	transition: background-color 0.2s;
+}
+.category-sort-button:hover {
+	background-color: #e8e8ea;
+}
+.category-sort-button.active {
+	background-color: #e8e8ea;
+}
+.category-sort-button span {
+	flex: 1;
+	text-align: left;
+}
+.category-sort-icon {
+	width: 24px;
+	height: 24px;
+	margin-left: 10px;
+	transition: transform 0.2s;
+	flex-shrink: 0;
+}
+.category-sort-icon.rotated {
+	transform: rotate(180deg);
+}
+.category-sort-dropdown-menu {
+	position: absolute;
+	top: calc(100% + 8px);
+	right: 0;
+	width: 233px;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+	overflow: hidden;
+	z-index: 1000;
+}
+.category-sort-dropdown-item {
+	width: 100%;
+	padding: 12px 20px;
+	border: none;
+	background: transparent;
+	text-align: left;
+	cursor: pointer;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400; /* Regular - Body2_16px */
+	line-height: 1.5;
+	color: #1c1c1c;
+	transition: background-color 0.2s;
+}
+.category-sort-dropdown-item:hover {
+	background-color: var(--rn-lightgray-color);
+}
+.category-sort-dropdown-item.active {
+	color: var(--rn-blue-color);
+	font-weight: 600; /* Demibold */
+}
 @media (max-width: 425px) {
 	.ant-dropdown-menu-submenu-popup {
 		left: 50% !important;
+	}
+	.category-title {
+		font-size: 32px;
+	}
+	.category-header {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.category-sort-wrapper {
+		width: 100%;
+	}
+	.category-sort-button {
+		width: 100%;
+		justify-content: space-between;
+	}
+	.category-sort-dropdown-menu {
+		right: 0;
+		left: 0;
+		width: 100%;
+	}
+}
+
+/* Product Page Styles */
+.product-section {
+	margin-top: 0;
+}
+.product-image-wrapper {
+	width: 100%;
+	position: relative;
+}
+.product-main-image {
+	width: 100%;
+	height: auto;
+	border-radius: 20px;
+	object-fit: contain;
+}
+.product-details-card {
+	width: 491px;
+	padding: 24px;
+	background: #fff;
+	border-radius: 20px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	margin-left: auto;
+}
+.product-details {
+	width: 100%;
+}
+.product-header-row {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 16px;
+}
+.product-reviews {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	color: var(--rn-blue-color);
+}
+.product-article {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+}
+.product-article-label {
+	color: var(--rn-gray-color);
+}
+.product-article-value {
+	color: #1c1c1c;
+}
+.product-favorite-button {
+	width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #f7f7f9;
+	border: none;
+	border-radius: 50%;
+	cursor: pointer;
+	padding: 0;
+	transition: background 0.3s ease;
+}
+.product-favorite-button:hover {
+	background: #e8e8ea;
+}
+.product-favorite-icon {
+	width: 16px;
+	height: 16px;
+}
+.product-title {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 24px;
+	font-weight: 600; /* Demibold - H4_24px */
+	line-height: 1.5;
+	color: #1c1c1c;
+	margin: 0 0 24px 0;
+}
+.product-delivery-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16px;
+	margin-bottom: 24px;
+}
+.product-delivery-tag {
+	display: inline-block;
+	padding: 6px 9px;
+	background: #fff;
+	border: 1px solid #e8e8ea;
+	border-radius: 8px;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400; /* Regular - Body2_16px */
+	line-height: 1.5;
+	color: #1c1c1c;
+	font-size: 14px;
+	font-weight: 400;
+	color: #1c1c1c;
+}
+.product-price-section {
+	margin-bottom: 24px;
+}
+.product-price-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 24px;
+}
+.product-price-main {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 24px;
+	font-weight: 600; /* Demibold - H4_24px */
+	line-height: 1.2;
+}
+.product-price-value {
+	color: #c40004; /* Red */
+}
+.product-price-separator {
+	color: var(--rn-gray-color);
+}
+.product-price-weight {
+	color: var(--rn-gray-color);
+}
+.product-price-details {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	text-align: right;
+}
+.product-price-kg,
+.product-max-weight {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 1.5;
+}
+.product-price-label {
+	color: var(--rn-gray-color);
+}
+.product-price-value-small {
+	color: #1c1c1c;
+}
+.product-stock {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	color: var(--rn-blue-color);
+	margin-top: 16px;
+}
+.product-stock-unavailable {
+	color: var(--rn-gray-color);
+}
+.product-tabs-section {
+	margin-top: 24px;
+	margin-bottom: 0;
+	width: 491px;
+	margin-left: auto;
+	display: flex;
+	flex-direction: column;
+}
+.product-tabs-section .ant-tabs {
+	background: #fff;
+	border-radius: 20px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	padding: 12px 24px 24px 24px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+}
+.product-tabs-section .ant-tabs-content-holder {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+.product-tabs-section .ant-tabs-tabpane {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+.product-tabs-section .ant-tabs-nav {
+	margin-bottom: 2px;
+	padding: 0;
+	width: 100%;
+	border-bottom: none;
+	position: relative;
+}
+.product-tabs-section .ant-tabs-nav::before {
+	content: '';
+	position: absolute;
+	bottom: -1px;
+	left: -24px;
+	width: calc(50% + 24px);
+	height: 2px;
+	background: var(--rn-blue-color);
+	z-index: 2;
+	transition: left 0.3s ease;
+}
+.product-tabs-section .ant-tabs-nav::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: -24px;
+	right: -24px;
+	height: 1px;
+	background: var(--rn-gray-color);
+	opacity: 0.3;
+	z-index: 1;
+}
+.product-tabs-section
+	.ant-tabs-nav:has(
+		.ant-tabs-nav-list .ant-tabs-tab:nth-child(2).ant-tabs-tab-active
+	)::before {
+	bottom: -1px;
+}
+.product-tabs-section
+	.ant-tabs-nav:has(
+		.ant-tabs-nav-list .ant-tabs-tab:nth-child(2).ant-tabs-tab-active
+	)::before {
+	left: 50%;
+	width: calc(50% + 24px);
+}
+.product-tabs-section .ant-tabs-nav-list {
+	display: flex;
+	gap: 0;
+	width: 100%;
+	border-bottom: none;
+	position: relative;
+}
+.product-tabs-section .ant-tabs-tab {
+	padding: 0 0 8px 0;
+	margin-right: 0;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 18px;
+	font-weight: 400; /* Regular - Body1_18px */
+	color: var(--rn-gray-color);
+	border: none;
+	border-bottom: none;
+	position: relative;
+	flex: 1;
+	text-align: center;
+}
+.product-tabs-section .ant-tabs-tab:not(:last-child)::after {
+	display: none;
+}
+.product-tabs-section .ant-tabs-tab-active {
+	color: var(--rn-blue-color) !important;
+}
+.product-tabs-section .ant-tabs-tab-active .ant-tabs-tab-btn {
+	color: var(--rn-blue-color) !important;
+}
+.product-tabs-section .ant-tabs-ink-bar {
+	display: none;
+}
+.product-tabs-section .ant-tabs-content-holder {
+	padding: 0;
+}
+.product-tabs-section .ant-tabs-tabpane {
+	display: block;
+}
+.product-tabs-section .ant-tabs-tabpane-hidden {
+	display: none !important;
+}
+.product-tabs-section .ant-tabs-tab-btn {
+	padding: 0;
+	width: 100%;
+	text-align: center;
+}
+.product-description-wrapper {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #1c1c1c;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	overflow: hidden;
+	min-height: 0;
+}
+.product-description {
+	margin-bottom: 0;
+	flex: 1;
+	overflow: hidden;
+	min-height: 0;
+}
+.product-description-collapsed {
+	max-height: 240px;
+	overflow: hidden;
+	position: relative;
+}
+.product-description-collapsed::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 30px;
+	background: linear-gradient(to bottom, transparent, #fff);
+	pointer-events: none;
+	z-index: 1;
+}
+.product-description:not(.product-description-collapsed) {
+	overflow: visible;
+	max-height: none;
+}
+.product-tabs-section.expanded {
+	height: auto !important;
+	min-height: auto !important;
+}
+.product-tabs-section.expanded .ant-tabs {
+	height: auto;
+}
+.product-tabs-section.expanded .product-description-wrapper {
+	overflow: visible;
+}
+.product-tabs-section.expanded .product-description {
+	overflow: visible;
+	max-height: none;
+}
+.product-read-more-link {
+	background: none;
+	border: none;
+	padding: 0;
+	margin-top: 8px;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 600; /* Demibold - H5_16px */
+	color: var(--rn-blue-color);
+	text-decoration: none;
+	cursor: pointer;
+	transition: color 0.2s;
+	align-self: flex-start;
+	flex-shrink: 0;
+}
+.product-read-more-link:hover {
+	color: #0669b8;
+}
+.product-reviews-placeholder {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	color: var(--rn-gray-color);
+	text-align: center;
+	padding: 40px 0;
+}
+.recommended-products-section {
+	margin-top: 100px;
+	margin-bottom: 48px;
+}
+.recommended-products-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 24px;
+}
+.recommended-products-section .ant-typography,
+.recommended-products-section h1.ant-typography,
+.recommended-products-section h2.ant-typography,
+.recommended-products-section h3.ant-typography {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 48px;
+	font-weight: 500; /* Medium */
+	line-height: 1.2;
+	color: #1c1c1c;
+	margin: 0;
+	text-transform: uppercase;
+}
+.recommended-products-link {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	color: var(--rn-blue-color);
+	text-decoration: none;
+}
+.recommended-products-link:hover {
+	text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+	.product-details-card {
+		width: 100%;
+	}
+	.product-tabs-section {
+		width: 100%;
+		margin-left: 0;
+	}
+	.product-title {
+		font-size: 32px;
+	}
+	.product-price-main {
+		font-size: 24px;
 	}
 }

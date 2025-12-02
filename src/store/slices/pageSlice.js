@@ -22,7 +22,11 @@ const fetchNewsList = createAsyncThunk("page.NEWS.LIST", async () => {
 });
 
 const fetchNewsDetail = createAsyncThunk("page.NEWS.DETAIL", async (id) => {
-  const response = await fetcher(`/index.php?route=information/news/info/&news_id=${id}`);
+  // Ходим на продовый бэк точно так же, как страница /news на сайте
+  const baseUrl = "https://rayanhalal.ru";
+  const response = await fetch(
+    `${baseUrl}/site/index.php?route=information/news/info/&news_id=${id}&store_id=0`
+  );
   return response.json();
 });
 
