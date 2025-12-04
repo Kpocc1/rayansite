@@ -1,98 +1,132 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Alert, Button, Layout, List, Skeleton, Tag, Typography } from "antd";
-import { RedoOutlined } from "@ant-design/icons";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button, Skeleton } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
-import { fetchHistories } from "store/slices/customerSlice";
-import HeadingTitle from "components/HeadingTitle";
-import AccountSider from "../AccountSider";
-import Breadcrumb from "components/Breadcrumb";
-import useBreakpoint from "hooks/useBreakpoint";
-import useSmartNavigate from "hooks/useSmartNavigate";
-import { loadingStatus } from "helpers/fetcher";
-import { formatCurrency } from "helpers/formatter";
-import { PRODUCTS_GRID } from "constants/breakpoints";
+import { fetchHistories } from 'store/slices/customerSlice';
+import AccountMenu from 'components/menu/AccountMenu';
+import useSmartNavigate from 'hooks/useSmartNavigate';
+import { loadingStatus } from 'helpers/fetcher';
+import { formatCurrency } from 'helpers/formatter';
 
-const Password = () => {
-  const dispatch = useDispatch();
-  const { data, status } = useSelector((state) => state.customer.histories);
-  const { navigate } = useSmartNavigate(); 
-  const { isDesktop } = useBreakpoint();
+const History = () => {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const { data, status } = useSelector(state => state.customer.histories);
+	const { navigate: smartNavigate } = useSmartNavigate();
 
-  useEffect(() => {
-    dispatch(fetchHistories());
-  }, [dispatch]);
+	useEffect(() => {
+		dispatch(fetchHistories());
+	}, [dispatch]);
 
-  return (
-    <div className="region">
-      <Breadcrumb />
-      <HeadingTitle
-        title={data.heading_title}
-        level={2}
-        style={{ marginTop: 0, marginBottom: 30 }}
-      />
-      <Layout>
-        <AccountSider />
-        <Layout.Content className={isDesktop ? "pl-30" : ""}>
-          <List
-            grid={PRODUCTS_GRID}
-            className="rn-product-grid"
-            itemLayout="horizontal"
-            dataSource={data.orders || Array(4).fill({})}
-            renderItem={(item, index) => (
-              <Skeleton active loading={status !== loadingStatus.SUCCEEDED}>
-                <List.Item className="white">
-                  <div className="m-0 p-20">
-                    <Tag
-                      style={{ fontSize: 16, fontWeight: 500, marginBottom: 10 }}
-                      onClick={() => navigate(`/account/history/${item.order_id}`)}
-                    >
-                      <Typography.Link onClick={() => navigate(`/account/history/${item.order_id}`)}>
-                        #{item.order_id}
-                      </Typography.Link>
-                    </Tag>
-                    <br />
-                    <Typography.Link onClick={() => navigate(`/account/history/${item.order_id}`)}>
-                      {item.name}
-                    </Typography.Link>
-                    <div style={{ marginTop: 4 }}>{item.date_added}</div>
-                    <div>
-                      <Typography.Title level={4} className="mt-10 text-right">
-                        {formatCurrency(item.total)}
-                      </Typography.Title>
-                      <p><Alert message={item.status} type="info" /></p>
-                    </div>
-                  </div>
-                  <div className="p-10">
-                    <div style={{}}>
-                      {item.products?.map(p => (
-                        <img
-                          key={p.product_id}
-                          src={p.image}
-                          alt={p.name}
-                          style={{ verticalAlign: "bottom", maxWidth: 70, maxHeight: 70 }}
-                        />
-                      ))}
-                    </div>
-                    <div className="p-20">
-                      <Button
-                        type="primary"
-                        block
-                        icon={<RedoOutlined />}
-                        onClick={() => navigate(`/account/history/${item.order_id}`)}
-                      >
-                        Детали заказа
-                      </Button>
-                    </div>
-                  </div>
-                </List.Item>
-              </Skeleton>
-            )}
-          />
-        </Layout.Content>
-      </Layout>
-    </div>
-  );
+	const getStatusClass = statusText => {
+		const lowerStatus = (statusText || '').toLowerCase();
+		if (lowerStatus.includes('доставлен') || lowerStatus.includes('завершен')) {
+			return '';
+		}
+		return 'account-history-status-pending';
+	};
+
+	return (
+		<div className="region account-section">
+			{/* Breadcrumb */}
+			<div className="contact-breadcrumb" style={{ marginTop: '64px' }}>
+				<a
+					href="/"
+					onClick={e => {
+						e.preventDefault();
+						navigate('/');
+					}}
+					className="breadcrumb-link"
+				>
+					Главная
+				</a>
+				<span className="breadcrumb-separator"></span>
+				<span className="breadcrumb-current">Личный кабинет</span>
+			</div>
+
+			{/* Title */}
+			<h1 className="account-title">ИСТОРИЯ ЗАКАЗОВ</h1>
+
+			{/* Layout */}
+			<div className="account-layout">
+				{/* Sidebar */}
+				<div className="account-sidebar">
+					<AccountMenu />
+				</div>
+
+				{/* Content */}
+				<div className="account-content">
+					{status === loadingStatus.SUCCEEDED ? (
+						<div className="account-history-grid">
+							{(data.orders || []).map((item, index) => (
+								<div key={index} className="account-history-card">
+									<div className="account-history-header">
+										<span className="account-history-order-id">
+											#{item.order_id}
+										</span>
+										<span
+											className={`account-history-status ${getStatusClass(item.status)}`}
+										>
+											{item.status}
+										</span>
+									</div>
+
+									<div className="account-history-images">
+										{item.products?.slice(0, 4).map(p => (
+											<img
+												key={p.product_id}
+												src={p.image}
+												alt={p.name}
+												className="account-history-image"
+											/>
+										))}
+									</div>
+
+									<div className="account-history-customer">{item.name}</div>
+
+									<div className="account-history-footer">
+										<span className="account-history-total">
+											{formatCurrency(item.total)}
+										</span>
+										<span className="account-history-date">
+											{item.date_added}
+										</span>
+									</div>
+
+									<Button
+										type="primary"
+										block
+										className="account-history-button"
+										onClick={() =>
+											smartNavigate(`/account/history/${item.order_id}`)
+										}
+									>
+										Детали заказа
+										<img 
+											src={`${process.env.PUBLIC_URL}/icons/icon-arrow-right-circle.svg`}
+											alt=""
+											className="account-history-button-icon"
+										/>
+									</Button>
+								</div>
+							))}
+						</div>
+					) : (
+						<div className="account-history-grid">
+							{Array(3)
+								.fill({})
+								.map((_, index) => (
+									<div key={index} className="account-history-card">
+										<Skeleton active paragraph={{ rows: 4 }} />
+									</div>
+								))}
+						</div>
+					)}
+				</div>
+			</div>
+		</div>
+	);
 };
 
-export default Password;
+export default History;

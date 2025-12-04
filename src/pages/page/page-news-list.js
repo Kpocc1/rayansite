@@ -9,9 +9,9 @@ const PageNewsList = () => {
 	const [sortBy, setSortBy] = useState('date'); // 'date', 'alphabet', 'views'
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 	const dropdownRef = useRef(null);
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
 	const { data } = useSelector(state => state.page.newsList);
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
 	useEffect(() => {
 		// Загружаем список новостей один раз
@@ -35,7 +35,7 @@ const PageNewsList = () => {
 	};
 
 	// Закрытие дропдауна при клике вне его
-	useEffect(() => {
+  useEffect(() => {
 		const handleClickOutside = event => {
 			if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
 				setIsDropdownOpen(false);
@@ -82,7 +82,7 @@ const PageNewsList = () => {
 		sortOptions.find(opt => opt.value === sortBy)?.label ||
 		'По дате публикации';
 
-	return (
+  return (
 		<>
 			<div className='region news-section'>
 				<div className='contact-breadcrumb'>
@@ -254,10 +254,10 @@ const PageNewsList = () => {
 							Без ГМО и заменителей мяса
 						</h4>
 					</div>
-				</div>
-			</div>
+      </div>
+    </div>
 		</>
-	);
+  );
 };
 
 export default PageNewsList;

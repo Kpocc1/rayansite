@@ -5,6 +5,7 @@ import { Row, Col, Skeleton } from 'antd';
 
 import { fetchCategory } from 'store/slices/productSlice';
 import CartQtyButtonGroup from 'components/cart/CartQtyButtonGroup';
+import WishlistButton from 'components/cart/WishlistButton';
 import useSmartNavigate from 'hooks/useSmartNavigate';
 import { loadingStatus } from 'helpers/fetcher';
 import { formatCurrency, formatWeightWithUnit } from 'helpers/formatter';
@@ -12,14 +13,14 @@ import { getStock } from 'helpers/product';
 import { menuFlatter } from 'helpers';
 
 const Category = () => {
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const { data, status } = useSelector(state => state.product.category);
 	const { data: menuData } = useSelector(state => state.menu.categoriesList);
 	const { '*': path } = useParams();
-	let [searchParams, setSearchParams] = useSearchParams();
+  let [searchParams, setSearchParams] = useSearchParams();
 	const { navigate: smartNavigate, getHref } = useSmartNavigate();
-	const url = getHref(path);
+  const url = getHref(path);
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 	const dropdownRef = useRef(null);
 
@@ -76,20 +77,20 @@ const Category = () => {
 		};
 	}, [path, menuData]);
 
-	const handleSortSelect = (_, obj) => {
-		const params = new URLSearchParams(searchParams);
-		const params2 = new URLSearchParams(obj.query);
+  const handleSortSelect = (_, obj) => {
+    const params = new URLSearchParams(searchParams);
+    const params2 = new URLSearchParams(obj.query);
 		params.set('sort', params2.get('sort'));
 		params.set('order', params2.get('order'));
-		setSearchParams(`&${params.toString()}`);
+    setSearchParams(`&${params.toString()}`);
 		setIsDropdownOpen(false);
-	};
+  };
 
 	const handlePagination = page => {
-		const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams);
 		params.set('page', page);
-		setSearchParams(`&${params.toString()}`);
-	};
+    setSearchParams(`&${params.toString()}`);
+  };
 
 	const handleCategoryClick = categoryPathValue => {
 		// Если категория уже активна, переходим на родительскую категорию
@@ -105,9 +106,9 @@ const Category = () => {
 		}
 	};
 
-	useEffect(() => {
-		if (url) dispatch(fetchCategory({ url, searchParams }));
-	}, [dispatch, url, searchParams]);
+  useEffect(() => {
+    if (url) dispatch(fetchCategory({ url, searchParams }));
+  }, [dispatch, url, searchParams]);
 
 	// Закрытие дропдауна при клике вне его
 	useEffect(() => {
@@ -130,7 +131,7 @@ const Category = () => {
 				s.value === `${data.sort}_${data.order}`
 		)?.label || 'По дате публикации';
 
-	return (
+  return (
 		<>
 			<div className='region category-section'>
 				{/* Breadcrumb */}
@@ -260,9 +261,9 @@ const Category = () => {
 							</div>
 						) : null}
 					</>
-				) : (
+            ) : (
 					<Skeleton active paragraph={{ rows: 2 }} />
-				)}
+            )}
 
 				{/* Products Grid */}
 				{status === loadingStatus.SUCCEEDED && data?.products ? (
@@ -307,18 +308,15 @@ const Category = () => {
 												</div>
 											)}
 										</div>
-										<button
+										<div
 											className='popular-product-favorite'
-											onClick={e => {
-												e.stopPropagation();
-											}}
+											onClick={e => e.stopPropagation()}
 										>
-											<img
-												src={`${process.env.PUBLIC_URL}/icons/icon-heart.svg`}
-												alt='Избранное'
-												className='popular-product-favorite-icon'
+											<WishlistButton
+												product_id={item.product_id}
+												active={item.in_wishlist}
 											/>
-										</button>
+										</div>
 										<h3 className='popular-product-title'>
 											{item.name}, {formatWeightWithUnit(item.weight)}
 										</h3>
@@ -335,16 +333,16 @@ const Category = () => {
 										</div>
 										<div
 											className={`popular-product-stock ${
-												stock.quantity === 0 || stock.stock === 0
+												stock.stock === 0
 													? 'popular-product-stock-unavailable'
 													: ''
 											}`}
 										>
-											{stock.quantity === 0 || stock.stock === 0
+											{stock.stock === 0
 												? 'Нет в наличии'
-												: stock.quantity === 999 || stock.stock === 999
+												: stock.stock === 999
 												? 'В наличии много'
-												: `В наличии ${stock.quantity} шт.`}
+												: `В наличии ${stock.stock} шт.`}
 										</div>
 									</div>
 								</Col>
@@ -359,9 +357,9 @@ const Category = () => {
 								<Col xs={12} sm={12} md={8} lg={6} key={index}>
 									<Skeleton active avatar paragraph={{ rows: 4 }} />
 								</Col>
-							))}
-					</Row>
-				)}
+                  ))}
+                </Row>
+              )}
 
 				{/* Pagination */}
 				{status === loadingStatus.SUCCEEDED && data?.product_total > 0 && (
@@ -369,8 +367,8 @@ const Category = () => {
 						<div className='pagination-wrapper'>
 							{/* Можно добавить пагинацию позже если нужно */}
 						</div>
-					</div>
-				)}
+                </div>
+              )}
 			</div>
 
 			{/* Quality Section */}
@@ -430,10 +428,10 @@ const Category = () => {
 							Без ГМО и заменителей мяса
 						</h4>
 					</div>
-				</div>
-			</div>
+          </div>
+    </div>
 		</>
-	);
+  );
 };
 
 export default Category;

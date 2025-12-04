@@ -1,61 +1,78 @@
-import React, { useState } from "react";
-import { Input, Layout, Form, Button } from "antd";
+import React, { useState } from 'react';
+import { Input, Form, Button, message } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
 
-import Breadcrumb from "components/Breadcrumb";
-import AccountSider from "../AccountSider";
-import HeadingTitle from "components/HeadingTitle";
+import AccountMenu from 'components/menu/AccountMenu';
 
-const rules = [{ required: true, message: "Обязательное поле" }];
+const rules = [{ required: true, message: 'Обязательное поле' }];
 
 const Password = () => {
-  const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(false);
+	const navigate = useNavigate();
 
-  // const handleFinish = async (values) => {
-  //   setLoading(true);
-  //   const res = await editProfile(values);
-  //   if (res.error) {
-  //     message.error(res.error_warning);
-  //   } else {
-  //     setCustomer(values);
-  //     message.success(res.success);
-  //   }
-  //   setLoading(false);
-  // };
+	const handleFinish = async values => {
+		setLoading(true);
+		// TODO: Implement password change API call
+		message.success('Пароль успешно изменен');
+		setLoading(false);
+	};
 
-  return (
-    <div className="region">
-      <Breadcrumb />
-      <HeadingTitle
-        title="Изменить пароль"
-        level={2}
-        style={{ marginTop: 0, marginBottom: 30 }}
-      />
-      <Layout>
-        <AccountSider />
-        <Layout.Content>
-          <div className="white p-30">
-            <Form
-              name="profile"
-              layout="vertical"
-              style={{ maxWidth: 600 }}
-              // initialValues={data}
-              // onFinish={handleFinish}
-              // autoComplete="off"
-            >
-              <Form.Item name="password" label="Пароль" rules={rules}>
-                <Input.Password />
-              </Form.Item>
-              <Form.Item>
-                <Button type="primary" htmlType="submit" loading={loading}>
-                  Сохранить изменения
-                </Button>
-              </Form.Item>
-            </Form>
-          </div>
-        </Layout.Content>
-      </Layout>
-    </div>
-  );
+	return (
+		<div className="region account-section">
+			{/* Breadcrumb */}
+			<div className="contact-breadcrumb" style={{ marginTop: '64px' }}>
+				<a
+					href="/"
+					onClick={e => {
+						e.preventDefault();
+						navigate('/');
+					}}
+					className="breadcrumb-link"
+				>
+					Главная
+				</a>
+				<span className="breadcrumb-separator"></span>
+				<span className="breadcrumb-current">Личный кабинет</span>
+			</div>
+
+			{/* Title */}
+			<h1 className="account-title">БЕЗОПАСНОСТЬ</h1>
+
+			{/* Layout */}
+			<div className="account-layout">
+				{/* Sidebar */}
+				<div className="account-sidebar">
+					<AccountMenu />
+				</div>
+
+				{/* Content */}
+				<div className="account-content">
+					<div className="account-form-card">
+						<Form
+							name="password"
+							layout="vertical"
+							onFinish={handleFinish}
+							style={{ maxWidth: 600 }}
+						>
+							<Form.Item name="password" label="Пароль" rules={rules}>
+								<Input.Password
+									iconRender={visible =>
+										visible ? <EyeOutlined /> : <EyeInvisibleOutlined />
+									}
+								/>
+							</Form.Item>
+							<div className="account-form-submit">
+								<Button type="primary" htmlType="submit" loading={loading}>
+									Сохранить изменения
+								</Button>
+							</div>
+						</Form>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default Password;

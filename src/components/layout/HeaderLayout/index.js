@@ -131,7 +131,7 @@ const HeaderLayout = () => {
 			>
 				<div className='region'>
 					<Flex vertical={false} justify='flex-start' align='center'>
-						<Dropdown
+					<Dropdown
 							trigger={['click']}
 							menu={{
 								items: data.cities_list,
@@ -141,8 +141,8 @@ const HeaderLayout = () => {
 							dropdownRender={menu => (
 								<div className='city-dropdown-menu'>{menu}</div>
 							)}
-						>
-							{status === loadingStatus.SUCCEEDED ? (
+					>
+						{status === loadingStatus.SUCCEEDED ? (
 								<Button type='text' className='city-select-button'>
 									<img
 										src={`${process.env.PUBLIC_URL}/icons/icon-map-marker.svg`}
@@ -157,11 +157,11 @@ const HeaderLayout = () => {
 										alt=''
 										className='city-arrow'
 									/>
-								</Button>
-							) : (
-								<Skeleton.Button active />
-							)}
-						</Dropdown>
+							</Button>
+						) : (
+							<Skeleton.Button active />
+						)}
+					</Dropdown>
 						{status === loadingStatus.SUCCEEDED && data.telephone && (
 							<a href={`tel:${data.telephone}`} className='top-rail-telephone'>
 								<img
@@ -238,7 +238,7 @@ const HeaderLayout = () => {
 								</a>
 							</div>
 						)}
-					</Flex>
+				</Flex>
 				</div>
 			</div>
 			<div className='rn-header region'>
@@ -343,17 +343,17 @@ const HeaderLayout = () => {
 												})}
 											</div>
 										)}
-								</div>
 							</div>
-						)}
+						</div>
+					)}
 					>
-						<Button
-							type='primary'
+										<Button
+											type='primary'
 							className={`catalog-button ${
 								catalogMenuOpen ? 'catalog-button-open' : ''
 							}`}
 							onClick={() => setCatalogMenuOpen(!catalogMenuOpen)}
-						>
+										>
 							<img
 								src={`${process.env.PUBLIC_URL}/icons/${
 									catalogMenuOpen ? 'icon-close.svg' : 'icon-catalog.svg'
@@ -362,11 +362,11 @@ const HeaderLayout = () => {
 								className='catalog-icon'
 							/>
 							<span className='catalog-text'>Каталог</span>
-						</Button>
+										</Button>
 					</Dropdown>
 					<div className='search-wrapper'>
 						<SearchWithSuggest />
-					</div>
+									</div>
 				</Flex>
 				<Flex align='flex-start' gap={30} style={{ height: '50px' }}>
 					<a
@@ -380,7 +380,7 @@ const HeaderLayout = () => {
 								handleSigninModalOpen();
 							}
 						}}
-					>
+						>
 						<img
 							src={`${process.env.PUBLIC_URL}/icons/icon-clock.svg`}
 							alt=''
@@ -407,51 +407,23 @@ const HeaderLayout = () => {
 						/>
 						<span className='header-action-text'>Избранное</span>
 					</a>
-					<Dropdown
-						trigger={['hover']}
-						menu={{ items: cartProducts.data.products || [] }}
-						dropdownRender={({ props }) =>
-							cartProducts.data.products?.length > 0 ? (
-								<Card bordered hoverable style={{ cursor: 'default' }}>
-									<MiniCart
-										products={props.items}
-										status={cartProducts.status}
-									/>
-									<div style={{ textAlign: 'right' }}>
-										<Button
-											type='primary'
-											size='large'
-											danger
-											block
-											onClick={() => navigate('/cart')}
-										>
-											К оформлению
-										</Button>
-									</div>
-								</Card>
-							) : (
-								''
-							)
-						}
-					>
-						<a
-							href='/cart'
-							className='header-action-item'
-							onClick={e => {
-								e.preventDefault();
-								navigate('/cart');
-							}}
-						>
-							<Badge count={cartProducts.data.count} offset={[0, 0]}>
-								<img
-									src={`${process.env.PUBLIC_URL}/icons/icon-cart.svg`}
-									alt=''
-									className='header-action-icon'
-								/>
-							</Badge>
-							<span className='header-action-text'>Корзина</span>
-						</a>
-					</Dropdown>
+					<a
+						href='/cart'
+						className='header-action-item'
+						onClick={e => {
+							e.preventDefault();
+							navigate('/cart');
+						}}
+							>
+						<Badge count={cartProducts.data.count} offset={[0, 0]}>
+							<img
+								src={`${process.env.PUBLIC_URL}/icons/icon-cart.svg`}
+								alt=''
+								className='header-action-icon'
+							/>
+						</Badge>
+						<span className='header-action-text'>Корзина</span>
+					</a>
 					<a
 						href='/account'
 						className='header-action-item'

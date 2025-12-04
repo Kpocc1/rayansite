@@ -8,10 +8,10 @@ const CheckoutFormIntervals = ({ shippingMethods, isPickup }) => {
 	const { isMobile } = useBreakpoint();
 	const isNalchik = shippingMethods.data?.store_id === 0;
 	return (
-		<div className='white p-20'>
-			<Typography.Title level={4} style={{ marginTop: 0 }}>
-				{isPickup ? 'Дата и время самовывоза' : 'Дата и интервал доставки'}
-			</Typography.Title>
+		<div className='checkout-intervals-card'>
+			<label className='checkout-intervals-label'>
+				{isPickup ? 'Дата доставки' : 'Дата доставки'}
+			</label>
 			{shippingMethods.status === loadingStatus.SUCCEEDED ? (
 				<Tabs
 					defaultActiveKey='1'
@@ -21,7 +21,7 @@ const CheckoutFormIntervals = ({ shippingMethods, isPickup }) => {
 						isNalchik,
 						isPickup
 					)}
-					// onChange={console.log}
+					className='checkout-intervals-tabs'
 				/>
 			) : (
 				<Skeleton active paragraph={{ rows: 2 }} />

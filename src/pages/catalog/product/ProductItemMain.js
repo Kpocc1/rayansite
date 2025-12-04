@@ -17,12 +17,12 @@ const ProductItemMain = ({ product_id, data }) => {
   }
 
   let stockText;
-  if (stock.quantity === 0 || stock.stock === 0) {
+  if (stock.stock === 0) {
     stockText = "нет в наличии";
-  } else if (stock.quantity === 999 || stock.stock === 999) {
+  } else if (stock.stock === 999) {
     stockText = "В наличии много";
   } else {
-    stockText = `В наличии ${stock.quantity} шт.`;
+    stockText = `В наличии ${stock.stock} шт.`;
   }
 
   // Форматируем отзывы - если уже есть слово "отзывов", не добавляем его снова
@@ -74,7 +74,7 @@ const ProductItemMain = ({ product_id, data }) => {
         )}
         <span className="product-delivery-tag">Курьер: {formatCurrency(200)}</span>
         <span className="product-delivery-tag">Самовывоз: {formatCurrency(0)}</span>
-      </div>
+        </div>
 
       {/* Цена */}
       <div className="product-price-section">
@@ -85,15 +85,15 @@ const ProductItemMain = ({ product_id, data }) => {
             <span className="product-price-weight">{formatWeightWithUnit(data.weight)}</span>
           </div>
           <div className="product-price-details">
-            {data.price_kg && (
+                {data.price_kg && (
               <div className="product-price-kg">
                 <span className="product-price-label">Цена за кг:</span> <span className="product-price-value-small">{formatCurrency(data.price_kg)}</span>
-              </div>
-            )}
+                  </div>
+                )}
             {data.weight && (
               <div className="product-max-weight">
                 <span className="product-price-label">Макс. вес:</span> <span className="product-price-value-small">{formatWeightWithUnit(data.weight)}</span>
-              </div>
+                </div>
             )}
           </div>
         </div>
@@ -112,7 +112,7 @@ const ProductItemMain = ({ product_id, data }) => {
             await addToCart(product_id, data.minimum || 1);
             dispatch(fetchCartProducts());
           }}
-          disabled={stock.quantity === 0 && stock.stock === 0}
+          disabled={stock.stock === 0}
           style={{ marginBottom: 0, flex: 1 }}
         >
           <img
@@ -122,7 +122,7 @@ const ProductItemMain = ({ product_id, data }) => {
           />
           <span>В корзину</span>
         </button>
-        <div className={`product-stock ${stock.quantity === 0 || stock.stock === 0 ? 'product-stock-unavailable' : ''}`} style={{ marginTop: 0, whiteSpace: "nowrap" }}>
+        <div className={`product-stock ${stock.stock === 0 ? 'product-stock-unavailable' : ''}`} style={{ marginTop: 0, whiteSpace: "nowrap" }}>
           {stockText}
         </div>
       </div>

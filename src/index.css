@@ -542,6 +542,14 @@ input[type='number'] {
 	transform: scale(1.02);
 	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
+.popular-product-card-inactive {
+	opacity: 0.6;
+}
+.popular-product-card-inactive:hover,
+.popular-product-card-inactive:focus {
+	transform: none;
+	box-shadow: none;
+}
 .popular-product-image-wrapper {
 	position: relative;
 	margin-bottom: 24px;
@@ -578,6 +586,14 @@ input[type='number'] {
 .popular-product-favorite-icon {
 	width: 16px;
 	height: 16px;
+}
+.popular-product-favorite .wishlist-buttons {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.popular-product-favorite .wishlist-buttons .anticon {
+	font-size: 18px !important;
 }
 .popular-product-rating {
 	position: absolute;
@@ -1490,6 +1506,13 @@ body:not(:has([class*='ant-dropdown-open']))::before {
 .header-action-item:hover {
 	opacity: 0.7;
 }
+.header-action-item-cart {
+	position: relative;
+	z-index: 1;
+}
+.header-action-item-cart:hover {
+	z-index: 1001;
+}
 .header-action-icon {
 	width: 24px;
 	height: 24px;
@@ -2386,6 +2409,164 @@ body:not(:has([class*='ant-dropdown-open']))::before {
 	border-radius: 8px;
 	color: #856404;
 }
+/* Стили для страницы вакансий */
+.vacancies-section {
+	margin-top: 64px;
+}
+.vacancies-title {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 48px;
+	font-weight: 500; /* Medium - h2_48px */
+	line-height: 1.2;
+	color: #1c1c1c;
+	margin: 0 0 32px 0;
+	text-transform: uppercase;
+}
+.vacancies-content {
+	display: flex;
+	gap: 48px;
+	margin-bottom: 48px;
+}
+.vacancies-description {
+	flex: 1;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 18px;
+	font-weight: 400; /* Regular - body1_18px */
+	line-height: 1.5;
+	color: #1c1c1c;
+}
+.vacancies-description p {
+	margin: 0 0 16px 0;
+}
+.vacancies-description p:last-child {
+	margin-bottom: 0;
+}
+.vacancies-contacts {
+	display: flex;
+	gap: 48px;
+	flex-shrink: 0;
+}
+.vacancies-contacts-item {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+.vacancies-contacts-label {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 600; /* Demibold - H5_16px */
+	line-height: 1.5;
+	color: var(--rn-blue-color);
+	margin: 0;
+}
+.vacancies-contacts-value {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400; /* Regular */
+	line-height: 1.5;
+	color: #1c1c1c;
+	text-decoration: none;
+}
+.vacancies-contacts-value:hover {
+	color: var(--rn-blue-color);
+}
+/* Карточки преимуществ */
+.vacancies-benefits {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 24px;
+	margin-bottom: 48px;
+}
+.vacancies-benefit-card {
+	background: var(--rn-lightgray-color);
+	border-radius: 20px;
+	padding: 24px;
+}
+.vacancies-benefit-icon {
+	width: 44px;
+	height: 44px;
+	object-fit: contain;
+	margin-bottom: 24px;
+}
+.vacancies-benefit-title {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 24px;
+	font-weight: 600; /* Demibold - H4_24px */
+	line-height: 1.2;
+	color: var(--rn-red-color);
+	margin: 0 0 16px 0;
+}
+.vacancies-benefit-text {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400; /* Regular - Body2_16px */
+	line-height: 1.5;
+	color: #1c1c1c;
+	margin: 0;
+}
+/* Список вакансий */
+.vacancies-list-section {
+	margin-bottom: 48px;
+}
+.vacancies-list-title {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 32px;
+	font-weight: 500; /* Medium - h3_32px */
+	line-height: 1.2;
+	color: var(--rn-blue-color);
+	margin: 0 0 24px 0;
+}
+.vacancies-grid {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	gap: 16px;
+}
+.vacancy-button {
+	background: var(--rn-lightgray-color);
+	border: none;
+	border-radius: 8px;
+	padding: 16px 20px;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 14px;
+	font-weight: 500; /* Medium */
+	line-height: 1.4;
+	color: #1c1c1c;
+	cursor: pointer;
+	text-align: center;
+	transition: all 0.3s ease;
+}
+.vacancy-button:hover {
+	background-color: #e0e0e2;
+}
+@media (max-width: 1024px) {
+	.vacancies-content {
+		flex-direction: column;
+		gap: 32px;
+	}
+	.vacancies-contacts {
+		flex-wrap: wrap;
+	}
+	.vacancies-benefits {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.vacancies-grid {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+@media (max-width: 768px) {
+	.vacancies-title {
+		font-size: 32px;
+	}
+	.vacancies-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.vacancies-benefits {
+		grid-template-columns: 1fr;
+	}
+	.vacancies-list-title {
+		font-size: 24px;
+	}
+}
 @media (max-width: 768px) {
 	.news-detail-date {
 		font-size: 36px;
@@ -2396,6 +2577,502 @@ body:not(:has([class*='ant-dropdown-open']))::before {
 	.news-detail-meta {
 		flex-direction: column;
 		align-items: flex-start;
+	}
+}
+/* Стили для страницы сертификатов */
+.certificates-section {
+	margin-top: 64px;
+}
+.certificates-title {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 48px;
+	font-weight: 500; /* Medium - h2_48px */
+	line-height: 1.2;
+	color: #1c1c1c;
+	margin: 0 0 48px 0;
+	text-transform: uppercase;
+}
+.certificates-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 24px;
+	margin-bottom: 60px;
+}
+.certificate-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+.certificate-image-button {
+	background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	width: 100%;
+	margin-bottom: 16px;
+	transition: transform 0.3s ease;
+}
+.certificate-image-button:hover {
+	transform: scale(1.02);
+}
+.certificate-image {
+	width: 100%;
+	height: auto;
+	border-radius: 8px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.certificate-title-button {
+	background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400; /* Regular - Body2_16px */
+	line-height: 1.5;
+	color: var(--rn-blue-color);
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
+.certificate-title-button:hover {
+	color: #0669b8;
+	text-decoration: underline;
+}
+@media (max-width: 1024px) {
+	.certificates-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+@media (max-width: 768px) {
+	.certificates-title {
+		font-size: 32px;
+	}
+	.certificates-grid {
+		grid-template-columns: 1fr;
+	}
+}
+/* Стили для личного кабинета */
+.account-section {
+	margin-top: 64px;
+	margin-bottom: 100px;
+}
+.account-title {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 48px;
+	font-weight: 500; /* Medium - h2_48px */
+	line-height: 1.2;
+	color: #1c1c1c;
+	margin: 0 0 32px 0;
+	text-transform: uppercase;
+}
+.account-layout {
+	display: flex;
+	gap: 24px;
+	align-items: flex-start;
+}
+.account-sidebar {
+	width: 280px;
+	flex-shrink: 0;
+}
+.account-content {
+	flex: 1;
+	min-width: 0;
+}
+/* Account Menu */
+.account-menu {
+	background: #fff;
+	border-radius: 20px;
+	padding: 24px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.account-menu-items {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin-bottom: 24px;
+}
+.account-menu-item {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 12px 16px;
+	background: none;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	width: 100%;
+	text-align: left;
+}
+.account-menu-item:hover {
+	background: var(--rn-lightgray-color);
+}
+.account-menu-item-active {
+	background: rgba(0, 133, 255, 0.1);
+}
+.account-menu-item-active:hover {
+	background: rgba(0, 133, 255, 0.15);
+}
+.account-menu-icon {
+	width: 24px;
+	height: 24px;
+	flex-shrink: 0;
+}
+.account-menu-label {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #999;
+}
+.account-menu-item-active .account-menu-label {
+	color: var(--rn-blue-color);
+	font-weight: 500;
+}
+.account-menu-logout {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding: 12px 16px;
+	background: none;
+	border: 1px solid var(--rn-red-color);
+	border-radius: 8px;
+	cursor: pointer;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 1.5;
+	color: var(--rn-red-color);
+	transition: all 0.3s ease;
+}
+.account-menu-logout:hover {
+	background: var(--rn-red-color);
+	color: #fff;
+}
+/* Account Form Card */
+.account-form-card {
+	background: #fff;
+	border-radius: 20px;
+	padding: 32px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.account-form-card .ant-form-item {
+	margin-bottom: 16px;
+}
+.account-form-card .ant-form-item-label > label {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	color: var(--rn-gray-color);
+	height: auto;
+	padding-bottom: 4px;
+}
+.account-form-card .ant-input {
+	width: 100%;
+	height: 54px;
+	border-radius: 8px;
+	background-color: var(--rn-lightgray-color);
+	border: none;
+	padding: 0 20px;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 54px;
+	color: #1c1c1c;
+	box-sizing: border-box;
+}
+.account-form-card .ant-input:focus {
+	outline: none;
+	background-color: #e8e8ea;
+	box-shadow: none;
+}
+.account-form-card .ant-input-affix-wrapper {
+	width: 100%;
+	height: 54px;
+	border-radius: 8px;
+	background-color: var(--rn-lightgray-color);
+	border: none;
+	padding: 0 20px;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	color: #1c1c1c;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+}
+.account-form-card .ant-input-affix-wrapper:focus,
+.account-form-card .ant-input-affix-wrapper-focused {
+	outline: none;
+	background-color: #e8e8ea;
+	box-shadow: none;
+	border: none;
+}
+.account-form-card .ant-input-affix-wrapper .ant-input {
+	border: none;
+	padding: 0;
+	background: transparent;
+	height: auto;
+}
+.account-form-submit {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 24px;
+}
+.account-form-submit .ant-btn {
+	height: 48px;
+	padding: 0 32px;
+	border-radius: 8px;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 500;
+}
+/* History cards */
+.account-history-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 24px;
+}
+.account-history-card {
+	background: #fff;
+	border-radius: 20px;
+	padding: 24px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+	display: flex;
+	flex-direction: column;
+}
+.account-history-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 16px;
+}
+.account-history-order-id {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 500;
+	color: #1c1c1c;
+	background: var(--rn-lightgray-color);
+	padding: 6px 12px;
+	border-radius: 8px;
+}
+.account-history-status {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	color: #22c55e;
+	background: rgba(34, 197, 94, 0.1);
+	padding: 6px 12px;
+	border-radius: 8px;
+}
+.account-history-status-pending {
+	color: #f59e0b;
+	background: rgba(245, 158, 11, 0.1);
+}
+.account-history-images {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-bottom: 16px;
+}
+.account-history-image {
+	width: 72px;
+	height: 72px;
+	object-fit: contain;
+	border-radius: 8px;
+	background: #fff;
+}
+.account-history-customer {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 500;
+	color: var(--rn-red-color);
+	margin-bottom: 12px;
+}
+.account-history-footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 16px;
+}
+.account-history-total {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 20px;
+	font-weight: 600;
+	color: #1c1c1c;
+}
+.account-history-date {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	color: var(--rn-gray-color);
+}
+.account-history-button {
+	width: 100%;
+	height: 48px;
+	border-radius: 8px;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 500;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+}
+.account-history-button-icon {
+	width: 24px;
+	height: 24px;
+}
+/* Order Detail */
+.account-order-detail-card {
+	background: #fff;
+	border-radius: 20px;
+	padding: 32px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+	margin-bottom: 32px;
+}
+.account-order-detail-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 32px;
+}
+.account-order-detail-section {
+	display: flex;
+	flex-direction: column;
+}
+.account-order-detail-title {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 18px;
+	font-weight: 600;
+	color: #1c1c1c;
+	margin: 0 0 16px 0;
+}
+.account-order-detail-label {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 14px;
+	font-weight: 600;
+	color: #1c1c1c;
+	margin: 0 0 4px 0;
+}
+.account-order-detail-value {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	color: #666;
+	margin: 0 0 12px 0;
+}
+.account-order-detail-button {
+	height: 48px;
+	padding: 0 32px;
+	border-radius: 8px;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 500;
+	margin-top: 16px;
+}
+/* Order Timeline */
+.account-order-timeline-item {
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+	margin-bottom: 16px;
+}
+.account-order-timeline-dot {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	border: 2px solid #e0e0e0;
+	background: #fff;
+	flex-shrink: 0;
+	margin-top: 4px;
+}
+.account-order-timeline-dot-active {
+	border-color: var(--rn-blue-color);
+	background: var(--rn-blue-color);
+}
+.account-order-timeline-content {
+	flex: 1;
+}
+.account-order-timeline-status {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	color: #1c1c1c;
+	margin: 0 0 4px 0;
+}
+.account-order-timeline-date {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 12px;
+	font-weight: 400;
+	color: #999;
+	margin: 0;
+}
+/* Order Summary */
+.account-order-summary {
+	border-top: 1px solid var(--rn-lightgray-color);
+	padding-top: 24px;
+	margin-top: 24px;
+}
+.account-order-summary-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 12px;
+}
+.account-order-summary-label {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	color: #1c1c1c;
+}
+.account-order-summary-value {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 600;
+	color: #1c1c1c;
+}
+.account-order-summary-total {
+	margin-top: 16px;
+	padding-top: 16px;
+	border-top: 1px solid var(--rn-lightgray-color);
+}
+.account-order-summary-total .account-order-summary-label {
+	font-weight: 600;
+}
+.account-order-summary-total .account-order-summary-value {
+	font-size: 24px;
+	color: var(--rn-red-color);
+}
+/* Products in order title */
+.account-products-title {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 32px;
+	font-weight: 500;
+	color: #1c1c1c;
+	margin: 0 0 24px 0;
+}
+@media (max-width: 1024px) {
+	.account-layout {
+		flex-direction: column;
+	}
+	.account-sidebar {
+		width: 100%;
+	}
+	.account-history-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.account-order-detail-grid {
+		grid-template-columns: 1fr;
+	}
+}
+@media (max-width: 768px) {
+	.account-title {
+		font-size: 32px;
+	}
+	.account-history-grid {
+		grid-template-columns: 1fr;
 	}
 }
 /* Стили для страницы категории */
@@ -2927,6 +3604,302 @@ body:not(:has([class*='ant-dropdown-open']))::before {
 	text-decoration: underline;
 }
 
+/* Корзина */
+.cart-section {
+	margin-bottom: 100px;
+}
+.cart-title {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 48px;
+	font-weight: 500; /* Medium */
+	line-height: 1.2;
+	color: #1c1c1c;
+	margin: 0 0 24px 0;
+	text-transform: uppercase;
+}
+.cart-in-stock {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 24px; /* h4_24px */
+	font-weight: 400; /* regular */
+	color: #1c1c1c;
+	margin: 0 0 24px 0;
+}
+.cart-in-stock-count {
+	color: var(--rn-blue-color);
+}
+.cart-items {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+.cart-item {
+	display: flex;
+	align-items: flex-start;
+	gap: 64px;
+	padding: 0;
+	background: transparent;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	padding-bottom: 24px;
+	margin-bottom: 24px;
+}
+.cart-item:last-child {
+	border-bottom: none;
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+/* Блок 1: Картинка, название, цена за кг - ширина 500px */
+.cart-item-block-1 {
+	display: flex;
+	gap: 24px;
+	align-items: flex-start;
+	width: 500px;
+	flex-shrink: 0;
+}
+.cart-item-image {
+	width: 180px;
+	height: 180px;
+	flex-shrink: 0;
+	border-radius: 20px;
+	overflow: hidden;
+}
+.cart-item-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.cart-item-info {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	flex: 1;
+}
+.cart-item-title {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 18px;
+	font-weight: 500; /* Medium */
+	line-height: 1.5;
+	color: #1c1c1c;
+	margin: 0;
+}
+.cart-item-price-per-kg {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	color: var(--rn-gray-color);
+	margin: 0;
+}
+/* Блок 2: Селектор количества - ширина 125px */
+.cart-item-block-2 {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	width: 125px;
+	flex-shrink: 0;
+}
+.cart-item-quantity {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	width: 100%;
+}
+.cart-item-quantity .ant-space-compact {
+	width: 100%;
+}
+.cart-item-quantity .ant-btn {
+	border-radius: 0;
+	height: 32px;
+	width: 32px;
+}
+.cart-item-quantity .ant-btn:first-child {
+	border-top-left-radius: 12px;
+	border-bottom-left-radius: 12px;
+}
+.cart-item-quantity .ant-btn:last-child {
+	border-top-right-radius: 12px;
+	border-bottom-right-radius: 12px;
+}
+.cart-quantity-input {
+	text-align: center;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	border-radius: 0;
+	height: 32px;
+	border-left: none;
+	border-right: none;
+}
+.cart-item-max-weight {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	color: var(--rn-gray-color);
+	margin: 0;
+}
+/* Блок 3: Цена - шрифт 24px demibold */
+.cart-item-block-3 {
+	display: flex;
+	align-items: center;
+	flex-shrink: 0;
+}
+.cart-item-total-price {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 24px;
+	font-weight: 600; /* Demibold */
+	color: var(--rn-red-color);
+	white-space: nowrap;
+}
+/* Блок 4: Избранное и корзина - flexbox gap 12px */
+.cart-item-block-4 {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	flex-shrink: 0;
+}
+.cart-item-wishlist,
+.cart-item-remove {
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	width: 28px;
+	height: 28px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.cart-item-wishlist img,
+.cart-item-remove img {
+	width: 28px;
+	height: 28px;
+}
+.cart-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 24px;
+}
+.cart-sidebar {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	margin-left: auto;
+}
+.cart-checkout-button {
+	height: 56px;
+	border-radius: 12px;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 18px;
+	font-weight: 500; /* Medium */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+}
+.cart-checkout-button-icon {
+	width: 24px;
+	height: 24px;
+}
+.cart-summary-card {
+	background: #fff;
+	border-radius: 20px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	padding: 24px;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+.cart-summary-total {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-bottom: 24px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.cart-summary-label {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 18px;
+	font-weight: 500; /* Medium */
+	color: #1c1c1c;
+}
+.cart-summary-total-price {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 24px;
+	font-weight: 600; /* Demibold */
+	color: var(--rn-red-color);
+}
+.cart-summary-promo {
+	width: 100%;
+}
+.cart-promo-input {
+	width: 100%;
+	height: 48px;
+	border-radius: 12px;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+}
+.cart-summary-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.cart-summary-value {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	color: #1c1c1c;
+}
+.cart-summary-discount {
+	color: var(--rn-red-color);
+}
+.cart-summary-comment {
+	position: relative;
+}
+.cart-comment-textarea,
+.cart-comment-textarea.ant-input {
+	width: 100%;
+	height: 138px;
+	border-radius: 8px;
+	background-color: var(--rn-lightgray-color) !important;
+	border: none !important;
+	padding: 20px 20px 32px 20px !important;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400; /* Regular - Body2_16px */
+	line-height: 1.5;
+	color: #1c1c1c;
+	resize: none;
+	box-sizing: border-box;
+}
+.cart-comment-textarea::placeholder {
+	color: transparent;
+}
+.cart-comment-textarea:focus {
+	outline: none;
+	background-color: #e8e8ea !important;
+}
+.cart-comment-counter {
+	position: absolute;
+	bottom: 8px;
+	right: 20px;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 12px;
+	font-weight: 400;
+	color: var(--rn-gray-color);
+	pointer-events: none;
+	z-index: 1;
+}
+.cart-empty {
+	text-align: center;
+	padding: 60px 20px;
+}
+.cart-empty p {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 18px;
+	font-weight: 400;
+	color: var(--rn-gray-color);
+	margin-bottom: 24px;
+}
+
 @media (max-width: 768px) {
 	.product-details-card {
 		width: 100%;
@@ -2941,4 +3914,351 @@ body:not(:has([class*='ant-dropdown-open']))::before {
 	.product-price-main {
 		font-size: 24px;
 	}
+	.cart-title {
+		font-size: 32px;
+	}
+	.cart-item {
+		flex-direction: column;
+	}
+	.cart-item-image {
+		width: 100%;
+		height: 200px;
+	}
+}
+/* Форма оформления заказа в сайдбаре */
+.checkout-form-sidebar {
+	background: #fff;
+	border-radius: 20px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	padding: 24px;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	margin-bottom: 100px;
+}
+.checkout-form-back-button {
+	padding: 0;
+	margin-bottom: 8px;
+	color: var(--rn-gray-color);
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+}
+.checkout-form-back-button:hover {
+	color: var(--rn-blue-color);
+}
+.checkout-form-title {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 24px;
+	font-weight: 600; /* Demibold - h4_24px */
+	line-height: 1.2;
+	color: #1c1c1c;
+	margin: 0 0 24px 0;
+}
+.checkout-form-section {
+	margin-bottom: 24px;
+}
+.checkout-form-section .ant-form-item-label > label {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400; /* Regular - Body2_16px */
+	color: #1c1c1c;
+}
+.checkout-shipping-buttons {
+	display: flex;
+	gap: 12px;
+	width: 100%;
+}
+.checkout-shipping-buttons .ant-radio-button-wrapper {
+	flex: 1;
+	height: auto;
+	border-radius: 8px;
+	border: 1px solid #e0e0e0;
+	background-color: #fff;
+	text-align: center;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400; /* Regular */
+	line-height: 1.5;
+	padding: 12px 24px;
+	color: #1c1c1c;
+	cursor: pointer;
+	transition: border-color 0.2s;
+}
+.checkout-shipping-buttons
+	.ant-radio-button-wrapper:hover:not(.ant-radio-button-wrapper-disabled) {
+	border-color: var(--rn-blue-color);
+}
+.checkout-shipping-buttons
+	.ant-radio-button-wrapper:hover:not(.ant-radio-button-wrapper-disabled):not(
+		.ant-radio-button-wrapper-checked
+	) {
+	color: #1c1c1c;
+}
+.checkout-shipping-buttons .ant-radio-button-wrapper::before {
+	display: none !important;
+}
+.checkout-shipping-buttons .ant-radio-button-wrapper-checked {
+	background-color: var(--rn-blue-color);
+	border-color: var(--rn-blue-color);
+	color: #fff;
+}
+.checkout-shipping-buttons .ant-radio-button-wrapper-checked:hover {
+	color: #fff !important;
+}
+.checkout-shipping-buttons .ant-radio-button-wrapper-disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+.checkout-form-section .ant-input,
+.checkout-form-section .ant-select-selector {
+	border-radius: 8px;
+	height: 48px;
+	border: 1px solid var(--rn-lightgray-color);
+	background-color: var(--rn-lightgray-color);
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+}
+.checkout-form-section .ant-input:focus,
+.checkout-form-section .ant-select-focused .ant-select-selector {
+	border-color: var(--rn-blue-color);
+	background-color: #e8e8ea;
+}
+.checkout-payment-select,
+.checkout-delivery-date-select {
+	width: 100%;
+}
+.checkout-payment-select .ant-select-selector {
+	border-radius: 8px !important;
+	height: 48px !important;
+	border: 1px solid var(--rn-lightgray-color) !important;
+	background-color: var(--rn-lightgray-color) !important;
+	font-family: 'TT Firs Neue', sans-serif !important;
+	font-size: 16px !important;
+	font-weight: 400 !important;
+}
+.checkout-payment-select .ant-select-selector:hover {
+	border-color: var(--rn-lightgray-color) !important;
+}
+.checkout-payment-select.ant-select-focused .ant-select-selector {
+	border-color: var(--rn-blue-color) !important;
+	background-color: #e8e8ea !important;
+}
+.checkout-payment-select .ant-select-selection-item {
+	line-height: 46px !important;
+	font-family: 'TT Firs Neue', sans-serif !important;
+	font-size: 16px !important;
+	font-weight: 400 !important;
+	color: #1c1c1c !important;
+}
+.checkout-payment-select .ant-select-selection-placeholder {
+	line-height: 46px !important;
+	font-family: 'TT Firs Neue', sans-serif !important;
+	font-size: 16px !important;
+	font-weight: 400 !important;
+	color: #999 !important;
+}
+.checkout-comment-textarea {
+	margin-bottom: 0;
+	height: 180px !important;
+}
+.checkout-form-summary {
+	background: #fff;
+	border-radius: 20px;
+	padding: 24px;
+	margin-top: 24px;
+}
+.checkout-summary-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 16px;
+}
+.checkout-summary-row:last-of-type {
+	margin-bottom: 0;
+}
+.checkout-summary-label {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	color: #1c1c1c;
+}
+.checkout-summary-value {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	color: #1c1c1c;
+}
+.checkout-summary-total {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 16px;
+	padding-top: 16px;
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+.checkout-summary-total .checkout-summary-label {
+	font-weight: 600; /* Demibold */
+}
+.checkout-summary-total-price {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 24px;
+	font-weight: 600; /* Demibold - h4_24px */
+	color: var(--rn-red-color);
+}
+.checkout-submit-button {
+	height: 56px;
+	border-radius: 12px;
+	margin-top: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+}
+.checkout-submit-button-icon {
+	width: 20px;
+	height: 20px;
+}
+/* Интервалы доставки */
+.checkout-intervals-card {
+	margin-bottom: 24px;
+}
+.checkout-intervals-label {
+	display: block;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400; /* Regular - Body2_16px */
+	color: #1c1c1c;
+	margin-bottom: 16px;
+}
+.checkout-intervals-tabs {
+	margin-top: 0;
+}
+.checkout-intervals-tabs .ant-tabs-nav {
+	margin-bottom: 16px;
+}
+.checkout-intervals-tabs .ant-tabs-tab {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	padding: 8px 16px;
+}
+.checkout-intervals-tabs .ant-tabs-tab-active {
+	color: var(--rn-blue-color);
+}
+.checkout-intervals-tabs .ant-tabs-ink-bar {
+	background: var(--rn-blue-color);
+}
+.checkout-intervals-tabs .ant-radio-group {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+.checkout-intervals-tabs .ant-radio-button-wrapper {
+	border-radius: 8px !important;
+	border: 1px solid var(--rn-lightgray-color) !important;
+	background-color: var(--rn-lightgray-color);
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	color: #1c1c1c;
+	height: 48px;
+	line-height: 48px;
+	padding: 0 16px;
+	margin-left: 0 !important;
+}
+.checkout-intervals-tabs .ant-radio-button-wrapper::before {
+	display: none !important;
+}
+.checkout-intervals-tabs .ant-radio-button-wrapper:not(:first-child)::before {
+	display: none !important;
+}
+.checkout-intervals-tabs .ant-radio-button-wrapper:hover {
+	background-color: #e8e8ea;
+	border-color: #e8e8ea;
+}
+.checkout-intervals-tabs .ant-radio-button-wrapper-checked {
+	background-color: var(--rn-blue-color);
+	border-color: var(--rn-blue-color);
+	color: #fff;
+}
+.checkout-intervals-tabs .ant-radio-button-wrapper:first-child {
+	border-radius: 8px;
+}
+.checkout-intervals-tabs .ant-radio-button-wrapper:last-child {
+	border-radius: 8px;
+}
+.checkout-intervals-tabs .ant-radio-button-wrapper-disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+/* Адрес доставки */
+.checkout-address-section {
+	margin-bottom: 24px;
+}
+.checkout-address-section .ant-form-item-label > label {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400; /* Regular - Body2_16px */
+	color: #1c1c1c;
+}
+.checkout-address-button {
+	width: 100%;
+	height: 48px;
+	border-radius: 8px;
+	border: 1px solid var(--rn-lightgray-color);
+	background-color: var(--rn-lightgray-color);
+	padding: 0 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	color: #1c1c1c;
+	cursor: pointer;
+	transition: background-color 0.2s, border-color 0.2s;
+}
+.checkout-address-button:hover {
+	background-color: #e8e8ea;
+	border-color: #e8e8ea;
+}
+.checkout-address-button:focus {
+	outline: none;
+	border-color: var(--rn-blue-color);
+	background-color: #e8e8ea;
+}
+.checkout-address-edit-icon {
+	width: 24px;
+	height: 24px;
+	flex-shrink: 0;
+}
+.checkout-address-add-button {
+	width: 100%;
+	height: 48px;
+	border-radius: 8px;
+}
+.checkout-address-detail-input {
+	border-radius: 8px;
+	height: 48px;
+	border: 1px solid var(--rn-lightgray-color);
+	background-color: var(--rn-lightgray-color);
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+}
+.checkout-address-detail-input:focus {
+	border-color: var(--rn-blue-color);
+	background-color: #e8e8ea;
+}
+.checkout-address-section .ant-form-item {
+	margin-bottom: 16px;
+}
+.checkout-address-section .ant-form-item:last-child {
+	margin-bottom: 0;
+}
+.checkout-address-item-offset .ant-form-item-label > label::after {
+	content: '\A\A';
+	white-space: pre;
 }

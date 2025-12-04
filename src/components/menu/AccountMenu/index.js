@@ -1,79 +1,78 @@
-import { Button, Menu } from "antd";
-import {
-  HeartOutlined,
-  HistoryOutlined,
-  UserOutlined,
-  SecurityScanOutlined,
-} from "@ant-design/icons";
-
-import useSmartNavigate from "hooks/useSmartNavigate";
-import { removeCustomer } from "helpers/customer";
+import useSmartNavigate from 'hooks/useSmartNavigate';
+import { removeCustomer } from 'helpers/customer';
+import { useLocation } from 'react-router-dom';
 
 const accountItems = [
-  {
-    label: "Профиль",
-    key: "/account",
-    icon: <UserOutlined />,
-  },
-  {
-    label: "Безопасность",
-    key: "/account/password",
-    icon: <SecurityScanOutlined />,
-  },
-  {
-    label: "История заказов",
-    key: "/account/history",
-    icon: <HistoryOutlined />,
-  },
-  {
-    label: "Избранные",
-    key: "/account/wishlist",
-    icon: <HeartOutlined />,
-  },
-  // {
-  //   label: "Возвраты",
-  //   key: "/account/return",
-  //   icon: <RedoOutlined />,
-  // },
-  // {
-  //   label: "Бонусные баллы",
-  //   key: "/account/reward",
-  //   icon: <PoundCircleOutlined />,
-  // },
+	{
+		label: 'Профиль',
+		key: '/account',
+		icon: `${process.env.PUBLIC_URL}/icons/icon-profile.svg`,
+		iconActive: `${process.env.PUBLIC_URL}/icons/icon-profile-active.svg`,
+	},
+	{
+		label: 'Безопасность',
+		key: '/account/password',
+		icon: `${process.env.PUBLIC_URL}/icons/icon-lock-account.svg`,
+		iconActive: `${process.env.PUBLIC_URL}/icons/icon-lock-account-active.svg`,
+	},
+	{
+		label: 'История заказов',
+		key: '/account/history',
+		icon: `${process.env.PUBLIC_URL}/icons/icon-clock-account.svg`,
+		iconActive: `${process.env.PUBLIC_URL}/icons/icon-clock-account-active.svg`,
+	},
+	{
+		label: 'Избранное',
+		key: '/account/wishlist',
+		icon: `${process.env.PUBLIC_URL}/icons/icon-heart-account.svg`,
+		iconActive: `${process.env.PUBLIC_URL}/icons/icon-heart-account-active.svg`,
+	},
 ];
 
 const AccountMenu = () => {
-  const { navigate } = useSmartNavigate();
+	const { navigate } = useSmartNavigate();
+	const location = useLocation();
 
-  const handleMenuClick = ({ item, key, keyPath, domEvent }) => {
-    navigate(key);
-  };
+	const handleMenuClick = key => {
+		navigate(key);
+	};
 
-  const handleLogout = () => {
-    removeCustomer();
-    window.location = "/";
-  };
+	const handleLogout = () => {
+		removeCustomer();
+		window.location = '/';
+	};
 
-  return (
-    <>
-      <Menu
-        mode="inline"
-        defaultSelectedKeys={["1"]}
-        defaultOpenKeys={["sub1"]}
-        items={accountItems}
-        onClick={handleMenuClick}
-      />
-      <br />
-      <Button
-        block
-        danger
-        type="primary"
-        onClick={handleLogout}
-      >
-        Выход
-      </Button>
-    </>
-  );
+	const isActive = key => {
+		if (key === '/account') {
+			return location.pathname === '/account';
+		}
+		return location.pathname.startsWith(key);
+	};
+
+	return (
+		<div className="account-menu">
+			<div className="account-menu-items">
+				{accountItems.map(item => (
+					<button
+						key={item.key}
+						type="button"
+						className={`account-menu-item ${isActive(item.key) ? 'account-menu-item-active' : ''}`}
+						onClick={() => handleMenuClick(item.key)}
+					>
+						<img
+							src={isActive(item.key) ? item.iconActive : item.icon}
+							alt=""
+							className="account-menu-icon"
+						/>
+						<span className="account-menu-label">{item.label}</span>
+					</button>
+				))}
+			</div>
+			<button type="button" className="account-menu-logout" onClick={handleLogout}>
+				Выйти
+			</button>
+		</div>
+	);
 };
 
 export default AccountMenu;

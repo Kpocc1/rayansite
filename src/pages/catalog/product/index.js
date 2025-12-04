@@ -15,6 +15,7 @@ import { getStock } from 'helpers/product';
 import { addToCart, fetchCartProducts } from 'store/slices/cartSlice';
 import { setSigninModalIsOpen } from 'store/slices/layoutSlice';
 import useCustomer from 'hooks/useCustomer';
+import WishlistButton from 'components/cart/WishlistButton';
 
 const ProductDescription = ({ description, onExpand, onCollapse }) => {
 	const [isExpanded, setIsExpanded] = useState(false);
@@ -444,18 +445,15 @@ const Product = () => {
 															</div>
 														)}
 													</div>
-													<button
+													<div
 														className='popular-product-favorite'
-														onClick={e => {
-															e.stopPropagation();
-														}}
+														onClick={e => e.stopPropagation()}
 													>
-														<img
-															src={`${process.env.PUBLIC_URL}/icons/icon-heart.svg`}
-															alt='Избранное'
-															className='popular-product-favorite-icon'
+														<WishlistButton
+															product_id={item.product_id}
+															active={item.in_wishlist}
 														/>
-													</button>
+													</div>
 													<h3 className='popular-product-title'>
 														{item.name}, {formatWeightWithUnit(item.weight)}
 													</h3>
@@ -499,7 +497,7 @@ const Product = () => {
 													</div>
 													{(() => {
 														const stock = getStock(item);
-														if (stock.quantity === 0 && stock.stock === 0) {
+														if (stock.stock === 0) {
 															return (
 																<div className='popular-product-stock popular-product-stock-unavailable'>
 																	Нет в наличии
@@ -508,9 +506,9 @@ const Product = () => {
 														}
 														return (
 															<div className='popular-product-stock'>
-																{stock.quantity === 999 || stock.stock === 999
+																{stock.stock === 999
 																	? 'В наличии много'
-																	: `В наличии ${stock.quantity} шт.`}
+																	: `В наличии ${stock.stock} шт.`}
 															</div>
 														);
 													})()}
