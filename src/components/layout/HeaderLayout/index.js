@@ -117,6 +117,7 @@ const HeaderLayout = () => {
 			total={total}
 			handleCityClick={handleCityClick}
 			handleLogoClick={handleLogoClick}
+			status={status}
 		/>
 	) : (
 		<div className='white'>

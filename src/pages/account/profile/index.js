@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { editProfile, fetchProfile } from 'store/slices/customerSlice';
 import AccountMenu from 'components/menu/AccountMenu';
+import AccountLogoutButton from 'components/menu/AccountMenu/AccountLogoutButton';
 import { loadingStatus } from 'helpers/fetcher';
 import { setCustomer } from 'helpers/customer';
 
@@ -98,6 +99,9 @@ const Profile = () => {
 					</div>
 				</div>
 			</div>
+
+			{/* Кнопка выхода для мобильных */}
+			<AccountLogoutButton />
 		</div>
 	);
 };

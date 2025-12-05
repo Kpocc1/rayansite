@@ -109,7 +109,7 @@ const PageNewsList = () => {
 						>
 							<span>{currentSortLabel}</span>
 							<img
-								src={`${process.env.PUBLIC_URL}/icons/down.svg`}
+								src={`${process.env.PUBLIC_URL}/icons/icon-chevron-down.svg`}
 								alt=''
 								className={`news-sort-icon ${
 									isDropdownOpen ? 'news-sort-icon-open' : ''

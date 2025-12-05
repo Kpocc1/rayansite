@@ -104,10 +104,7 @@ const Cart = () => {
 
 	return (
 		<div className='region'>
-			<div
-				className='contact-breadcrumb'
-				style={{ marginTop: '64px', marginBottom: '24px' }}
-			>
+			<div className='contact-breadcrumb'>
 				<a
 					href='/'
 					onClick={e => {
@@ -135,7 +132,7 @@ const Cart = () => {
 							>
 								<span>По добавлению</span>
 								<img
-									src={`${process.env.PUBLIC_URL}/icons/down.svg`}
+									src={`${process.env.PUBLIC_URL}/icons/icon-chevron-down.svg`}
 									alt='Сортировать'
 									className={`category-sort-icon ${
 										isSortDropdownOpen ? 'rotated' : ''

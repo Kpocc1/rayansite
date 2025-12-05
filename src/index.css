@@ -512,6 +512,924 @@ input[type='number'] {
 .quality-card-text-white {
 	color: #fff;
 }
+
+/* Адаптив для мобильных/планшетных устройств (< 992px - когда хедер мобильный) */
+@media (max-width: 991px) {
+	/* Заголовки h2 - 24px medium на мобилках/таблетах */
+	.quality-title,
+	.popular-products-title,
+	.catalog-title,
+	.about-title,
+	.news-title,
+	.contact-title,
+	.news-detail-title,
+	.vacancies-title,
+	.certificates-title,
+	.account-title,
+	.category-title,
+	.cart-title,
+	.recommended-products-section h2.ant-typography,
+	.recommended-products-section h3.ant-typography {
+		font-size: 24px !important;
+		font-weight: 500 !important; /* Medium */
+		color: #1c1c1c !important; /* AA */
+	}
+
+	/* Ссылки "Перейти в каталог", "В каталог" - Body3_14px regular */
+	.catalog-link-text {
+		font-size: 14px !important;
+		font-weight: 400 !important;
+		line-height: 1.5;
+	}
+
+	.catalog-link-icon {
+		width: 16px;
+		height: 16px;
+	}
+
+	/* Убираем лишние отступы от хедера */
+	.mobile-search {
+		padding: 12px 0 0 0 !important;
+		margin-bottom: 0 !important;
+	}
+
+	.mobile-header {
+		margin-bottom: 0 !important;
+	}
+
+	.mobile-top-bar {
+		margin-bottom: 0 !important;
+	}
+
+	/* Отступ хлебных крошек от хедера - принудительно 24px */
+	.contact-breadcrumb[style],
+	.contact-breadcrumb {
+		margin-top: 24px !important;
+		margin-bottom: 16px !important;
+		padding-top: 0 !important;
+	}
+
+	/* Убираем верхние отступы у секций и region */
+	.region,
+	.account-section,
+	.category-section,
+	.news-section,
+	.contact-section,
+	.news-detail-section,
+	.cart-section {
+		margin-top: 0 !important;
+		padding-top: 0 !important;
+	}
+
+	/* Заголовки с ссылками - вертикально */
+	.popular-products-header,
+	.catalog-section-header {
+		flex-direction: column !important;
+		align-items: flex-start !important;
+		gap: 8px !important;
+		margin-bottom: 24px !important;
+	}
+
+	/* Карточки каталога - названия категорий H5_14px demibold */
+	.catalog-card {
+		height: 140px !important;
+	}
+
+	.catalog-card-title {
+		font-size: 14px !important;
+		font-weight: 600 !important; /* Demibold */
+		bottom: 12px !important;
+		left: 12px !important;
+	}
+
+	/* Карточки популярных товаров */
+	.popular-product-image-wrapper {
+		height: 160px !important;
+		margin-bottom: 16px !important;
+	}
+
+	/* Заголовок товара - Body3_14px regular */
+	.popular-product-title {
+		font-size: 14px !important;
+		font-weight: 400 !important;
+		line-height: 1.4 !important;
+		margin-bottom: 12px !important;
+	}
+
+	/* Цена - H5_16px demibold */
+	.popular-product-price {
+		font-size: 16px !important;
+		font-weight: 600 !important;
+	}
+
+	/* Вес "кг" - Body3_14px regular */
+	.popular-product-weight {
+		font-size: 14px !important;
+		font-weight: 400 !important;
+	}
+
+	.popular-product-price-row {
+		margin-bottom: 16px !important;
+	}
+
+	/* Кнопка "В корзину" - H5_14px demibold */
+	.popular-product-button {
+		font-size: 14px !important;
+		font-weight: 600 !important;
+		height: 44px !important;
+		padding: 10px 16px !important;
+	}
+
+	.popular-product-button-icon {
+		width: 20px !important;
+		height: 20px !important;
+	}
+
+	/* В наличии - Body3_14px regular */
+	.popular-product-stock {
+		font-size: 14px !important;
+		font-weight: 400 !important;
+	}
+
+	/* Рейтинг уменьшаем */
+	.popular-product-rating-value {
+		font-size: 14px !important;
+	}
+
+	.popular-product-rating-icon {
+		width: 14px !important;
+		height: 14px !important;
+	}
+
+	/* Паддинги карточки */
+	.popular-product-card {
+		padding: 8px 12px 12px !important;
+	}
+
+	/* Секция "Доверьтесь качеству" - адаптивная сетка */
+	.quality-section {
+		margin-top: 60px !important;
+		margin-bottom: 60px !important;
+	}
+
+	.quality-title {
+		margin-bottom: 24px;
+	}
+
+	.quality-cards {
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: auto;
+		gap: 12px;
+		margin-bottom: 24px;
+	}
+
+	.quality-card {
+		padding: 16px;
+		border-radius: 16px;
+	}
+
+	.quality-card-icon {
+		width: 36px;
+		height: 36px;
+		margin-bottom: 16px;
+	}
+
+	.quality-card-text {
+		font-size: 16px;
+		font-weight: 500; /* Medium */
+		line-height: 1.3;
+	}
+
+	/* Синяя карточка - на всю ширину снизу */
+	.quality-card-blue {
+		grid-row: auto;
+		grid-column: 1 / -1; /* На всю ширину */
+	}
+
+	/* Секция "О компании" */
+	.about-section {
+		margin-top: 60px !important;
+		margin-bottom: 40px !important;
+	}
+
+	.about-content {
+		grid-template-columns: 1fr !important;
+	}
+
+	.about-text {
+		padding: 24px 16px !important;
+		order: 1;
+	}
+
+	.about-image {
+		order: 2;
+	}
+
+	/* Заголовок - h2_24px medium AA */
+	.about-title {
+		font-size: 24px !important;
+		font-weight: 500 !important;
+		line-height: 1.3 !important;
+		margin-bottom: 20px !important;
+	}
+
+	/* Текст - Body3_14px regular */
+	.about-main-text {
+		font-size: 14px !important;
+		font-weight: 400 !important;
+		line-height: 1.5 !important;
+		margin-bottom: 16px !important;
+	}
+
+	.about-main-text p {
+		margin-bottom: 12px !important;
+	}
+
+	/* Жирный текст про бренд - тоже 14px но demibold */
+	.about-brand-text {
+		font-size: 14px !important;
+		font-weight: 600 !important;
+		line-height: 1.5 !important;
+	}
+
+	/* ===== Страница контактов ===== */
+	.contact-section {
+		padding-top: 40px !important;
+	}
+
+	/* Форма "Оставить заявку" */
+	.contact-form {
+		width: 100% !important;
+		padding: 20px 16px !important;
+	}
+
+	/* Заголовок формы - h4_24px demibold */
+	.contact-form-title {
+		font-size: 24px !important;
+		font-weight: 600 !important;
+		line-height: 1.3 !important;
+		margin-bottom: 20px !important;
+	}
+
+	/* Кнопка - H5_16px demibold */
+	.contact-form-button {
+		font-size: 16px !important;
+		font-weight: 600 !important;
+		padding: 14px 0 !important;
+	}
+
+	/* Disclaimer - caption_14px regular */
+	.contact-form-disclaimer {
+		font-size: 14px !important;
+		font-weight: 400 !important;
+	}
+
+	/* Контактная информация */
+	.contact-info-grid {
+		flex-direction: column !important;
+		gap: 20px !important;
+	}
+
+	.contact-info-item {
+		min-width: 100% !important;
+	}
+
+	/* Заголовки разделов (Отдел продаж и т.д.) - H5_18px demibold */
+	.contact-info-title {
+		font-size: 18px !important;
+		font-weight: 600 !important;
+	}
+
+	/* Текст (телефоны, email) - body1_18px regular */
+	.contact-info-phone,
+	.contact-info-email,
+	.contact-info-address,
+	.contact-info-map-link,
+	.contact-info-list li {
+		font-size: 18px !important;
+		font-weight: 400 !important;
+	}
+
+	/* ===== Реквизиты компании ===== */
+	.company-details-section {
+		margin-bottom: 40px !important;
+	}
+
+	/* Заголовок "Реквизиты компании" - h3_24px medium */
+	.company-details-title {
+		font-size: 24px !important;
+		font-weight: 500 !important;
+		line-height: 1.3 !important;
+		margin-bottom: 16px !important;
+	}
+
+	.company-details-grid {
+		flex-direction: column !important;
+		gap: 16px !important;
+	}
+
+	.company-details-item {
+		min-width: 100% !important;
+	}
+
+	/* Заголовки полей (Наименование юр. лица и т.д.) - H5_18px demibold */
+	.company-details-label {
+		font-size: 18px !important;
+		font-weight: 600 !important;
+	}
+
+	/* Значения полей - body1_18px regular */
+	.company-details-value {
+		font-size: 18px !important;
+		font-weight: 400 !important;
+	}
+
+	/* ===== Страница новостей ===== */
+	.news-header {
+		flex-direction: column !important;
+		align-items: flex-start !important;
+		gap: 16px !important;
+		margin-bottom: 24px !important;
+	}
+
+	.news-sort-wrapper {
+		width: 100% !important;
+	}
+
+	.news-sort-button {
+		width: 100% !important;
+	}
+
+	.news-sort-dropdown {
+		width: 100% !important;
+	}
+
+	/* ===== Карточки новостей ===== */
+	.news-card {
+		border-radius: 16px !important;
+	}
+
+	.news-card-image {
+		height: 180px !important;
+	}
+
+	.news-card-image-placeholder {
+		height: 180px !important;
+	}
+
+	.news-card-body {
+		padding: 16px !important;
+	}
+
+	/* Заголовок карточки - H5_16px demibold */
+	.news-card-title {
+		font-size: 16px !important;
+		font-weight: 600 !important;
+		line-height: 1.4 !important;
+		margin-bottom: 8px !important;
+	}
+
+	/* Текст - Body3_14px regular */
+	.news-card-excerpt {
+		font-size: 14px !important;
+		font-weight: 400 !important;
+		line-height: 1.5 !important;
+		margin-bottom: 12px !important;
+	}
+
+	/* Дата и просмотры - caption_14px regular */
+	.news-card-meta {
+		gap: 12px !important;
+	}
+
+	.news-card-meta-item {
+		font-size: 14px !important;
+		font-weight: 400 !important;
+		gap: 6px !important;
+	}
+
+	.news-card-meta-icon {
+		width: 14px !important;
+		height: 14px !important;
+	}
+
+	/* ===== Детальная страница новости/статьи ===== */
+	.news-detail-section {
+		margin-top: 40px !important;
+	}
+
+	.news-detail-wrapper {
+		max-width: 100% !important;
+	}
+
+	.news-detail-meta {
+		margin-bottom: 16px !important;
+		gap: 6px !important;
+	}
+
+	/* "Опубликовано..." - Body3_14px regular */
+	.news-detail-date {
+		font-size: 14px !important;
+		font-weight: 400 !important;
+		line-height: 1.5 !important;
+	}
+
+	/* "Просмотров" - caption_14px regular */
+	.news-detail-views-text {
+		font-size: 14px !important;
+		font-weight: 400 !important;
+	}
+
+	.news-detail-views-icon {
+		width: 16px !important;
+		height: 16px !important;
+	}
+
+	/* Заголовок - h2_24px medium AA */
+	.news-detail-title {
+		font-size: 24px !important;
+		font-weight: 500 !important;
+		line-height: 1.3 !important;
+		margin-bottom: 20px !important;
+	}
+
+	/* Текст - Body3_14px regular */
+	.news-detail-content {
+		font-size: 14px !important;
+		font-weight: 400 !important;
+		line-height: 1.6 !important;
+	}
+
+	.news-detail-content p {
+		margin-bottom: 16px !important;
+	}
+
+	.news-detail-content img {
+		width: 100% !important;
+		max-width: 100% !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		border-radius: 12px !important;
+	}
+
+	/* ===== Страница корзины ===== */
+	.cart-section {
+		margin-bottom: 60px !important;
+	}
+
+	/* Заголовок и сортировка - вертикально */
+	.cart-header {
+		flex-direction: column !important;
+		align-items: flex-start !important;
+		gap: 16px !important;
+		margin-bottom: 16px !important;
+	}
+
+	.cart-header .category-sort-wrapper {
+		width: 100% !important;
+	}
+
+	.cart-header .category-sort-button {
+		width: 100% !important;
+	}
+
+	/* "В наличии 2 товара" - h4_24px regular */
+	.cart-in-stock {
+		font-size: 24px !important;
+		font-weight: 400 !important;
+		margin-bottom: 16px !important;
+	}
+
+	/* Карточки товаров в корзине */
+	.cart-item {
+		display: grid !important;
+		grid-template-columns: 100px 1fr auto !important;
+		grid-template-rows: auto auto auto !important;
+		gap: 4px 12px !important;
+		padding-bottom: 16px !important;
+		align-items: start !important;
+	}
+
+	/* Блок 1: Фото + Инфо - разделяем */
+	.cart-item-block-1 {
+		display: contents !important;
+	}
+
+	/* Изображение - слева, занимает 2 строки */
+	.cart-item-image {
+		grid-row: 1 / 3 !important;
+		grid-column: 1 !important;
+		width: 100px !important;
+		height: 100px !important;
+		border-radius: 12px !important;
+	}
+
+	.cart-item-info {
+		display: contents !important;
+	}
+
+	/* Заголовок - под фото слева, H5_14px demibold */
+	.cart-item-title {
+		grid-row: 3 !important;
+		grid-column: 1 / 3 !important;
+		font-size: 14px !important;
+		font-weight: 600 !important;
+		line-height: 1.3 !important;
+		margin: 8px 0 0 0 !important;
+	}
+
+	/* Цена за кг - под названием, Body3_14px regular */
+	.cart-item-price-per-kg {
+		grid-row: 4 !important;
+		grid-column: 1 / 3 !important;
+		font-size: 14px !important;
+		font-weight: 400 !important;
+		margin: 0 !important;
+		color: var(--rn-gray-color) !important;
+	}
+
+	/* Цена - справа сверху */
+	.cart-item-block-3 {
+		grid-row: 1 !important;
+		grid-column: 2 / 4 !important;
+		justify-self: end !important;
+		align-self: start !important;
+	}
+
+	.cart-item-total-price {
+		font-size: 18px !important;
+	}
+
+	/* Блок 2: Количество - справа под ценой */
+	.cart-item-block-2 {
+		grid-row: 2 !important;
+		grid-column: 2 / 4 !important;
+		width: auto !important;
+		flex-direction: column !important;
+		align-items: flex-end !important;
+		justify-content: flex-start !important;
+		gap: 4px !important;
+	}
+
+	.cart-item-quantity {
+		width: auto !important;
+	}
+
+	.cart-item-quantity .ant-space-compact {
+		width: 120px !important;
+	}
+
+	.cart-item-quantity .ant-btn {
+		width: 32px !important;
+		height: 32px !important;
+		min-width: 32px !important;
+	}
+
+	.cart-item-quantity .cart-quantity-input {
+		width: 56px !important;
+		height: 32px !important;
+		font-size: 14px !important;
+	}
+
+	.cart-item-max-weight {
+		font-size: 12px !important;
+		white-space: nowrap !important;
+		text-align: right !important;
+	}
+
+	/* Иконки - справа внизу от цены за кг */
+	.cart-item-block-4 {
+		grid-row: 3 / 5 !important;
+		grid-column: 3 !important;
+		justify-self: end !important;
+		align-self: end !important;
+		gap: 12px !important;
+	}
+
+	.cart-item-wishlist img,
+	.cart-item-remove img {
+		width: 24px !important;
+		height: 24px !important;
+	}
+
+	/* Кнопка "К оформлению" - H5_16px demibold */
+	.cart-checkout-button {
+		font-size: 16px !important;
+		font-weight: 600 !important;
+		height: 48px !important;
+	}
+
+	.cart-checkout-button-icon {
+		width: 20px !important;
+		height: 20px !important;
+	}
+
+	/* Блок Итого */
+	.cart-summary-card {
+		padding: 16px !important;
+		border-radius: 16px !important;
+	}
+
+	/* "Итого" заголовок - h4_24px demibold */
+	.cart-summary-total .cart-summary-label {
+		font-size: 24px !important;
+		font-weight: 600 !important;
+	}
+
+	.cart-summary-total-price {
+		font-size: 20px !important;
+	}
+
+	/* Итого текст (Доставка, Сборка) - body1_18px regular */
+	.cart-summary-row .cart-summary-label {
+		font-size: 18px !important;
+		font-weight: 400 !important;
+	}
+
+	.cart-summary-value {
+		font-size: 18px !important;
+		font-weight: 400 !important;
+	}
+
+	.cart-summary-discount {
+		font-size: 18px !important;
+	}
+
+	/* ===== Форма оформления заказа ===== */
+	.checkout-form-sidebar {
+		padding: 16px !important;
+		border-radius: 16px !important;
+	}
+
+	.checkout-form-title {
+		font-size: 20px !important;
+	}
+
+	/* Поля адреса - 2 колонки */
+	.checkout-address-section .ant-row {
+		display: flex !important;
+		flex-wrap: wrap !important;
+		row-gap: 8px !important;
+	}
+
+	.checkout-address-section .ant-col-xs-12 {
+		flex: 0 0 50% !important;
+		max-width: 50% !important;
+	}
+
+	.checkout-address-section .ant-form-item {
+		margin-bottom: 12px !important;
+	}
+
+	.checkout-address-section .ant-form-item-label > label {
+		font-size: 14px !important;
+		line-height: 1.2 !important;
+		min-height: 34px !important;
+		display: flex !important;
+		align-items: flex-end !important;
+	}
+
+	.checkout-address-detail-input {
+		height: 44px !important;
+	}
+
+	/* ===== Личный кабинет - мобильное меню ===== */
+	.account-section {
+		margin-top: 40px !important;
+		margin-bottom: 60px !important;
+	}
+
+	.account-layout {
+		flex-direction: column !important;
+		gap: 16px !important;
+	}
+
+	.account-sidebar {
+		width: 100% !important;
+	}
+
+	.account-content {
+		width: 100% !important;
+	}
+
+	.account-form-card {
+		padding: 16px !important;
+		border-radius: 16px !important;
+	}
+
+	.account-form-submit {
+		justify-content: stretch !important;
+	}
+
+	.account-form-submit .ant-btn {
+		width: 100% !important;
+	}
+
+	.account-menu-mobile {
+		padding: 0 !important;
+		background: transparent !important;
+		box-shadow: none !important;
+		margin-bottom: 0 !important;
+	}
+
+	.account-menu-dropdown-trigger {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		width: 100%;
+		height: 74px;
+		padding: 8px;
+		background: #fff;
+		border: 1px solid #e8e8e8;
+		border-radius: 16px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+		position: relative;
+	}
+
+	.account-menu-dropdown-trigger::before {
+		content: '';
+		position: absolute;
+		top: 6px;
+		left: 6px;
+		right: 6px;
+		bottom: 6px;
+		background: #e6f2fc;
+		border-radius: 12px;
+		z-index: 0;
+	}
+
+	.account-menu-dropdown-trigger > * {
+		position: relative;
+		z-index: 1;
+	}
+
+	.account-menu-dropdown-trigger .account-menu-icon,
+	.account-menu-dropdown-trigger .account-menu-label,
+	.account-menu-dropdown-trigger .account-menu-dropdown-arrow {
+		margin: 8px 12px;
+		cursor: pointer;
+		font-family: 'TT Firs Neue', sans-serif;
+		font-size: 16px;
+		font-weight: 500;
+		color: var(--rn-blue-color);
+		margin-bottom: 0;
+	}
+
+	.account-menu-dropdown-trigger .account-menu-label {
+		flex: 1;
+		text-align: left;
+		color: var(--rn-blue-color);
+		font-weight: 500;
+	}
+
+	.account-menu-dropdown-arrow {
+		width: 24px;
+		height: 24px;
+		transition: transform 0.2s ease;
+	}
+
+	.account-menu-dropdown-arrow.open {
+		transform: rotate(180deg);
+	}
+
+	.account-menu-dropdown {
+		background: #fff;
+		border-radius: 16px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+		padding: 8px;
+		margin-top: 8px;
+	}
+
+	.account-menu-mobile .account-menu-item {
+		border-radius: 12px;
+	}
+
+	/* Кнопка выхода - внизу контента */
+	.account-logout-wrapper {
+		margin-top: 24px;
+	}
+
+	.account-logout-wrapper .account-menu-logout {
+		width: 100%;
+		margin-top: 0;
+	}
+
+	/* Карточки истории заказов */
+	.account-history-grid {
+		grid-template-columns: 1fr !important;
+		gap: 16px !important;
+	}
+
+	.account-history-card {
+		padding: 16px !important;
+		border-radius: 16px !important;
+	}
+
+	.account-history-header {
+		margin-bottom: 12px !important;
+	}
+
+	.account-history-images {
+		gap: 8px !important;
+		flex-wrap: wrap !important;
+		margin-bottom: 12px !important;
+	}
+
+	.account-history-image {
+		width: 60px !important;
+		height: 60px !important;
+		border-radius: 8px !important;
+	}
+
+	.account-history-order-id {
+		font-size: 14px !important;
+	}
+
+	.account-history-customer {
+		font-size: 16px !important;
+		margin-bottom: 8px !important;
+	}
+
+	.account-history-total {
+		font-size: 18px !important;
+	}
+
+	.account-history-date {
+		font-size: 12px !important;
+	}
+
+	.account-history-footer {
+		margin-bottom: 12px !important;
+	}
+
+	.account-history-button {
+		font-size: 14px !important;
+		height: 44px !important;
+	}
+
+	/* Страница деталей заказа */
+	.account-order-detail-grid {
+		grid-template-columns: 1fr !important;
+		gap: 16px !important;
+	}
+
+	.account-order-detail-card {
+		padding: 16px !important;
+		border-radius: 16px !important;
+	}
+
+	.account-order-detail-label {
+		font-size: 14px !important;
+	}
+
+	.account-order-detail-value {
+		font-size: 14px !important;
+	}
+
+	.account-order-detail-title {
+		font-size: 16px !important;
+	}
+
+	.account-order-detail-total-label {
+		font-size: 18px !important;
+	}
+
+	.account-order-detail-total-value {
+		font-size: 20px !important;
+	}
+
+	/* Карточки товаров в заказе */
+	.order-products-grid {
+		grid-template-columns: repeat(2, 1fr) !important;
+		column-gap: 6px !important;
+		row-gap: 12px !important;
+	}
+
+	/* Карточки товаров в избранном и популярных */
+	.popular-products-list {
+		margin-left: -3px !important;
+		margin-right: -3px !important;
+	}
+
+	.popular-products-list .ant-col {
+		padding-left: 3px !important;
+		padding-right: 3px !important;
+		margin-bottom: 12px !important;
+		flex: 0 0 50% !important;
+		max-width: 50% !important;
+	}
+
+	.wishlist-products-grid {
+		column-gap: 6px !important;
+		row-gap: 12px !important;
+	}
+
+	.wishlist-products-grid .ant-col {
+		flex: 0 0 calc(50% - 3px) !important;
+		max-width: calc(50% - 3px) !important;
+	}
+}
+
 .popular-products-header {
 	display: flex;
 	align-items: center;
@@ -1727,6 +2645,134 @@ body:not(:has([class*='ant-dropdown-open']))::before {
 	height: 48px;
 	width: auto;
 }
+
+/* Мобильный футер (< 992px) */
+@media (max-width: 991px) {
+	.rn-footer {
+		padding: 40px 0;
+	}
+
+	.footer-content {
+		padding: 0 16px;
+	}
+
+	.footer-main {
+		flex-direction: column;
+		gap: 0;
+	}
+
+	/* Левая колонка с контактами */
+	.footer-column-left {
+		margin-bottom: 32px;
+		padding-bottom: 8px;
+	}
+
+	.footer-logo {
+		width: 70px;
+		margin-bottom: 24px;
+	}
+
+	/* Body2_16px regular для обычного текста */
+	.footer-subtitle,
+	.footer-label {
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 1.5;
+		margin-bottom: 8px;
+	}
+
+	/* H5_18px demibold для телефона и почты */
+	.footer-phone {
+		font-size: 18px;
+		font-weight: 600;
+		line-height: 1.3;
+		margin-bottom: 24px;
+	}
+
+	.footer-email {
+		font-size: 18px;
+		font-weight: 600;
+		line-height: 1.3;
+		margin-bottom: 0;
+	}
+
+	.footer-columns-right {
+		flex-direction: column;
+		gap: 0;
+	}
+
+	/* Секции меню с отступами между ними */
+	.footer-column {
+		margin-bottom: 8px;
+	}
+
+	/* Порядок колонок: сначала с иконками, потом остальные */
+	.footer-columns-right .footer-column:nth-child(1) {
+		order: 2; /* Вакансии, Оставьте отзыв... */
+	}
+	.footer-columns-right .footer-column:nth-child(2) {
+		order: 1; /* Акции, О компании... с иконками */
+	}
+	.footer-columns-right .footer-column:nth-child(3) {
+		order: 3; /* Магазины и кафе... */
+	}
+
+	.footer-links {
+		margin-bottom: 0;
+	}
+
+	.footer-links li {
+		margin-bottom: 24px;
+	}
+
+	.footer-links li:last-child {
+		margin-bottom: 0;
+	}
+
+	.footer-links a {
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 1.5;
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
+
+	.footer-link-bold {
+		font-weight: 600 !important;
+	}
+
+	.footer-link-icon {
+		width: 24px;
+		height: 24px;
+	}
+
+	.footer-bottom {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 24px;
+		margin-top: 40px;
+	}
+
+	.footer-social {
+		gap: 16px;
+		margin-bottom: 0;
+	}
+
+	.footer-social-link img {
+		width: 40px;
+		height: 40px;
+	}
+
+	.footer-payments {
+		gap: 12px;
+	}
+
+	.footer-payment-icon {
+		height: 40px;
+	}
+}
+
 .rn-map {
 	width: 100%;
 	height: 500px;
@@ -4261,4 +5307,392 @@ body:not(:has([class*='ant-dropdown-open']))::before {
 .checkout-address-item-offset .ant-form-item-label > label::after {
 	content: '\A\A';
 	white-space: pre;
+}
+
+/* ========================================
+   МОБИЛЬНЫЙ ХЕДЕР
+   ======================================== */
+
+/* Контейнер для мобильной версии */
+.mobile-container {
+	padding: 0 16px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+/* Верхний бар с городом и телефоном */
+.mobile-top-bar {
+	background: linear-gradient(90deg, #1a73e8 0%, #0d5bbd 100%);
+	padding: 12px 0;
+}
+
+.mobile-top-bar .mobile-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.mobile-city-button {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+}
+
+.mobile-city-icon {
+	width: 18px;
+	height: 18px;
+	filter: brightness(0) invert(1);
+}
+
+.mobile-city-name {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	color: #fff;
+}
+
+.mobile-city-arrow {
+	width: 12px;
+	height: 12px;
+	filter: brightness(0) invert(1);
+}
+
+.mobile-phone-link {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	text-decoration: none;
+}
+
+.mobile-phone-icon {
+	width: 20px;
+	height: 20px;
+	filter: brightness(0) invert(1);
+}
+
+.mobile-phone-link span {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 14px;
+	font-weight: 600;
+	color: #fff;
+}
+
+/* Основной хедер */
+.mobile-header {
+	background: #fff;
+	padding: 16px 0;
+}
+
+.mobile-header .mobile-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.mobile-logo img {
+	height: 48px;
+	width: auto;
+}
+
+.mobile-header-right {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.mobile-catalog-button {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	background: var(--rn-blue-color);
+	border: none;
+	border-radius: 12px;
+	padding: 12px 16px;
+	cursor: pointer;
+}
+
+.mobile-catalog-icon {
+	width: 20px;
+	height: 20px;
+	filter: brightness(0) invert(1);
+}
+
+.mobile-catalog-button span {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	color: #fff;
+}
+
+.mobile-burger-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 44px;
+	height: 44px;
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 10px;
+}
+
+.mobile-burger-icon {
+	width: 24px;
+	height: 24px;
+}
+
+/* Строка поиска */
+.mobile-search {
+	background: #fff;
+	padding: 0 0 16px 0;
+}
+
+.mobile-search-wrapper {
+	display: flex;
+	align-items: center;
+	background: #fff;
+	border: 2px solid var(--rn-blue-color);
+	border-radius: 12px;
+	overflow: hidden;
+	height: 48px;
+}
+
+.mobile-search-icon {
+	width: 20px;
+	height: 20px;
+	margin-left: 16px;
+	opacity: 0.5;
+}
+
+.mobile-search-input {
+	flex: 1;
+	border: none;
+	outline: none;
+	padding: 0 12px;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 14px;
+	color: #1c1c1c;
+	background: transparent;
+}
+
+.mobile-search-input::placeholder {
+	color: #999;
+}
+
+.mobile-search-button {
+	background: var(--rn-blue-color);
+	border: none;
+	padding: 0 24px;
+	height: 100%;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	color: #fff;
+	cursor: pointer;
+}
+
+/* Бургер меню */
+.mobile-menu-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.25);
+	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px);
+	z-index: 1000;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	padding: 70px 24px 24px 24px;
+}
+
+.mobile-menu {
+	width: 100%;
+	max-width: 340px;
+	max-height: calc(100vh - 100px);
+	background: transparent;
+	overflow: visible;
+}
+
+.mobile-menu-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 16px 20px;
+	background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+	margin-bottom: 16px;
+	border-radius: 14px;
+	position: relative;
+	z-index: 2;
+}
+
+.mobile-menu-title {
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 24px;
+	font-weight: 500; /* Medium */
+	color: #fff;
+	letter-spacing: 1px;
+	margin: 0;
+}
+
+.mobile-menu-close {
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 4px;
+}
+
+.mobile-menu-close img {
+	width: 20px;
+	height: 20px;
+	filter: brightness(0) invert(1);
+}
+
+.mobile-menu-content {
+	background: #fff;
+	border-radius: 16px;
+	padding: 24px 20px 32px;
+	margin-top: 0;
+	position: relative;
+	min-height: 400px;
+	z-index: 1;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+	overflow-y: auto;
+	max-height: calc(100vh - 200px);
+}
+
+.mobile-menu-item {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	padding: 14px 0;
+	text-decoration: none;
+	color: #1c1c1c;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 15px;
+	font-weight: 400;
+}
+
+.mobile-menu-item img {
+	width: 22px;
+	height: 22px;
+	filter: brightness(0);
+}
+
+/* Пункты без иконок - прижаты к левому краю */
+.mobile-menu-item-text {
+	padding-left: 0;
+	font-weight: 500;
+	color: #333;
+}
+
+/* Красные иконки - Акции */
+.mobile-menu-item-promo {
+	color: var(--rn-red-color);
+}
+
+.mobile-menu-item-promo img {
+	/* Используем filter для получения красного цвета #c40004 из переменной */
+	filter: brightness(0) saturate(100%) invert(9%) sepia(100%) saturate(6472%)
+		hue-rotate(5deg) brightness(102%) contrast(115%);
+}
+
+.mobile-menu-cart-badge {
+	background: var(--rn-red-color);
+	color: #fff;
+	font-size: 11px;
+	font-weight: 600;
+	padding: 3px 8px;
+	border-radius: 4px;
+	margin-left: 8px;
+}
+
+/* Корзина с товарами - красная иконка (используем icon-cart-red.svg) */
+.mobile-menu-item-cart-active img {
+	filter: none;
+}
+
+/* Мобильный каталог */
+.mobile-catalog-menu {
+	max-height: calc(100vh - 80px);
+}
+
+.mobile-catalog-content {
+	overflow-y: auto;
+	max-height: calc(100vh - 180px);
+	padding: 16px 20px 24px;
+}
+
+.mobile-catalog-category {
+	border-bottom: none;
+}
+
+.mobile-catalog-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px 0;
+	cursor: pointer;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	color: #1c1c1c;
+	transition: color 0.2s;
+}
+
+.mobile-catalog-item:hover {
+	color: var(--rn-blue-color);
+}
+
+.mobile-catalog-item-active {
+	color: var(--rn-blue-color);
+	font-weight: 500;
+}
+
+.mobile-catalog-arrow {
+	width: 20px;
+	height: 20px;
+	transition: transform 0.3s ease;
+	opacity: 0.5;
+}
+
+.mobile-catalog-arrow-open {
+	transform: rotate(180deg);
+	opacity: 1;
+}
+
+.mobile-catalog-subcategories {
+	padding-left: 16px;
+	padding-bottom: 8px;
+}
+
+.mobile-catalog-subcategory {
+	padding: 12px 0;
+	font-family: 'TT Firs Neue', sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	color: #666;
+	cursor: pointer;
+	transition: color 0.2s;
+}
+
+.mobile-catalog-subcategory:hover {
+	color: var(--rn-blue-color);
+}
+
+.mobile-catalog-loading {
+	padding: 20px;
+}
+
+/* Скрываем десктопные стили для мобильной версии */
+@media (max-width: 992px) {
+	.rm-mob-nav {
+		display: none !important;
+	}
 }

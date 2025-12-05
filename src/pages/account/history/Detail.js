@@ -6,6 +6,7 @@ import { Button, Row, Col, Skeleton } from 'antd';
 import { batchAddToCart, fetchCartProducts } from 'store/slices/cartSlice';
 import { fetchHistory } from 'store/slices/customerSlice';
 import AccountMenu from 'components/menu/AccountMenu';
+import AccountLogoutButton from 'components/menu/AccountMenu/AccountLogoutButton';
 import CartQtyButtonGroup from 'components/cart/CartQtyButtonGroup';
 import WishlistButton from 'components/cart/WishlistButton';
 import useSmartNavigate from 'hooks/useSmartNavigate';
@@ -14,28 +15,28 @@ import { loadingStatus } from 'helpers/fetcher';
 import { getStock } from 'helpers/product';
 
 const HistoryDetail = () => {
-	const [reorderIsLoad, setReorderIsload] = useState();
-	const dispatch = useDispatch();
+  const [reorderIsLoad, setReorderIsload] = useState();
+  const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const { navigate: smartNavigate } = useSmartNavigate();
 	const { data, status } = useSelector(state => state.customer.history);
 	const { '*': orderId } = useParams();
 
-	const handleBatchAdd = async () => {
-		setReorderIsload(true);
-		const products = data.products
+  const handleBatchAdd = async () => {
+    setReorderIsload(true);
+    const products = data.products
 			.filter(p => p.reorder)
-			.map(({ product_id, quantity }) => ({ product_id, quantity }));
-		await batchAddToCart(products);
-		dispatch(fetchCartProducts());
-		setReorderIsload(false);
-	};
+      .map(({ product_id, quantity }) => ({ product_id, quantity }));
+    await batchAddToCart(products);
+    dispatch(fetchCartProducts());
+    setReorderIsload(false);
+  };
 
-	useEffect(() => {
-		dispatch(fetchHistory(orderId));
-	}, [dispatch, orderId]);
+  useEffect(() => {
+    dispatch(fetchHistory(orderId));
+  }, [dispatch, orderId]);
 
-	return (
+  return (
 		<div className="region account-section">
 			{/* Breadcrumb */}
 			<div className="contact-breadcrumb" style={{ marginTop: '64px' }}>
@@ -65,8 +66,8 @@ const HistoryDetail = () => {
 
 				{/* Content */}
 				<div className="account-content">
-					{status === loadingStatus.SUCCEEDED ? (
-						<>
+            {status === loadingStatus.SUCCEEDED ? (
+              <>
 							<div className="account-order-detail-card">
 								<div className="account-order-detail-grid">
 									{/* Order Details */}
@@ -90,14 +91,14 @@ const HistoryDetail = () => {
 										<p className="account-order-detail-value">
 											{data.shipping_method}
 										</p>
-										<Button
-											type="primary"
+                <Button
+                  type="primary"
 											className="account-order-detail-button"
-											onClick={handleBatchAdd}
-											loading={reorderIsLoad}
-										>
+                  onClick={handleBatchAdd}
+                  loading={reorderIsLoad}
+                >
 											Повторить заказ
-										</Button>
+                </Button>
 									</div>
 
 									{/* Shipping Address */}
@@ -162,8 +163,8 @@ const HistoryDetail = () => {
 												<span className="account-order-summary-value">
 													{formatCurrency(t.text)}
 												</span>
-											</div>
-										))}
+                  </div>
+                ))}
 									{data.totals?.find(t => t.code === 'total') && (
 										<div className="account-order-summary-row account-order-summary-total">
 											<span className="account-order-summary-label">Итого</span>
@@ -173,9 +174,9 @@ const HistoryDetail = () => {
 												)}
 											</span>
 										</div>
-									)}
-								</div>
-							</div>
+            )}
+          </div>
+                    </div>
 
 							{/* Products in Order */}
 							<h2 className="account-products-title">Товары в заказе</h2>
@@ -218,7 +219,7 @@ const HistoryDetail = () => {
 																{item.rating}
 															</span>
 														</div>
-													)}
+            )}
 												</div>
 												<div
 													className="popular-product-favorite"
@@ -269,8 +270,11 @@ const HistoryDetail = () => {
 					)}
 				</div>
 			</div>
-		</div>
-	);
+
+			{/* Кнопка выхода для мобильных */}
+			<AccountLogoutButton />
+    </div>
+  );
 };
 
 export default HistoryDetail;

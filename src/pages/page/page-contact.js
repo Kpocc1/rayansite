@@ -261,7 +261,7 @@ const PageContact = () => {
 						>
 							На карте{' '}
 							<img
-								src={`${process.env.PUBLIC_URL}/icons/strelka.svg`}
+								src={`${process.env.PUBLIC_URL}/icons/icon-arrow-link.svg`}
 								alt=''
 								className='contact-info-map-icon'
 							/>
@@ -292,7 +292,7 @@ const PageContact = () => {
 						>
 							На карте{' '}
 							<img
-								src={`${process.env.PUBLIC_URL}/icons/strelka.svg`}
+								src={`${process.env.PUBLIC_URL}/icons/icon-arrow-link.svg`}
 								alt=''
 								className='contact-info-map-icon'
 							/>

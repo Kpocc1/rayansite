@@ -104,7 +104,7 @@ const Category = () => {
 		} else {
 			smartNavigate(`/catalog/${categoryPathValue}`);
 		}
-	};
+  };
 
   useEffect(() => {
     if (url) dispatch(fetchCategory({ url, searchParams }));
@@ -195,7 +195,7 @@ const Category = () => {
 									>
 										<span>{currentSortLabel}</span>
 										<img
-											src={`${process.env.PUBLIC_URL}/icons/down.svg`}
+											src={`${process.env.PUBLIC_URL}/icons/icon-chevron-down.svg`}
 											alt='Сортировать'
 											className={`category-sort-icon ${
 												isDropdownOpen ? 'rotated' : ''

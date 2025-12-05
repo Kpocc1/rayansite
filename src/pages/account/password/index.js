@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
 
 import AccountMenu from 'components/menu/AccountMenu';
+import AccountLogoutButton from 'components/menu/AccountMenu/AccountLogoutButton';
 
 const rules = [{ required: true, message: 'Обязательное поле' }];
 
@@ -71,6 +72,9 @@ const Password = () => {
 					</div>
 				</div>
 			</div>
+
+			{/* Кнопка выхода для мобильных */}
+			<AccountLogoutButton />
 		</div>
 	);
 };

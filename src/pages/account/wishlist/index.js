@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { loadingStatus } from 'helpers/fetcher';
 import { fetchWishlist } from 'store/slices/customerSlice';
 import AccountMenu from 'components/menu/AccountMenu';
+import AccountLogoutButton from 'components/menu/AccountMenu/AccountLogoutButton';
 import CartQtyButtonGroup from 'components/cart/CartQtyButtonGroup';
 import WishlistButton from 'components/cart/WishlistButton';
 import useSmartNavigate from 'hooks/useSmartNavigate';
@@ -149,6 +150,9 @@ const Wishlist = () => {
 					)}
 				</div>
 			</div>
+
+			{/* Кнопка выхода для мобильных */}
+			<AccountLogoutButton />
 		</div>
 	);
 };

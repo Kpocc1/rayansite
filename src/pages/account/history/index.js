@@ -5,19 +5,20 @@ import { useNavigate } from 'react-router-dom';
 
 import { fetchHistories } from 'store/slices/customerSlice';
 import AccountMenu from 'components/menu/AccountMenu';
+import AccountLogoutButton from 'components/menu/AccountMenu/AccountLogoutButton';
 import useSmartNavigate from 'hooks/useSmartNavigate';
 import { loadingStatus } from 'helpers/fetcher';
 import { formatCurrency } from 'helpers/formatter';
 
 const History = () => {
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const { data, status } = useSelector(state => state.customer.histories);
 	const { navigate: smartNavigate } = useSmartNavigate();
 
-	useEffect(() => {
-		dispatch(fetchHistories());
-	}, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchHistories());
+  }, [dispatch]);
 
 	const getStatusClass = statusText => {
 		const lowerStatus = (statusText || '').toLowerCase();
@@ -27,7 +28,7 @@ const History = () => {
 		return 'account-history-status-pending';
 	};
 
-	return (
+  return (
 		<div className="region account-section">
 			{/* Breadcrumb */}
 			<div className="contact-breadcrumb" style={{ marginTop: '64px' }}>
@@ -63,25 +64,25 @@ const History = () => {
 								<div key={index} className="account-history-card">
 									<div className="account-history-header">
 										<span className="account-history-order-id">
-											#{item.order_id}
+                        #{item.order_id}
 										</span>
 										<span
 											className={`account-history-status ${getStatusClass(item.status)}`}
 										>
 											{item.status}
 										</span>
-									</div>
+                    </div>
 
 									<div className="account-history-images">
 										{item.products?.slice(0, 4).map(p => (
-											<img
-												key={p.product_id}
-												src={p.image}
-												alt={p.name}
+                        <img
+                          key={p.product_id}
+                          src={p.image}
+                          alt={p.name}
 												className="account-history-image"
-											/>
-										))}
-									</div>
+                        />
+                      ))}
+                    </div>
 
 									<div className="account-history-customer">{item.name}</div>
 
@@ -94,22 +95,22 @@ const History = () => {
 										</span>
 									</div>
 
-									<Button
-										type="primary"
-										block
+                      <Button
+                        type="primary"
+                        block
 										className="account-history-button"
 										onClick={() =>
 											smartNavigate(`/account/history/${item.order_id}`)
 										}
-									>
-										Детали заказа
+                      >
+                        Детали заказа
 										<img 
 											src={`${process.env.PUBLIC_URL}/icons/icon-arrow-right-circle.svg`}
 											alt=""
 											className="account-history-button-icon"
 										/>
-									</Button>
-								</div>
+                      </Button>
+                    </div>
 							))}
 						</div>
 					) : (
@@ -121,12 +122,15 @@ const History = () => {
 										<Skeleton active paragraph={{ rows: 4 }} />
 									</div>
 								))}
-						</div>
-					)}
+                  </div>
+            )}
 				</div>
 			</div>
-		</div>
-	);
+
+			{/* Кнопка выхода для мобильных */}
+			<AccountLogoutButton />
+    </div>
+  );
 };
 
 export default History;
