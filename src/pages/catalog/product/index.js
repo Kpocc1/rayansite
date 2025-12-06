@@ -67,18 +67,18 @@ const ProductInfoTabs = ({
 	onDescriptionExpand,
 	onDescriptionCollapse,
 }) => [
-	{
+  {
 		key: '1',
 		label: 'О товаре',
-		children: (
+    children: (
 			<ProductDescription
 				description={data?.onec_description}
 				onExpand={onDescriptionExpand}
 				onCollapse={onDescriptionCollapse}
-			/>
-		),
-	},
-	{
+      />
+    ),
+  },
+  {
 		key: '2',
 		label: 'Отзывы',
 		children: (
@@ -86,11 +86,11 @@ const ProductInfoTabs = ({
 				<p>Отзывы пока отсутствуют. Будьте первым, кто оставит отзыв!</p>
 			</div>
 		),
-	},
+  },
 ];
 
 const Product = () => {
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const { product, review } = useSelector(state => state.product);
 	const { data: menuData } = useSelector(state => state.menu.categoriesList);
@@ -107,32 +107,29 @@ const Product = () => {
 
 	const handleDescriptionExpand = () => {
 		setIsDescriptionExpanded(true);
-		// При раскрытии убираем ограничение высоты
-		if (tabsSectionRef.current) {
-			tabsSectionRef.current.style.height = 'auto';
-			tabsSectionRef.current.style.minHeight = 'auto';
-		}
 	};
 
 	const handleDescriptionCollapse = () => {
 		setIsDescriptionExpanded(false);
 		// При сворачивании возвращаем ограничение высоты
-		if (imageRef.current && detailsCardRef.current && tabsSectionRef.current) {
+		if (imageRef.current && detailsCardRef.current) {
 			const imageHeight = imageRef.current.offsetHeight;
 			const detailsCardHeight = detailsCardRef.current.offsetHeight;
 			const marginBetween = 24;
 			const calculatedHeight = imageHeight - detailsCardHeight - marginBetween;
-			if (calculatedHeight > 0 && tabsSectionRef.current) {
-				tabsSectionRef.current.style.height = `${calculatedHeight}px`;
-				tabsSectionRef.current.style.minHeight = `${calculatedHeight}px`;
+
+			if (calculatedHeight > 0) {
+				setTabsHeight(calculatedHeight);
+			} else {
+				setTabsHeight(null);
 			}
 		}
 	};
 
-	useEffect(() => {
-		dispatch(fetchProduct(product_id));
-		dispatch(fetchReview(product_id));
-	}, [dispatch, product_id]);
+  useEffect(() => {
+    dispatch(fetchProduct(product_id));
+    dispatch(fetchReview(product_id));
+  }, [dispatch, product_id]);
 
 	// Вычисляем высоту блока с вкладками на основе высоты картинки
 	useEffect(() => {
@@ -152,6 +149,8 @@ const Product = () => {
 
 				if (calculatedHeight > 0) {
 					setTabsHeight(calculatedHeight);
+				} else {
+					setTabsHeight(null);
 				}
 			}
 		};
@@ -208,7 +207,7 @@ const Product = () => {
 		};
 	}, [product.data?.category_id, menuData]);
 
-	return (
+  return (
 		<div className='region product-section'>
 			{/* Breadcrumb */}
 			{product.status === loadingStatus.SUCCEEDED && product.data ? (
@@ -299,6 +298,8 @@ const Product = () => {
 												imageHeight - detailsCardHeight - marginBetween;
 											if (calculatedHeight > 0) {
 												setTabsHeight(calculatedHeight);
+											} else {
+												setTabsHeight(null);
 											}
 										}
 									}, 100);
@@ -308,10 +309,10 @@ const Product = () => {
 							<Skeleton.Image
 								active
 								style={{ width: '100%', height: '500px' }}
-							/>
+                />
 						) : null}
 					</div>
-				</Col>
+            </Col>
 				<Col xs={24} md={12}>
 					{product.status === loadingStatus.SUCCEEDED &&
 					product.data &&
@@ -327,16 +328,10 @@ const Product = () => {
 								}`}
 								style={{
 									marginTop: '24px',
-									height: isDescriptionExpanded
-										? 'auto'
-										: tabsHeight
-										? `${tabsHeight}px`
-										: 'auto',
-									minHeight: isDescriptionExpanded
-										? 'auto'
-										: tabsHeight
-										? `${tabsHeight}px`
-										: 'auto',
+									minHeight:
+										isDescriptionExpanded || !tabsHeight
+											? 'auto'
+											: `${tabsHeight}px`,
 								}}
 							>
 								<Tabs
@@ -355,9 +350,9 @@ const Product = () => {
 						<Skeleton active paragraph={{ rows: 8 }} />
 					) : (
 						<div>Товар не найден</div>
-					)}
-				</Col>
-			</Row>
+              )}
+            </Col>
+          </Row>
 
 			{product.status === loadingStatus.SUCCEEDED &&
 			product.data &&
@@ -379,16 +374,14 @@ const Product = () => {
 								/>
 								{product.data.products && product.data.products.length > 0 && (
 									<a
-										href='#'
+										href='/catalog'
 										className='popular-products-link catalog-link-all'
 										onClick={e => {
 											e.preventDefault();
-											// TODO: Добавить навигацию к категории
+											navigate('/catalog');
 										}}
 									>
-										<span className='catalog-link-text'>
-											{product.data.products.length} товаров
-										</span>
+										<span className='catalog-link-text'>В каталог</span>
 										<img
 											src={`${process.env.PUBLIC_URL}/icons/icon-arrow-right-gray.svg`}
 											alt=''
@@ -408,7 +401,7 @@ const Product = () => {
 											return (
 												<Col xs={12} sm={12} md={8} lg={6} key={index}>
 													<Skeleton active avatar paragraph={{ rows: 4 }} />
-												</Col>
+        </Col>
 											);
 										}
 										return (
@@ -443,8 +436,8 @@ const Product = () => {
 																	{item.rating}
 																</span>
 															</div>
-														)}
-													</div>
+            )}
+          </div>
 													<div
 														className='popular-product-favorite'
 														onClick={e => e.stopPropagation()}
@@ -452,8 +445,8 @@ const Product = () => {
 														<WishlistButton
 															product_id={item.product_id}
 															active={item.in_wishlist}
-														/>
-													</div>
+          />
+        </div>
 													<h3 className='popular-product-title'>
 														{item.name}, {formatWeightWithUnit(item.weight)}
 													</h3>
@@ -523,7 +516,7 @@ const Product = () => {
 			) : product.status === loadingStatus.LOADING ? (
 				<>
 					<Skeleton active paragraph={{ rows: 4 }} />
-					<Skeleton active paragraph={{ rows: 4 }} />
+          <Skeleton active paragraph={{ rows: 4 }} />
 				</>
 			) : null}
 			<div className='region quality-section' style={{ marginTop: '60px' }}>
@@ -581,8 +574,8 @@ const Product = () => {
 					</div>
 				</div>
 			</div>
-		</div>
-	);
+    </div>
+  );
 };
 
 export default Product;

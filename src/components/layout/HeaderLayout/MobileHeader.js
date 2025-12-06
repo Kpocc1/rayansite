@@ -366,7 +366,7 @@ const MobileHeader = ({
 									handleMenuItemClick('/contact');
 								}}
 							>
-								<img
+            <img
 									src={`${process.env.PUBLIC_URL}/icons/icon-envelope.svg`}
 									alt=''
 								/>
@@ -393,7 +393,7 @@ const MobileHeader = ({
 								<img
 									src={`${process.env.PUBLIC_URL}/icons/icon-close.svg`}
 									alt='Закрыть'
-								/>
+            />
 							</button>
 						</div>
 						<div className='mobile-menu-content mobile-catalog-content'>

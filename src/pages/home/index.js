@@ -304,13 +304,14 @@ const Home = () => {
 				<div className='popular-products-header'>
 					<h2 className='popular-products-title'>ВАШИ СКИДКИ</h2>
 					<a
-						href='#'
+						href='/catalog'
 						onClick={e => {
 							e.preventDefault();
+							navigate('/catalog');
 						}}
 						className='popular-products-link catalog-link-all'
 					>
-						<span className='catalog-link-text'>159 товаров</span>
+						<span className='catalog-link-text'>В каталог</span>
 						<img
 							src={`${process.env.PUBLIC_URL}/icons/icon-arrow-right-gray.svg`}
 							alt=''

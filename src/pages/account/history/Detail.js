@@ -50,7 +50,7 @@ const HistoryDetail = () => {
 				>
 					Главная
 				</a>
-				<span className="breadcrumb-separator"></span>
+				<span className="breadcrumb-separator breadcrumb-separator-active"></span>
 				<span className="breadcrumb-current">Личный кабинет</span>
 			</div>
 
@@ -193,8 +193,8 @@ const HistoryDetail = () => {
 										<Col
 											xs={12}
 											sm={12}
-											md={8}
-											lg={6}
+											md={12}
+											lg={8}
 											key={item.product_id || index}
 										>
 											<div

@@ -14,16 +14,16 @@ import { formatCurrency, formatWeightWithUnit } from 'helpers/formatter';
 import { getStock } from 'helpers/product';
 
 const Wishlist = () => {
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const { navigate: smartNavigate } = useSmartNavigate();
 	const { data, status } = useSelector(state => state.customer.wishlist);
 
-	useEffect(() => {
-		dispatch(fetchWishlist());
-	}, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchWishlist());
+  }, [dispatch]);
 
-	return (
+  return (
 		<div className="region account-section">
 			{/* Breadcrumb */}
 			<div className="contact-breadcrumb" style={{ marginTop: '64px' }}>
@@ -37,7 +37,7 @@ const Wishlist = () => {
 				>
 					Главная
 				</a>
-				<span className="breadcrumb-separator"></span>
+				<span className="breadcrumb-separator breadcrumb-separator-active"></span>
 				<span className="breadcrumb-current">Личный кабинет</span>
 			</div>
 
@@ -153,8 +153,8 @@ const Wishlist = () => {
 
 			{/* Кнопка выхода для мобильных */}
 			<AccountLogoutButton />
-		</div>
-	);
+    </div>
+  );
 };
 
 export default Wishlist;

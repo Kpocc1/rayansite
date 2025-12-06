@@ -246,10 +246,6 @@ input[type='number'] {
 	margin-top: 0;
 	margin-bottom: 60px;
 }
-/* Отступ сверху только для хлебных крошек в новостях */
-.news-section .contact-breadcrumb {
-	margin-top: 64px;
-}
 .news-header {
 	display: flex;
 	justify-content: space-between;
@@ -2431,6 +2427,17 @@ body:not(:has([class*='ant-dropdown-open']))::before {
 .header-action-item-cart:hover {
 	z-index: 1001;
 }
+.header-action-item-cart-active .header-action-text {
+	background: var(--rn-red-color);
+	color: #fff;
+	font-size: 12px;
+	font-weight: 400;
+	padding: 2px 6px;
+	border-radius: 18px;
+	min-width: 80px;
+	text-align: center;
+	white-space: nowrap;
+}
 .header-action-icon {
 	width: 24px;
 	height: 24px;
@@ -2919,10 +2926,14 @@ body:not(:has([class*='ant-dropdown-open']))::before {
 .contact-section {
 	padding-top: 64px;
 }
+.contact-section .contact-breadcrumb {
+	margin-top: 0;
+}
 .contact-breadcrumb {
 	display: flex;
 	align-items: center;
 	gap: 8px;
+	margin-top: 64px;
 	margin-bottom: 24px;
 }
 .breadcrumb-link {
@@ -3878,7 +3889,7 @@ body:not(:has([class*='ant-dropdown-open']))::before {
 /* History cards */
 .account-history-grid {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 	gap: 24px;
 }
 .account-history-card {
@@ -4099,6 +4110,15 @@ body:not(:has([class*='ant-dropdown-open']))::before {
 	color: #1c1c1c;
 	margin: 0 0 24px 0;
 }
+
+/* Карточки товаров в деталях заказа - минимальная ширина */
+.account-content .popular-products-list .ant-col {
+	min-width: 320px;
+}
+.account-content .popular-products-list .popular-product-card {
+	min-width: 320px;
+	width: 100%;
+}
 @media (max-width: 1024px) {
 	.account-layout {
 		flex-direction: column;
@@ -4286,7 +4306,8 @@ body:not(:has([class*='ant-dropdown-open']))::before {
 	object-fit: contain;
 }
 .product-details-card {
-	width: 491px;
+	width: 100%;
+	max-width: 491px;
 	padding: 24px;
 	background: #fff;
 	border-radius: 20px;
@@ -4424,7 +4445,8 @@ body:not(:has([class*='ant-dropdown-open']))::before {
 .product-tabs-section {
 	margin-top: 24px;
 	margin-bottom: 0;
-	width: 491px;
+	width: 100%;
+	max-width: 491px;
 	margin-left: auto;
 	display: flex;
 	flex-direction: column;
@@ -4971,6 +4993,30 @@ body:not(:has([class*='ant-dropdown-open']))::before {
 		height: 200px;
 	}
 }
+
+/* Адаптив корзины для средних экранов (992px - 1400px) */
+@media (min-width: 992px) and (max-width: 1400px) {
+	.cart-item {
+		gap: 24px;
+	}
+	.cart-item-block-1 {
+		width: auto;
+		flex: 1;
+		min-width: 0;
+		flex-shrink: 1;
+	}
+	.cart-item-image {
+		width: 120px;
+		height: 120px;
+	}
+	.cart-item-block-2 {
+		width: 110px;
+	}
+	.cart-item-total-price {
+		font-size: 20px;
+	}
+}
+
 /* Форма оформления заказа в сайдбаре */
 .checkout-form-sidebar {
 	background: #fff;
@@ -5012,6 +5058,7 @@ body:not(:has([class*='ant-dropdown-open']))::before {
 }
 .checkout-shipping-buttons {
 	display: flex;
+	flex-wrap: wrap;
 	gap: 12px;
 	width: 100%;
 }
@@ -5056,6 +5103,7 @@ body:not(:has([class*='ant-dropdown-open']))::before {
 	opacity: 0.5;
 	cursor: not-allowed;
 }
+
 .checkout-form-section .ant-input,
 .checkout-form-section .ant-select-selector {
 	border-radius: 8px;
@@ -5608,8 +5656,8 @@ body:not(:has([class*='ant-dropdown-open']))::before {
 	color: #fff;
 	font-size: 11px;
 	font-weight: 600;
-	padding: 3px 8px;
-	border-radius: 4px;
+	padding: 6px 12px;
+	border-radius: 18px;
 	margin-left: 8px;
 }
 

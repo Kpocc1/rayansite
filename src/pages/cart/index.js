@@ -20,10 +20,10 @@ import { getStock } from 'helpers/product';
 const { TextArea } = Input;
 
 const Cart = () => {
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
 	const { data, status } = useSelector(state => state.cart.cartProducts);
-	const { customer } = useCustomer();
-	const { navigate } = useSmartNavigate();
+  const { customer } = useCustomer();
+  const { navigate } = useSmartNavigate();
 	const [comment, setComment] = useState('');
 	const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
 	const [isCommentFocused, setIsCommentFocused] = useState(false);
@@ -31,9 +31,9 @@ const Cart = () => {
 	const sortDropdownRef = useRef(null);
 
 	const handleRemoveFromCart = async cart_id => {
-		await removeFromCart(cart_id);
-		dispatch(fetchCartProducts());
-	};
+    await removeFromCart(cart_id);
+    dispatch(fetchCartProducts());
+  };
 
 	const handleAddToCart = async (product_id, quantity = 1) => {
 		if (!customer.token) {
@@ -48,15 +48,15 @@ const Cart = () => {
 		dispatch(fetchCartProducts());
 	};
 
-	useEffect(() => {
-		dispatch(fetchCartProducts());
-	}, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchCartProducts());
+  }, [dispatch]);
 
 	if (
 		status === loadingStatus.SUCCEEDED &&
 		(!data.products || data.products.length === 0)
 	) {
-		return (
+    return (
 			<div className='region cart-section'>
 				<Breadcrumb />
 				<h1 className='cart-title'>КОРЗИНА</h1>
@@ -66,9 +66,9 @@ const Cart = () => {
 						Перейти в каталог
 					</Button>
 				</div>
-			</div>
-		);
-	}
+      </div>
+    );
+  }
 
 	const inStockCount =
 		data.products?.filter(item => {
@@ -102,8 +102,8 @@ const Cart = () => {
 		data.totals?.find(t => t.code === 'total' && t.title?.includes('скидк'))
 			?.value || 0;
 
-	return (
-		<div className='region'>
+  return (
+		<div className='region cart-section'>
 			<div className='contact-breadcrumb'>
 				<a
 					href='/'
@@ -150,7 +150,7 @@ const Cart = () => {
 									<div
 										className='category-sort-dropdown-item'
 										onClick={() => setIsSortDropdownOpen(false)}
-									>
+                    >
 										По цене
 									</div>
 									<div
@@ -159,9 +159,9 @@ const Cart = () => {
 									>
 										По названию
 									</div>
-								</div>
-							)}
-						</div>
+                      </div>
+                        )}
+                      </div>
 					</div>
 					{inStockCount > 0 && (
 						<p className='cart-in-stock'>
@@ -260,7 +260,7 @@ const Cart = () => {
 								</div>
 							);
 						})}
-					</div>
+                      </div>
 				</Col>
 				<Col xs={24} md={7} style={{ marginLeft: 'auto' }}>
 					<div className='cart-sidebar'>
@@ -278,14 +278,14 @@ const Cart = () => {
 										}
 										setShowCheckoutForm(true);
 									}}
-								>
+                        >
 									<span>К оформлению</span>
 									<img
 										src={`${process.env.PUBLIC_URL}/icons/icon-arrow-right-circle.svg`}
 										alt=''
 										className='cart-checkout-button-icon'
 									/>
-								</Button>
+                          </Button>
 
 								<div className='cart-summary-card'>
 									<div className='cart-summary-total'>
@@ -298,7 +298,7 @@ const Cart = () => {
 									<div className='cart-summary-row'>
 										<span className='cart-summary-label'>Сборка</span>
 										<span className='cart-summary-value'>Бесплатно</span>
-									</div>
+                      </div>
 
 									{discount > 0 && (
 										<div className='cart-summary-row'>
@@ -306,8 +306,8 @@ const Cart = () => {
 											<span className='cart-summary-value cart-summary-discount'>
 												-{formatCurrency(discount)}
 											</span>
-										</div>
-									)}
+              </div>
+            )}
 
 									<div className='cart-summary-comment contact-form-field contact-form-field-textarea'>
 										<TextArea
@@ -342,11 +342,11 @@ const Cart = () => {
 								onBack={() => setShowCheckoutForm(false)}
 							/>
 						)}
-					</div>
-				</Col>
-			</Row>
-		</div>
-	);
+             </div>
+        </Col>
+      </Row>
+    </div>
+  );
 };
 
 export default Cart;

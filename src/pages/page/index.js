@@ -110,7 +110,7 @@ const PageDefault = () => {
             >
               Главная
             </a>
-            <span className="breadcrumb-separator"></span>
+            <span className="breadcrumb-separator breadcrumb-separator-active"></span>
             <span className="breadcrumb-current">
               {data?.heading_title || "Страница"}
             </span>

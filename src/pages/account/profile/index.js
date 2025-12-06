@@ -12,28 +12,28 @@ import { setCustomer } from 'helpers/customer';
 const rules = [{ required: true, message: 'Обязательное поле' }];
 
 const Profile = () => {
-	const [loading, setLoading] = useState(false);
-	const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const { data, status } = useSelector(state => state.customer.profile);
 
 	const handleFinish = async values => {
-		setLoading(true);
-		const res = await editProfile(values);
-		if (res.error) {
-			message.error(res.error_warning);
-		} else {
-			setCustomer(values);
-			message.success(res.success);
-		}
-		setLoading(false);
-	};
+    setLoading(true);
+    const res = await editProfile(values);
+    if (res.error) {
+      message.error(res.error_warning);
+    } else {
+      setCustomer(values);
+      message.success(res.success);
+    }
+    setLoading(false);
+  };
 
-	useEffect(() => {
-		dispatch(fetchProfile());
-	}, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchProfile());
+  }, [dispatch]);
 
-	return (
+  return (
 		<div className="region account-section">
 			{/* Breadcrumb */}
 			<div className="contact-breadcrumb" style={{ marginTop: '64px' }}>
@@ -47,7 +47,7 @@ const Profile = () => {
 				>
 					Главная
 				</a>
-				<span className="breadcrumb-separator"></span>
+				<span className="breadcrumb-separator breadcrumb-separator-active"></span>
 				<span className="breadcrumb-current">Личный кабинет</span>
 			</div>
 
@@ -64,46 +64,46 @@ const Profile = () => {
 				{/* Content */}
 				<div className="account-content">
 					<div className="account-form-card">
-						{status === loadingStatus.SUCCEEDED ? (
-							<Form
-								name="profile"
-								layout="vertical"
-								initialValues={data}
-								onFinish={handleFinish}
-							>
-								<Form.Item name="firstname" label="Имя" rules={rules}>
-									<Input />
-								</Form.Item>
-								<Form.Item name="lastname" label="Фамилия" rules={rules}>
-									<Input />
-								</Form.Item>
+            {status === loadingStatus.SUCCEEDED ? (
+              <Form
+                name="profile"
+                layout="vertical"
+                initialValues={data}
+                onFinish={handleFinish}
+              >
+                <Form.Item name="firstname" label="Имя" rules={rules}>
+                <Input />
+                </Form.Item>
+                <Form.Item name="lastname" label="Фамилия" rules={rules}>
+                <Input />
+                </Form.Item>
 								<Form.Item
 									name="telephone"
 									label="Номер телефона"
 									rules={rules}
 								>
-									<Input />
-								</Form.Item>
+                  <Input />
+                </Form.Item>
 								<Form.Item name="email" label="Почта" rules={rules}>
-									<Input />
-								</Form.Item>
+                <Input />
+                </Form.Item>
 								<div className="account-form-submit">
-									<Button type="primary" htmlType="submit" loading={loading}>
-										Сохранить изменения
-									</Button>
+                  <Button type="primary" htmlType="submit" loading={loading}>
+                    Сохранить изменения
+                  </Button>
 								</div>
-							</Form>
-						) : (
-							<Skeleton active paragraph={{ rows: 6 }} />
-						)}
-					</div>
+              </Form>
+            ) : (
+              <Skeleton active paragraph={{ rows: 6 }} />
+            )}
+          </div>
 				</div>
 			</div>
 
 			{/* Кнопка выхода для мобильных */}
 			<AccountLogoutButton />
-		</div>
-	);
+    </div>
+  );
 };
 
 export default Profile;

@@ -42,7 +42,7 @@ const History = () => {
 				>
 					Главная
 				</a>
-				<span className="breadcrumb-separator"></span>
+				<span className="breadcrumb-separator breadcrumb-separator-active"></span>
 				<span className="breadcrumb-current">Личный кабинет</span>
 			</div>
 

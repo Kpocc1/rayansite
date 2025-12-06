@@ -74,8 +74,10 @@ const HeaderLayout = () => {
 	}, [categoriesStatus, categoriesData]);
 	// const additionalMenu = useAdditionalMenu(); // Закомментировано, может пригодиться
 
-	const total =
+	const totalRaw =
 		cartProducts.data.totals?.find(t => t.code === 'total').text || '';
+	// Убираем .00 из цены и добавляем ₽ если его нет
+	const total = totalRaw.replace(/\.00\b/, '').replace(/,00\b/, '') + (totalRaw && !totalRaw.includes('₽') ? ' ₽' : '');
 
 	const handleCityClick = async ({ key, keyPath, domEvent }) => {
 		setCustomer({ ...customer, store_id: key });
@@ -410,20 +412,20 @@ const HeaderLayout = () => {
 					</a>
 					<a
 						href='/cart'
-						className='header-action-item'
+						className={`header-action-item ${cartProducts.data.count > 0 ? 'header-action-item-cart-active' : ''}`}
 						onClick={e => {
 							e.preventDefault();
 							navigate('/cart');
 						}}
 							>
-						<Badge count={cartProducts.data.count} offset={[0, 0]}>
-							<img
-								src={`${process.env.PUBLIC_URL}/icons/icon-cart.svg`}
-								alt=''
-								className='header-action-icon'
-							/>
-						</Badge>
-						<span className='header-action-text'>Корзина</span>
+						<img
+							src={`${process.env.PUBLIC_URL}/icons/${cartProducts.data.count > 0 ? 'icon-cart-red.svg' : 'icon-cart.svg'}`}
+							alt=''
+							className='header-action-icon'
+						/>
+						<span className='header-action-text'>
+							{cartProducts.data.count > 0 ? total : 'Корзина'}
+						</span>
 					</a>
 					<a
 						href='/account'

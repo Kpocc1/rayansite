@@ -63,7 +63,7 @@ const AccountMenu = () => {
 
 	// Мобильная версия - дропдаун (без кнопки выхода, она добавляется отдельно)
 	if (isMobileView) {
-		return (
+  return (
 			<div className="account-menu account-menu-mobile">
 				{/* Выбранный раздел - кнопка дропдауна */}
 				<button
@@ -98,7 +98,7 @@ const AccountMenu = () => {
 									src={isActive(item.key) ? item.iconActive : item.icon}
 									alt=""
 									className="account-menu-icon"
-								/>
+      />
 								<span className="account-menu-label">{item.label}</span>
 							</button>
 						))}
